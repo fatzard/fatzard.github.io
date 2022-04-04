@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>代码格式测试</title>
+      <link href="/2022/04/04/dai-ma-ce-shi/"/>
+      <url>/2022/04/04/dai-ma-ce-shi/</url>
+      
+        <content type="html"><![CDATA[<p>首先测试java代码：</p><pre class="language-java" data-language="java"><code class="language-java">public class Main&#123;    @Test    public void test()    &#123;        System.out.println(&quot;Java&quot;)    &#125;&#125;</code></pre><p>然后测试C++代码：</p><pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;using namespace std;int main()&#123;    cout&lt;&lt;&quot;C++&quot;&lt;&lt;endl;    return 0;&#125;</code></pre><p>最后是python代码：</p><pre class="language-py" data-language="py"><code class="language-py">print(&quot;python&quot;)</code></pre><p>完成</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hello world</title>
       <link href="/2022/04/03/hello-world/"/>
       <url>/2022/04/03/hello-world/</url>
