@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Spring IOC底层原理简析</title>
+      <link href="/2022/04/04/spring-ioc/"/>
+      <url>/2022/04/04/spring-ioc/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1、什么是IOC？"><a href="#1、什么是IOC？" class="headerlink" title="1、什么是IOC？"></a>1、什么是IOC？</h3><h4 id="1-1、控制反转"><a href="#1-1、控制反转" class="headerlink" title="1.1、控制反转"></a>1.1、控制反转</h4><p> 控制反转的英文即Inversion of Control（IOC），换言之：就是一个bean容器，专业的说法叫做控制反转。它的作用就是在spring启动时会去将一个个bean放到这个容器当中。bean可以通过配置文件定义也可以通过注解定义。</p><h4 id="1-2、用图表示："><a href="#1-2、用图表示：" class="headerlink" title="1.2、用图表示："></a>1.2、用图表示：</h4><p><img src="/2022/04/04/spring-ioc/1.jpg" alt="IOC"></p><p>这张图感觉最生动地体现了IOC。</p><h3 id="2、Spring-IOC底层"><a href="#2、Spring-IOC底层" class="headerlink" title="2、Spring IOC底层"></a>2、Spring IOC底层</h3><h4 id="2-1、没有采用IOC之前："><a href="#2-1、没有采用IOC之前：" class="headerlink" title="2.1、没有采用IOC之前："></a>2.1、没有采用IOC之前：</h4><p>原始采用一个类方法中new另一个类的实例来进行调用违反了迪米特法则。当B类改变所有依赖它的类都需要改变！</p><p><img src="/2022/04/04/spring-ioc/2.jpg" alt="before"></p><h4 id="2-2、采用IOC"><a href="#2-2、采用IOC" class="headerlink" title="2.2、采用IOC"></a>2.2、采用IOC</h4><p>利用IOC这种工厂的思想</p><h4 id><a href="#" class="headerlink" title></a><img src="/2022/04/04/spring-ioc/3.jpg" alt="after"></h4><h4 id="2-3、IOC解耦"><a href="#2-3、IOC解耦" class="headerlink" title="2.3、IOC解耦"></a>2.3、IOC解耦</h4><p>采用工厂这种模式，再配置XML，从XML中取出配置好的bean对象。</p><p>第一步配置XML文件，配置创建的对象：</p><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mysqlImpl<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.UserDaoMysqlImpl<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre><p>第二步在加载配置文件时候就进行对象的创建（常用）</p><pre class="language-java" data-language="java"><code class="language-java">ApplicationContext context&#x3D; new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);</code></pre><p>而这个context就类似于工厂，接下来就可以取出对象就行：</p><pre class="language-java" data-language="java"><code class="language-java">UserService userService&#x3D;(UserService) context.getBean(&quot;mysqlImpl&quot;);</code></pre><p>从而可以调用对象的方法：</p><pre class="language-java" data-language="java"><code class="language-java">userService.getUser();</code></pre><p>简而言之，Spring采用了这种工厂模式注入对象，而这也是Spring的核心之一！！！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第一个基于Spring的程序</title>
       <link href="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/"/>
       <url>/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/</url>

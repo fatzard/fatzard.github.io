@@ -4,8 +4,8 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="标签, fat fatzard&#39;s Blog">
-    <meta name="description" content="Welcome to fatzard&#39;Blog">
+    <meta name="keywords" content="Spring IOC底层原理简析, fat fatzard&#39;s Blog">
+    <meta name="description" content="1、什么是IOC？1.1、控制反转 控制反转的英文即Inversion of Control（IOC），换言之：就是一个bean容器，专业的说法叫做控制反转。它的作用就是在spring启动时会去将一个个bean放到这个容器当中。bean可以">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
     </style>
 
 
-    <title>标签 | fat fatzard&#39;s Blog</title>
+    <title>Spring IOC底层原理简析 | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -318,12 +318,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">tags</h1>
+                    <h1 class="description center-align post-title">Spring IOC底层原理简析</h1>
                 </div>
             </div>
         </div>
@@ -437,12 +437,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -465,7 +482,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    338
                 </div>
                 
 
@@ -495,7 +512,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h3 id="1、什么是IOC？"><a href="#1、什么是IOC？" class="headerlink" title="1、什么是IOC？"></a>1、什么是IOC？</h3><h4 id="1-1、控制反转"><a href="#1-1、控制反转" class="headerlink" title="1.1、控制反转"></a>1.1、控制反转</h4><p> 控制反转的英文即Inversion of Control（IOC），换言之：就是一个bean容器，专业的说法叫做控制反转。它的作用就是在spring启动时会去将一个个bean放到这个容器当中。bean可以通过配置文件定义也可以通过注解定义。</p>
+<h4 id="1-2、用图表示："><a href="#1-2、用图表示：" class="headerlink" title="1.2、用图表示："></a>1.2、用图表示：</h4><p><img src="/2022/04/04/spring-ioc/1.jpg" alt="IOC"></p>
+<p>这张图感觉最生动地体现了IOC。</p>
+<h3 id="2、Spring-IOC底层"><a href="#2、Spring-IOC底层" class="headerlink" title="2、Spring IOC底层"></a>2、Spring IOC底层</h3><h4 id="2-1、没有采用IOC之前："><a href="#2-1、没有采用IOC之前：" class="headerlink" title="2.1、没有采用IOC之前："></a>2.1、没有采用IOC之前：</h4><p>原始采用一个类方法中new另一个类的实例来进行调用违反了迪米特法则。当B类改变所有依赖它的类都需要改变！</p>
+<p><img src="/2022/04/04/spring-ioc/2.jpg" alt="before"></p>
+<h4 id="2-2、采用IOC"><a href="#2-2、采用IOC" class="headerlink" title="2.2、采用IOC"></a>2.2、采用IOC</h4><p>利用IOC这种工厂的思想</p>
+<h4 id><a href="#" class="headerlink" title></a><img src="/2022/04/04/spring-ioc/3.jpg" alt="after"></h4><h4 id="2-3、IOC解耦"><a href="#2-3、IOC解耦" class="headerlink" title="2.3、IOC解耦"></a>2.3、IOC解耦</h4><p>采用工厂这种模式，再配置XML，从XML中取出配置好的bean对象。</p>
+<p>第一步配置XML文件，配置创建的对象：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mysqlImpl<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.UserDaoMysqlImpl<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
+
+<p>第二步在加载配置文件时候就进行对象的创建（常用）</p>
+<pre class="language-java" data-language="java"><code class="language-java">ApplicationContext context&#x3D; new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);</code></pre>
+
+<p>而这个context就类似于工厂，接下来就可以取出对象就行：</p>
+<pre class="language-java" data-language="java"><code class="language-java">UserService userService&#x3D;(UserService) context.getBean(&quot;mysqlImpl&quot;);</code></pre>
+
+<p>从而可以调用对象的方法：</p>
+<pre class="language-java" data-language="java"><code class="language-java">userService.getUser();</code></pre>
+
+<p>简而言之，Spring采用了这种工厂模式注入对象，而这也是Spring的核心之一！！！！</p>
+
                 
             </div>
             <hr/>
@@ -521,7 +558,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/tags/index.html">http://wjknowledge.top/tags/index.html</a>
+                    <a href="http://wjknowledge.top/2022/04/04/spring-ioc/">http://wjknowledge.top/2022/04/04/spring-ioc/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -558,7 +595,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1001,13 +1046,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/tags/index.html">
+                <a href="/2022/04/04/spring-ioc/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="tags">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Spring IOC底层原理简析">
                         
-                        <span class="card-title">tags</span>
+                        <span class="card-title">Spring IOC底层原理简析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1022,13 +1067,29 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1036,16 +1097,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/tags/index.html">
+                <a href="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="tags">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="第一个基于Spring的程序">
                         
-                        <span class="card-title">tags</span>
+                        <span class="card-title">第一个基于Spring的程序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1060,13 +1121,28 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
