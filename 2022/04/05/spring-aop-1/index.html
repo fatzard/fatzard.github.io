@@ -4,10 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="hello world, fat fatzard&#39;s Blog">
-    <meta name="description" content="Hello, my friends!
-这是我的博客，我将在这分享我的算法笔记和Spring的学习之路！
-">
+    <meta name="keywords" content="Spring AOP(1), fat fatzard&#39;s Blog">
+    <meta name="description" content="1、什么是AOP？​      用来自百科的话来说：
+在软件业，AOP为Aspect Oriented Programming的缩写，意为：面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,7 +29,7 @@
     </style>
 
 
-    <title>hello world | fat fatzard&#39;s Blog</title>
+    <title>Spring AOP(1) | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -320,12 +319,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">hello world</h1>
+                    <h1 class="description center-align post-title">Spring AOP(1)</h1>
                 </div>
             </div>
         </div>
@@ -441,14 +440,27 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                                <span class="chip bg-color">介绍</span>
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -457,28 +469,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-03
+                    2022-04-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-04
+                    2022-04-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    28
+                    623
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -501,8 +513,61 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Hello, my friends!</p>
-<p>这是我的博客，我将在这分享我的算法笔记和Spring的学习之路！</p>
+                <h3 id="1、什么是AOP？"><a href="#1、什么是AOP？" class="headerlink" title="1、什么是AOP？"></a>1、什么是AOP？</h3><p>​      用来自百科的话来说：</p>
+<p>在软件业，AOP为Aspect Oriented Programming的缩写，意为：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/6016335">面向切面编程</a>，通过<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%A2%84%E7%BC%96%E8%AF%91/3191547">预编译</a>方式和运行期间动态代理实现程序功能的统一维护的一种技术。AOP是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/OOP">OOP</a>的延续，是软件开发中的一个热点，也是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Spring">Spring</a>框架中的一个重要内容，是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/4035031">函数式编程</a>的一种衍生范型。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%80%A6%E5%90%88%E5%BA%A6/2603938">耦合度</a>降低，提高程序的可重用性，同时提高了开发的效率。</p>
+<p>​            ！！！！！</p>
+<p>​    换言之，什么意思喃？用简单的话来说，就是在不破坏原有代码的情况下，通过“代理”的这种模式来切入，从而达到实现在不改变原有代码情况下进行功能的增加、删减！</p>
+<p>​    看下面这张图：</p>
+<p><img src="/2022/04/05/spring-aop-1/1.jpg" alt="AOP"></p>
+<p>如果一个开发是按照A-&gt;B-&gt;C-&gt;D这样的流程来的，现在你想添加一些功能，你会发现，如果要改变或者添加功能，代码量的改变将会非常之大！！！因为有可能一个类继承了一堆类，你如果改一个类，如果没处理好，那就会“寄”，而且改代码是非常痛苦的！！！！（打ACM调一个计算几何都非常痛苦，别说这一堆Java代码），所以出现了“代理”这种思想，这种思想采用代理的方式，将对象封装在一个代理对象中，通过代理的方式进行功能的增删！</p>
+<h3 id="2、JDK动态代理"><a href="#2、JDK动态代理" class="headerlink" title="2、JDK动态代理"></a>2、JDK动态代理</h3><p><strong>JDK的动态代理需要了解两个类</strong></p>
+<p>核心 : InvocationHandler   和   Proxy  ， 网上看JDK帮助文档吧O(∩_∩)O</p>
+<p>模版：</p>
+<pre class="language-java" data-language="java"><code class="language-java">package com.demo3.pro;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+public class ProxyInvocationHandler implements InvocationHandler &#123;
+
+    &#x2F;&#x2F;被代理的接口
+    private Object target;
+
+    public void setTarget(Object target) &#123;
+        this.target &#x3D; target;
+    &#125;
+
+    &#x2F;&#x2F;生成得到的代理类
+    public Object getProxy()
+    &#123;
+        return Proxy.newProxyInstance(this.getClass().getClassLoader(),
+                target.getClass().getInterfaces(),this);
+    &#125;
+
+    &#x2F;&#x2F;处理生成实例并返回代理结果
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+        Object result&#x3D;method.invoke(target,args);
+        return result;
+    &#125;
+&#125;
+</code></pre>
+
+<p>在测试中调用即可：</p>
+<pre class="language-java" data-language="java"><code class="language-java">@Test
+public  void test()
+&#123;
+    &#x2F;&#x2F;真实角色
+    UserSeveImpl userSeveimpl&#x3D;new UserSeveImpl();
+    &#x2F;&#x2F;代理角色
+    ProxyInvocationHandler proxyInvocationHandler&#x3D;new ProxyInvocationHandler();
+    proxyInvocationHandler.setTarget(userSeveimpl);&#x2F;&#x2F;设置要代理的对象
+    &#x2F;&#x2F;动态生成代理类
+    UserSeve userSeve &#x3D;(UserSeve) proxyInvocationHandler.getProxy();
+    userSeve.add();
+&#125;</code></pre>
+
 
                 
             </div>
@@ -529,7 +594,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/2022/04/03/hello-world/">http://wjknowledge.top/2022/04/03/hello-world/</a>
+                    <a href="http://wjknowledge.top/2022/04/05/spring-aop-1/">http://wjknowledge.top/2022/04/05/spring-aop-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -567,8 +632,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                                    <span class="chip bg-color">介绍</span>
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
                         </div>
@@ -1008,62 +1077,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/04/dai-ma-ce-shi/">
+                <a href="/2022/04/05/spring-aop-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="代码格式测试">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Spring AOP(1)">
                         
-                        <span class="card-title">代码格式测试</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">测试</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/03/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hello world">
-                        
-                        <span class="card-title">hello world</span>
+                        <span class="card-title">Spring AOP(1)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1074,12 +1099,16 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1088,8 +1117,65 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                        <span class="chip bg-color">介绍</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/05/spring-zhong-bean-de-zuo-yong-yu-xml-zi-dong-zhuang-pei/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Spring中Bean的作用域&amp;XML的自动装配(注解)">
+                        
+                        <span class="card-title">Spring中Bean的作用域&amp;XML的自动装配(注解)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
