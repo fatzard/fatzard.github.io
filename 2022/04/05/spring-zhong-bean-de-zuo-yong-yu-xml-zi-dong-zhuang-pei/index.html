@@ -4,10 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="hello world, fat fatzard&#39;s Blog">
-    <meta name="description" content="Hello, my friends!
-这是我的博客，我将在这分享我的算法笔记和Spring的学习之路！
-">
+    <meta name="keywords" content="Spring中Bean的作用域&amp;XML的自动装配, fat fatzard&#39;s Blog">
+    <meta name="description" content="1、bean的作用域​    在XML文件中，bean对象后面加一个scope便可以知道这个bean的作用域，但是在Spring中默认为单例
+1.1、当scope&amp;#x3D;singleton时为单例&amp;lt;bean id=&#34;myBean&#34;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,7 +29,7 @@
     </style>
 
 
-    <title>hello world | fat fatzard&#39;s Blog</title>
+    <title>Spring中Bean的作用域&amp;XML的自动装配 | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -320,12 +319,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">hello world</h1>
+                    <h1 class="description center-align post-title">Spring中Bean的作用域&amp;XML的自动装配</h1>
                 </div>
             </div>
         </div>
@@ -441,14 +440,27 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                                <span class="chip bg-color">介绍</span>
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -457,28 +469,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-03
+                    2022-04-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-04
+                    2022-04-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    28
+                    683
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -501,8 +513,127 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Hello, my friends!</p>
-<p>这是我的博客，我将在这分享我的算法笔记和Spring的学习之路！</p>
+                <h3 id="1、bean的作用域"><a href="#1、bean的作用域" class="headerlink" title="1、bean的作用域"></a>1、bean的作用域</h3><p>​    在XML文件中，bean对象后面加一个scope便可以知道这个bean的作用域，但是在Spring中默认为单例</p>
+<h4 id="1-1、当scope-x3D-singleton时为单例"><a href="#1-1、当scope-x3D-singleton时为单例" class="headerlink" title="1.1、当scope&#x3D;singleton时为单例"></a>1.1、当scope&#x3D;singleton时为单例</h4><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myBean<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.wang.pojo.MyBean<span class="token punctuation">"</span></span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>singleton<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
+
+<h4 id="1-2、当scope-x3D-prototype时为多例"><a href="#1-2、当scope-x3D-prototype时为多例" class="headerlink" title="1.2、当scope&#x3D;prototype时为多例"></a>1.2、当scope&#x3D;prototype时为多例</h4><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myBean<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.wang.pojo.MyBean<span class="token punctuation">"</span></span> <span class="token attr-name">scope</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>prototype<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
+
+<h4 id="1-3、bean的一个周期："><a href="#1-3、bean的一个周期：" class="headerlink" title="1.3、bean的一个周期："></a>1.3、bean的一个周期：</h4><p>底层的bean是如何执行？</p>
+<ul>
+<li>执行无参数的构造</li>
+<li>执行set方法设置属性值</li>
+<li>在初始化方法前添加前置处理器</li>
+<li>执行初始化方法</li>
+<li>在初始化方法后添加后置处理器</li>
+<li>获取创建Bean的实例对象</li>
+<li>执行销毁方法(context.close执行即完成销毁)</li>
+</ul>
+<p>注：这也是为什么要写set和get方法</p>
+<p>O(∩_∩)O哈哈~不过IDEA快捷键（alt+insert一键生成set和get方法，我一次都没自己手写过）</p>
+<h3 id="2、xml自动装配"><a href="#2、xml自动装配" class="headerlink" title="2、xml自动装配"></a>2、xml自动装配</h3><p>写一个测试的person类：</p>
+<pre class="language-java" data-language="java"><code class="language-java">public class Person &#123;
+    private   Cat cat;
+    private   Dog dog;
+    private String name;
+    public Cat getCat() &#123;
+        return cat;
+    &#125;
+    public void setCat(Cat cat) &#123;
+        this.cat &#x3D; cat;
+    &#125;
+    public Dog getDog() &#123;
+        return dog;
+    &#125;
+    public void setDog(Dog dog) &#123;
+        this.dog &#x3D; dog;
+    &#125;
+    public String getName() &#123;
+        return name;
+    &#125;
+    public void setName(String name) &#123;
+        this.name &#x3D; name;
+    &#125;
+    @Override
+    public String toString() &#123;
+        return &quot;Person&#123;&quot; +
+                &quot;cat&#x3D;&quot; + cat +
+                &quot;, dog&#x3D;&quot; + dog +
+                &quot;, name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h4 id="2-1、byName装配"><a href="#2-1、byName装配" class="headerlink" title="2.1、byName装配"></a>2.1、byName装配</h4><p>Bean的id值必须与类中变量名一致</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cat<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Cat<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dog<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Dog<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+自动装配
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>person<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Person<span class="token punctuation">"</span></span> <span class="token attr-name">autowire</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>byName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>kimihua<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
+
+<p>就是在bean中加一个autowire</p>
+<h4 id="2-2、byType装配"><a href="#2-2、byType装配" class="headerlink" title="2.2、byType装配"></a>2.2、byType装配</h4><p>注：不能有相同类型的Bean</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>person<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Person<span class="token punctuation">"</span></span> <span class="token attr-name">autowire</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>byType<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>kimihua<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
+
+<h4 id="2-3、利用注解自动装配"><a href="#2-3、利用注解自动装配" class="headerlink" title="2.3、利用注解自动装配"></a>2.3、利用注解自动装配</h4><p>首先在xml文件中打开注解支持，如下：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">context:</span>component-scan</span> <span class="token attr-name">base-package</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.example<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
+
+<p>这个意思就是：扫描该目录下的所有包，这样加了注解之后就可以被发现。</p>
+<p>完整的xml的文件呢：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">context:</span>component-scan</span> <span class="token attr-name">base-package</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.example<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cat<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.Cat<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dog<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.Dog<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>person<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.Person<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
+
+<p>然后在测试person类中加上<code>@Autowired</code></p>
+<pre class="language-java" data-language="java"><code class="language-java">public class Person &#123;
+    @Autowired
+    private   Cat cat;
+    @Autowired
+    private   Dog dog;
+    private String name;
+
+    public Cat getCat() &#123;
+        return cat;
+    &#125;
+
+&#x2F;&#x2F;    public void setCat(Cat cat) &#123;
+&#x2F;&#x2F;        this.cat &#x3D; cat;
+&#x2F;&#x2F;    &#125;
+
+    public Dog getDog() &#123;
+        return dog;
+    &#125;
+
+&#x2F;&#x2F;    public void setDog(Dog dog) &#123;
+&#x2F;&#x2F;        this.dog &#x3D; dog;
+&#x2F;&#x2F;    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name &#x3D; name;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Person&#123;&quot; +
+                &quot;cat&#x3D;&quot; + cat +
+                &quot;, dog&#x3D;&quot; + dog +
+                &quot;, name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;</code></pre>
+
+<p>小贴士：</p>
+<p>利用注解的方式写，可以不用set方法。</p>
+<p>^_(<em>^▽^</em>)好像挺方便的！！！</p>
 
                 
             </div>
@@ -529,7 +660,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/2022/04/03/hello-world/">http://wjknowledge.top/2022/04/03/hello-world/</a>
+                    <a href="http://wjknowledge.top/2022/04/05/spring-zhong-bean-de-zuo-yong-yu-xml-zi-dong-zhuang-pei/">http://wjknowledge.top/2022/04/05/spring-zhong-bean-de-zuo-yong-yu-xml-zi-dong-zhuang-pei/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -567,8 +698,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                                    <span class="chip bg-color">介绍</span>
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
                         </div>
@@ -1008,62 +1143,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/04/dai-ma-ce-shi/">
+                <a href="/2022/04/05/spring-zhong-bean-de-zuo-yong-yu-xml-zi-dong-zhuang-pei/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="代码格式测试">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Spring中Bean的作用域&amp;XML的自动装配">
                         
-                        <span class="card-title">代码格式测试</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">测试</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/03/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hello world">
-                        
-                        <span class="card-title">hello world</span>
+                        <span class="card-title">Spring中Bean的作用域&amp;XML的自动装配</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1074,12 +1165,16 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1088,8 +1183,65 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                        <span class="chip bg-color">介绍</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/05/spring-dui-xiang-zhu-ru/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Spring对象创建与依赖注入">
+                        
+                        <span class="card-title">Spring对象创建与依赖注入</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
