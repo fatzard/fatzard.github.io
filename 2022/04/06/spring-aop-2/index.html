@@ -4,13 +4,12 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="代码格式测试, fat fatzard&#39;s Blog">
-    <meta name="description" content="首先测试java代码：
-public class Main&amp;#123;
-    @Test
-    public void test()
-    &amp;#123;
-        System.out.println(&amp;quot;Java&amp;qu">
+    <meta name="keywords" content="AOP(2)-Spring实现AOP, fat fatzard&#39;s Blog">
+    <meta name="description" content="利用Spring实现AOP首先写一个UserService接口：
+public interface UserService &amp;#123;
+    public void add();
+    public void delete();
+  ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,7 +32,7 @@ public class Main&amp;#123;
     </style>
 
 
-    <title>代码格式测试 | fat fatzard&#39;s Blog</title>
+    <title>AOP(2)-Spring实现AOP | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -323,12 +322,12 @@ public class Main&amp;#123;
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">代码格式测试</h1>
+                    <h1 class="description center-align post-title">AOP(2)-Spring实现AOP</h1>
                 </div>
             </div>
         </div>
@@ -444,14 +443,27 @@ public class Main&amp;#123;
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                                <span class="chip bg-color">测试</span>
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -460,28 +472,28 @@ public class Main&amp;#123;
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-04
+                    2022-04-06
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-04
+                    2022-04-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    65
+                    968
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -504,28 +516,171 @@ public class Main&amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>首先测试java代码：</p>
-<pre class="language-java" data-language="java"><code class="language-java">public class Main&#123;
-    @Test
-    public void test()
-    &#123;
-        System.out.println(&quot;Java&quot;)
+                <h3 id="利用Spring实现AOP"><a href="#利用Spring实现AOP" class="headerlink" title="利用Spring实现AOP"></a>利用Spring实现AOP</h3><p>首先写一个UserService接口：</p>
+<pre class="language-java" data-language="java"><code class="language-java">public interface UserService &#123;
+    public void add();
+    public void delete();
+    public void modify();
+    public void query();
+&#125;</code></pre>
+
+<p>再写一个实现类：</p>
+<pre class="language-java" data-language="java"><code class="language-java">public class UserServiceImpl implements UserService&#123;
+    @Override
+    public void add() &#123;
+        System.out.println(&quot;增加了数据&quot;);
+    &#125;
+
+    @Override
+    public void delete() &#123;
+        System.out.println(&quot;删除了数据&quot;);
+    &#125;
+
+    @Override
+    public void modify() &#123;
+        System.out.println(&quot;修改了数据&quot;);
+    &#125;
+
+    @Override
+    public void query() &#123;
+        System.out.println(&quot;查询了数据&quot;);
     &#125;
 &#125;</code></pre>
 
-<p>然后测试C++代码：</p>
-<pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-using namespace std;
-int main()
-&#123;
-    cout&lt;&lt;&quot;C++&quot;&lt;&lt;endl;
-    return 0;
+<p>然后在XML文件注册bean：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>userService<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.pro.UserServiceImpl<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
+
+<p>好！</p>
+<p>现在我们假设我们的工程就如上所示，现在需要你增加一个日志功能（就是在执行该方法前输出执行了什么方法）</p>
+<p>那么Spring是如何实现的喃？</p>
+<h4 id="1、导入AOP依赖包"><a href="#1、导入AOP依赖包" class="headerlink" title="1、导入AOP依赖包"></a>1、导入AOP依赖包</h4><p>在XML文件中加入：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml">xmlns:aop="http://www.springframework.org/schema/aop"
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd"></code></pre>
+
+<p>完整的xml文件头部：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
+       <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
+       <span class="token attr-name"><span class="token namespace">xmlns:</span>aop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/aop<span class="token punctuation">"</span></span>
+       <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+
+<h3 id="2、利用Spring-API接口实现："><a href="#2、利用Spring-API接口实现：" class="headerlink" title="2、利用Spring-API接口实现："></a>2、利用Spring-API接口实现：</h3><h4 id="2-1、前置方法："><a href="#2-1、前置方法：" class="headerlink" title="2.1、前置方法："></a>2.1、前置方法：</h4><pre class="language-java" data-language="java"><code class="language-java">import org.springframework.aop.MethodBeforeAdvice;
+
+import java.lang.reflect.Method;
+
+public class BeforeLog implements MethodBeforeAdvice &#123;
+
+    &#x2F;&#x2F;method 要执行的目标对象的方法
+    &#x2F;&#x2F;args 参数
+    &#x2F;&#x2F;target 目标对象
+    @Override
+    public void before(Method method, Object[] args, Object target) throws Throwable &#123;
+        System.out.println(target.getClass().getName()+&quot;的&quot;+method.getName()+&quot;被执行了&quot;);
+    &#125;
 &#125;</code></pre>
 
-<p>最后是python代码：</p>
-<pre class="language-py" data-language="py"><code class="language-py">print(&quot;python&quot;)</code></pre>
+<h4 id="2-2、后置方法："><a href="#2-2、后置方法：" class="headerlink" title="2.2、后置方法："></a>2.2、后置方法：</h4><pre class="language-java" data-language="java"><code class="language-java">import org.springframework.aop.AfterReturningAdvice;
 
-<p>完成</p>
+import java.lang.reflect.Method;
+
+public class AfterLog implements AfterReturningAdvice &#123;
+    @Override
+    public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable &#123;
+        System.out.println(&quot;执行了&quot;+method.getName()+&quot; 返回了&quot;+returnValue);
+    &#125;
+&#125;</code></pre>
+
+<h4 id="2-3、在bean注册："><a href="#2-3、在bean注册：" class="headerlink" title="2.3、在bean注册："></a>2.3、在bean注册：</h4><pre class="language-xml" data-language="xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>beforeLog<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.log.BeforeLog<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>afterLog<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.log.AfterLog<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+
+<span class="token comment">&lt;!--    方法一：使用原生spring api接口--></span>
+<span class="token comment">&lt;!--    配置aop--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>config</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--        首先需要一个切入点 expression :表达式 execution 要执行的位置--></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>pointcut</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pointcut<span class="token punctuation">"</span></span> <span class="token attr-name">expression</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>execution(* UserServiceImpl.*(..))<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token comment">&lt;!--    执行环绕增加--></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>advisor</span> <span class="token attr-name">advice-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>afterLog<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pointcut<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>advisor</span> <span class="token attr-name">advice-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>beforeLog<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pointcut<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">aop:</span>config</span><span class="token punctuation">></span></span></code></pre>
+
+<p>现在万事大吉，进行测试：</p>
+<pre class="language-java" data-language="java"><code class="language-java">@Test
+   public void test()&#123;
+       ApplicationContext context &#x3D; new ClassPathXmlApplicationConetext(&quot;applicationContext.xml&quot;);
+       userService userService &#x3D; context.getBean(&quot;userService&quot;);
+       userService.add();
+   &#125;</code></pre>
+
+<h3 id="3、利用自定义类实现："><a href="#3、利用自定义类实现：" class="headerlink" title="3、利用自定义类实现："></a>3、利用自定义类实现：</h3><p>先整一个自定义切入点：</p>
+<pre class="language-java" data-language="java"><code class="language-java">public class DiyPoint &#123;
+    public void before()
+    &#123;
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;方法执行前&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);
+    &#125;
+    public void after()&#123;
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;方法执行后&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);
+    &#125;
+&#125;</code></pre>
+
+<p>同样地，再配置XML文件即可：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml">    第二种方式 ：自定义类
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>diy<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.Diy.DiyPoint<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>config</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--        自定义切面  ref为要引用的类--></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>aspect</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>diy<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--            引入点--></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>pointcut</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>point<span class="token punctuation">"</span></span> <span class="token attr-name">expression</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>execution(* UserServiceImpl.*(..))<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token comment">&lt;!--            通知--></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>before</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>before<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>point<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>after</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>after<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>point<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">aop:</span>aspect</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">aop:</span>config</span><span class="token punctuation">></span></span></code></pre>
+
+<h3 id="4、利用注解实现："><a href="#4、利用注解实现：" class="headerlink" title="4、利用注解实现："></a>4、利用注解实现：</h3><p>利用注解首先需要开启注解支持：</p>
+<pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--    利用注解的方式--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>PointcutAnnotation<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.Diy.PointcutAnnotation<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
+
+<p>接下来在com.Diy.PointcutAnnotation路径写我们的PointCutAnnotation类：</p>
+<pre class="language-java" data-language="java"><code class="language-java">import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+
+@Aspect&#x2F;&#x2F;标注这个类是一个切面
+public class PointcutAnnotation &#123;
+
+    &#x2F;&#x2F;传入的参数代表切入的点
+    @Before(&quot;execution(* com.kuang.pro.UserServiceImpl.*(..))&quot;)
+    public void before()
+    &#123;
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;方法执行前&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);
+    &#125;
+
+    @After(&quot;execution(* com.kuang.pro.UserServiceImpl.*(..))&quot;)
+    public void after()
+    &#123;
+        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;方法执行后&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);
+    &#125;
+
+    @Around(&quot;execution(* com.kuang.pro.UserServiceImpl.*(..))&quot;)
+    public  void around(ProceedingJoinPoint joinPoint) throws Throwable &#123;
+        System.out.println(&quot;环绕前&quot;);
+
+        joinPoint.proceed();
+
+        System.out.println(&quot;环绕后&quot;);
+    &#125;
+&#125;</code></pre>
+
+<p>同样测试可以通过！！！O(∩_∩)O哈哈~</p>
+<p><img src="/2022/04/06/spring-aop-2/1.jpg" alt="测试"></p>
+<p>美哉，下面开学SpringMVC！</p>
 
                 
             </div>
@@ -552,7 +707,7 @@ int main()
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/2022/04/04/dai-ma-ce-shi/">http://wjknowledge.top/2022/04/04/dai-ma-ce-shi/</a>
+                    <a href="http://wjknowledge.top/2022/04/06/spring-aop-2/">http://wjknowledge.top/2022/04/06/spring-aop-2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -590,8 +745,12 @@ int main()
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                                    <span class="chip bg-color">测试</span>
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
                         </div>
@@ -1031,17 +1190,18 @@ int main()
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/">
+                <a href="/2022/04/06/spring-aop-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="第一个基于Spring的程序">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="AOP(2)-Spring实现AOP">
                         
-                        <span class="card-title">第一个基于Spring的程序</span>
+                        <span class="card-title">AOP(2)-Spring实现AOP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1051,9 +1211,9 @@ int main()
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1066,6 +1226,7 @@ int main()
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1088,13 +1249,13 @@ int main()
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/03/hello-world/">
+                <a href="/2022/04/05/spring-aop-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hello world">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="AOP(1)-JDK动态管理">
                         
-                        <span class="card-title">hello world</span>
+                        <span class="card-title">AOP(1)-JDK动态管理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1105,12 +1266,16 @@ int main()
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            fatzard
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1118,8 +1283,12 @@ int main()
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BB%8B%E7%BB%8D/">
-                        <span class="chip bg-color">介绍</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
