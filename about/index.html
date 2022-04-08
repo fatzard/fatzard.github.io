@@ -41,7 +41,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 6.1.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -378,16 +378,21 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
 <div class="statis">
-    <span class="count"><a href="/">2</a></span>
+    <span class="count"><a href="/">13</a></span>
     <span class="name">文章</span>
 </div>
 
 
 
+<div class="statis">
+    <span class="count"><a href="/categories">3</a></span>
+    <span class="name">分类</span>
+</div>
+
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">2</a></span>
+    <span class="count"><a href="/tags">7</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -403,16 +408,21 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
 <div class="statis">
-    <span class="count"><a href="/">2</a></span>
+    <span class="count"><a href="/">13</a></span>
     <span class="name">文章</span>
 </div>
 
 
 
+<div class="statis">
+    <span class="count"><a href="/categories">3</a></span>
+    <span class="name">分类</span>
+</div>
+
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">2</a></span>
+    <span class="count"><a href="/tags">7</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -548,7 +558,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,0,2],
+                data: [0,0,0,0,0,0,0,0,0,0,0,0,13],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -590,7 +600,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [],
+                data: [{"name":"Spring","value":7},{"name":"ACM","value":4},{"name":"数论","value":4}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -614,7 +624,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["测试","介绍"]
+                data: ["Spring","Java","ACM","数论","SpringMvc","介绍","测试"]
             }
         ],
         yAxis: [
@@ -627,7 +637,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [1,1],
+                data: [7,7,4,4,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -729,7 +739,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">93</span>
+                        class="white-color">7.6k</span>
             
             
             
@@ -785,8 +795,9 @@
     </div>
 </footer>
 
-<div class="progress-bar"></div>
-
+<div class="progress-bar"> </div>
+ <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+ <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
