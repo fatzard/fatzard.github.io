@@ -4,12 +4,10 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Spring对象创建与依赖注入, fat fatzard&#39;s Blog">
-    <meta name="description" content="首先创建一个Student实体类，它具有以下属性：
-private  String name;
-private  Address address;
-private  String[] book;
-private  List&amp;lt;Strin">
+    <meta name="keywords" content="扩展欧几里得定理, fat fatzard&#39;s Blog">
+    <meta name="description" content="现在我们已经知道了，方程ax+by=gcd（a，b） 的一组可行解一定有一组可行解，那么如何求解它喃？
+而这个时候我们有一个方法可以帮助我们求解：
+扩展欧几里得算法（Extended Euclidean algorithm, EXGCD），">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -32,7 +30,7 @@ private  List&amp;lt;Strin">
     </style>
 
 
-    <title>Spring对象创建与依赖注入 | fat fatzard&#39;s Blog</title>
+    <title>扩展欧几里得定理 | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -322,12 +320,12 @@ private  List&amp;lt;Strin">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Spring对象创建与依赖注入</h1>
+                    <h1 class="description center-align post-title">扩展欧几里得定理</h1>
                 </div>
             </div>
         </div>
@@ -443,12 +441,12 @@ private  List&amp;lt;Strin">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Spring/">
-                                <span class="chip bg-color">Spring</span>
+                            <a href="/tags/ACM/">
+                                <span class="chip bg-color">ACM</span>
                             </a>
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/%E6%95%B0%E8%AE%BA/">
+                                <span class="chip bg-color">数论</span>
                             </a>
                         
                     </div>
@@ -459,8 +457,12 @@ private  List&amp;lt;Strin">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/ACM/" class="post-category">
+                                ACM
+                            </a>
+                        
+                            <a href="/categories/ACM/%E6%95%B0%E8%AE%BA/" class="post-category">
+                                数论
                             </a>
                         
                     </div>
@@ -472,21 +474,21 @@ private  List&amp;lt;Strin">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-05
+                    2022-04-07
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-05
+                    2022-04-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    462
+                    424
                 </div>
                 
 
@@ -516,80 +518,57 @@ private  List&amp;lt;Strin">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>首先创建一个Student实体类，它具有以下属性：</p>
-<pre class="language-java" data-language="java"><code class="language-java">private  String name;
-private  Address address;
-private  String[] book;
-private  List&lt;String&gt; hobbys;
-private  Map&lt;String,String&gt;card;
-private  Set&lt;String&gt;games;
-private  String money;
-private  Properties info;</code></pre>
-<p>下面利用SpringIOC实现：</p>
-<h4 id="1-1、在bean中创建对象："><a href="#1-1、在bean中创建对象：" class="headerlink" title="1.1、在bean中创建对象："></a>1.1、在bean中创建对象：</h4><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>student<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.Student<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-	<span class="token comment">&lt;!-- 各种属性--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span></code></pre>
-<h4 id="2、对于对象属性的依赖注入："><a href="#2、对于对象属性的依赖注入：" class="headerlink" title="2、对于对象属性的依赖注入："></a>2、对于对象属性的依赖注入：</h4><h5 id="2-1、普通值注入："><a href="#2-1、普通值注入：" class="headerlink" title="2.1、普通值注入："></a>2.1、普通值注入：</h5><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--第一种普通值注入--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fatzard<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
-<h5 id="2-2、利用bean注入："><a href="#2-2、利用bean注入：" class="headerlink" title="2.2、利用bean注入："></a>2.2、利用bean注入：</h5><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--第二种bean注入--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>address<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>adress<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
-<h5 id="2-3、数组注入："><a href="#2-3、数组注入：" class="headerlink" title="2.3、数组注入："></a>2.3、数组注入：</h5><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--数组注入--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>book<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>array</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>追风筝的人<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>那不勒斯的灯火<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>array</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
-<h5 id="2-4、List注入："><a href="#2-4、List注入：" class="headerlink" title="2.4、List注入："></a>2.4、List注入：</h5><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--List注入--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hobbys<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>list</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>听歌<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>敲代码<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>list</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
-<h5 id="2-5、map注入："><a href="#2-5、map注入：" class="headerlink" title="2.5、map注入："></a>2.5、map注入：</h5><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--map--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>card<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>map</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>entry</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>id<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>122121212<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>map</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
-<h5 id="2-6、set注入："><a href="#2-6、set注入：" class="headerlink" title="2.6、set注入："></a>2.6、set注入：</h5><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--set--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>games<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>set</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>GTA5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>CSGO<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>set</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
-<h5 id="2-7、注入空值："><a href="#2-7、注入空值：" class="headerlink" title="2.7、注入空值："></a>2.7、注入空值：</h5><pre class="language-xml" data-language="xml"><code class="language-xml">
-<span class="token comment">&lt;!--注入空值--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>money<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>null</span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre>
-<h5 id="2-8、Properties的注入："><a href="#2-8、Properties的注入：" class="headerlink" title="2.8、Properties的注入："></a>2.8、Properties的注入：</h5><p>Properties可以存放很多东西，如下所示：<br><pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--propertoes--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>info<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>props</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>prop</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>学号<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>202000001<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>prop</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>prop</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>男<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>prop</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>prop</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>username<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>root<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>prop</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>prop</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pass<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>root<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>prop</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>props</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span></code></pre></p>
-<h4 id="3、利用p或c命名空间注入"><a href="#3、利用p或c命名空间注入" class="headerlink" title="3、利用p或c命名空间注入"></a>3、利用p或c命名空间注入</h4><p>在bean配置头部加上：</p>
-<pre class="language-xml" data-language="xml"><code class="language-xml">xmlns:p="http://www.springframework.org/schema/p"
-xmlns:c="http://www.springframework.org/schema/c"</code></pre>
-<p>完整头部：</p>
-<pre class="language-xml" data-language="xml"><code class="language-xml">
-<span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xmlns:</span>p</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/p<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xmlns:</span>c</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/c<span class="token punctuation">"</span></span>
-       <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans 
-       http://www.springframework.org/schema/beans/spring-beans.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
-<h4 id="4、"><a href="#4、" class="headerlink" title="4、"></a>4、</h4><p>使用ApplicationContext获取对应的bean</p>
-<pre class="language-xml" data-language="xml"><code class="language-xml">ApplicationContext context =new ClassPathXmlApplicationContext("beans.xml");
-Student student=(Student)context.getBean("student");
-System.out.println(student.toString());</code></pre>
+                <p>现在我们已经知道了，方程ax+by=gcd（a，b） 的一组可行解一定有一组可行解，那么如何求解它喃？</p>
+<p>而这个时候我们有一个方法可以帮助我们求解：</p>
+<p>扩展欧几里得算法（Extended Euclidean algorithm, EXGCD），常用于求ax+by=gcd（a，b） 的一组可行解。</p>
+<p>下面来看一下证明：</p>
+<p>(没加载出来一定要多刷新一下，这渲染太慢了)</p>
+<script type="math/tex; mode=display">
+设
+\begin{cases}
+ax1+by1=gcd(a,b)\\bx2+(a\ mod\ b)y2=gcd(b,a\ mod\ b)
+\end{cases}
+\\
+∵gcd(a,b)=gcd(b,a\ mod\ b);\\
+∴ax1+by1=gcd(b,a mod b)=bx2+(a\ mod\ b)y2;\\
+又∵a\ mod\ b=a-[\frac{a}{b}]*b\\
+\begin{aligned}
+∴bx2+(a\ mod\ b)y2&=bx2+(a-[\frac{a}{b}]*b)y2\\
+                             &=bx2+ay2-[\frac{a}{b}]*b*y2\\
+                             &=ay2+b(x2-[\frac{a}{b}]*y2)\\
+                             &=ax1+by1\\
+                           \end{aligned}\\
+                             由于对应项系数对应相等,所以 \\
+                             \begin{cases}
+                             x1=y2\\
+        y1=x2-[\frac{a}{b}]*y2\\
+        \end{cases}</script><p>那么将x2，y2 不断代入递归求解直至gcd 为 0为止<br>在这之前有 </p>
+<script type="math/tex; mode=display">
+gcd*x+0*y=gcd</script><p>，故x=1，y=0，再反过来带回去迭代便可以求出一组可行解</p>
+<p>代码实现：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+int ex_gcd(int a,int b,int &amp;x,int &amp;y)&#x2F;&#x2F;扩展欧几里得求ax+by&#x3D;gcd（a，b）；
+&#123;
+	if(!b)&#123;
+		x&#x3D;1;
+        y&#x3D;0;
+		return a;
+	&#125;
+	int gcd&#x3D;ex_gcd(b,a%b,y,x);
+	y-&#x3D;a&#x2F;b*x;
+	return gcd;
+&#125;
+
+int main()
+&#123;
+    int a,b,x,y;
+    cin&gt;&gt;a&gt;&gt;b;
+    int gcd&#x3D;ex_gcd(a,b,x,y); 
+    printf(&quot;%dx+%dy&#x3D;%d\n&quot;,a,b,gcd);
+    cout&lt;&lt;&quot;x&#x3D;&quot;&lt;&lt;x&lt;&lt;&quot; y&#x3D;&quot;&lt;&lt;y&lt;&lt;endl;&#x2F;&#x2F;方程的特解，可由线性代数相关知识推出通解；
+    return 0;
+&#125;</code></pre>
 
                 
             </div>
@@ -616,7 +595,7 @@ System.out.println(student.toString());</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/2022/04/05/spring-dui-xiang-zhu-ru/">http://wjknowledge.top/2022/04/05/spring-dui-xiang-zhu-ru/</a>
+                    <a href="http://wjknowledge.top/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/">http://wjknowledge.top/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -654,12 +633,12 @@ System.out.println(student.toString());</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Spring/">
-                                    <span class="chip bg-color">Spring</span>
+                                <a href="/tags/ACM/">
+                                    <span class="chip bg-color">ACM</span>
                                 </a>
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/%E6%95%B0%E8%AE%BA/">
+                                    <span class="chip bg-color">数论</span>
                                 </a>
                             
                         </div>
@@ -1099,17 +1078,18 @@ System.out.println(student.toString());</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/04/05/spring-zhong-bean-de-zuo-yong-yu-xml-zi-dong-zhuang-pei/">
+                <a href="/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Spring中Bean的作用域&amp;XML的自动装配(注解)">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="扩展欧几里得定理">
                         
-                        <span class="card-title">Spring中Bean的作用域&amp;XML的自动装配(注解)</span>
+                        <span class="card-title">扩展欧几里得定理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1119,30 +1099,35 @@ System.out.println(student.toString());</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/ACM/" class="post-category">
+                                    ACM
+                                </a>
+                            
+                            <a href="/categories/ACM/%E6%95%B0%E8%AE%BA/" class="post-category">
+                                    数论
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/ACM/">
+                        <span class="chip bg-color">ACM</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/%E6%95%B0%E8%AE%BA/">
+                        <span class="chip bg-color">数论</span>
                     </a>
                     
                 </div>
@@ -1156,13 +1141,13 @@ System.out.println(student.toString());</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/04/spring-ioc/">
+                <a href="/2022/04/07/qiao-miao-zheng-ming-fei-shu-ding-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Spring IOC底层原理简析">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="利用“矩阵”巧妙证明斐蜀定理">
                         
-                        <span class="card-title">Spring IOC底层原理简析</span>
+                        <span class="card-title">利用“矩阵”巧妙证明斐蜀定理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1173,14 +1158,18 @@ System.out.println(student.toString());</code></pre>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/ACM/" class="post-category">
+                                    ACM
+                                </a>
+                            
+                            <a href="/categories/ACM/%E6%95%B0%E8%AE%BA/" class="post-category">
+                                    数论
                                 </a>
                             
                             
@@ -1190,12 +1179,12 @@ System.out.println(student.toString());</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/ACM/">
+                        <span class="chip bg-color">ACM</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/%E6%95%B0%E8%AE%BA/">
+                        <span class="chip bg-color">数论</span>
                     </a>
                     
                 </div>
@@ -1350,6 +1339,13 @@ System.out.println(student.toString());</code></pre>
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

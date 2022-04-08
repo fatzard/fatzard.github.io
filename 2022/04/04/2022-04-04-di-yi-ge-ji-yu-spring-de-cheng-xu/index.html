@@ -525,20 +525,19 @@
 <p>4.方便和其他框架进行整合    </p>
 <p>5.方便事务操作</p>
 <p>6.降低API开发难度</p>
-<h4 id="1-2、Spring下载："><a href="#1-2、Spring下载：" class="headerlink" title="1.2、Spring下载："></a>1.2、Spring下载：</h4><p>进入网址：[<a href="http://repo.spring.io]">http://repo.spring.io]</a></p>
+<h4 id="1-2、Spring下载："><a href="#1-2、Spring下载：" class="headerlink" title="1.2、Spring下载："></a>1.2、Spring下载：</h4><p>进入网址：[<a target="_blank" rel="noopener" href="http://repo.spring.io">http://repo.spring.io</a>]</p>
 <p>详细的Spring下载可参考这篇博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/frankarmstrong/article/details/69808813">https://blog.csdn.net/frankarmstrong/article/details/69808813</a></p>
 <h2 id="2、Spring-项目中pom-xml文件配置"><a href="#2、Spring-项目中pom-xml文件配置" class="headerlink" title="2、Spring 项目中pom.xml文件配置"></a>2、Spring 项目中pom.xml文件配置</h2><h4 id="2-1、导入依赖包："><a href="#2-1、导入依赖包：" class="headerlink" title="2.1、导入依赖包："></a>2.1、导入依赖包：</h4><p>Spring常用的的依赖包可以通过导入spring-webmvc包自动导入</p>
-<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/1.png"></p>
+<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/1.png" alt></p>
 <p>在xml文件中添加如下配置</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-webmvc<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.3.17<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-
 <p>导入依赖包，通过maven即可自动加载。</p>
 <p>除此之外，还可以导入其他常用包</p>
-<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/2.png"></p>
+<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/2.png" alt></p>
 <p>这些包在后面的开发中会用到，其相关配置文件如下：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
@@ -555,7 +554,6 @@
           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aspectjweaver<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.9.9<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
-
 <h3 id="3、利用Spring运行一个简单的程序"><a href="#3、利用Spring运行一个简单的程序" class="headerlink" title="3、利用Spring运行一个简单的程序"></a>3、利用Spring运行一个简单的程序</h3><p>打开IDEA编译器，构建如下的目录</p>
 <p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/3.png" alt="image-20220404185532186"></p>
 <p>首先写一个实体<code>hello</code>类：</p>
@@ -577,7 +575,6 @@
                 &#39;&#125;&#39;;
     &#125;
 &#125;</code></pre>
-
 <p>其中<code>./resources/bean.xml</code>为Spring的容器配置文件，那么接下来向Spring容器中注入对象：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
@@ -589,10 +586,9 @@
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>beans</span><span class="token punctuation">></span></span></code></pre>
-
 <p>在Spring中每个对象也被叫做bean，每个bean通过Spring容器赋值，比如：<code>&lt;property name=&quot;str&quot; value=&quot;Spring&quot;&gt;&lt;/property&gt;</code></p>
 <p>如果对象注入成功，那么在hello类的左侧出现个Spring的标志</p>
-<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/4.png"></p>
+<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/4.png" alt></p>
 <p>看来我们注册成功，那么接下来写一次test类进行测试：</p>
 <pre class="language-java" data-language="java"><code class="language-java">public class mytest &#123;
     public static  void main(String[] args)&#123;
@@ -601,10 +597,9 @@
         System.out.println(hello.toString());
     &#125;
 &#125;</code></pre>
-
 <p>其中<code>ApplicationContext context=new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);</code>是拿去Spring容器中对象的前提操作，因此在取得上下文后，再通过<code>context.getBean</code>方法传入<code>id</code>获得的对象，这样我们就拿到了对象。</p>
 <p>运行一下：</p>
-<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/5.png"></p>
+<p><img src="/2022/04/04/2022-04-04-di-yi-ge-ji-yu-spring-de-cheng-xu/5.png" alt></p>
 <p>很高兴，运行成功！！！！</p>
 
                 
@@ -1377,7 +1372,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.1k</span>
+                        class="white-color">5.5k</span>
             
             
             
@@ -1433,9 +1428,8 @@
     </div>
 </footer>
 
-<div class="progress-bar">
-    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-</div>
+<div class="progress-bar"> </div>
+ <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <!-- 搜索遮罩框 -->
@@ -1620,9 +1614,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>

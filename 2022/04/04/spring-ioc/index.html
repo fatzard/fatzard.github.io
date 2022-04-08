@@ -521,16 +521,12 @@
 <h4 id><a href="#" class="headerlink" title></a><img src="/2022/04/04/spring-ioc/3.jpg" alt="after"></h4><h4 id="2-3、IOC解耦"><a href="#2-3、IOC解耦" class="headerlink" title="2.3、IOC解耦"></a>2.3、IOC解耦</h4><p>采用工厂这种模式，再配置XML，从XML中取出配置好的bean对象。</p>
 <p>第一步配置XML文件，配置创建的对象：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mysqlImpl<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.demo.pro.UserDaoMysqlImpl<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
-
 <p>第二步在加载配置文件时候就进行对象的创建（常用）</p>
 <pre class="language-java" data-language="java"><code class="language-java">ApplicationContext context&#x3D; new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);</code></pre>
-
 <p>而这个context就类似于工厂，接下来就可以取出对象就行：</p>
 <pre class="language-java" data-language="java"><code class="language-java">UserService userService&#x3D;(UserService) context.getBean(&quot;mysqlImpl&quot;);</code></pre>
-
 <p>从而可以调用对象的方法：</p>
 <pre class="language-java" data-language="java"><code class="language-java">userService.getUser();</code></pre>
-
 <p>简而言之，Spring采用了这种工厂模式注入对象，而这也是Spring的核心之一！！！！</p>
 
                 
@@ -1311,7 +1307,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.1k</span>
+                        class="white-color">5.5k</span>
             
             
             
@@ -1367,9 +1363,8 @@
     </div>
 </footer>
 
-<div class="progress-bar">
-    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-</div>
+<div class="progress-bar"> </div>
+ <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <!-- 搜索遮罩框 -->
@@ -1554,9 +1549,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>

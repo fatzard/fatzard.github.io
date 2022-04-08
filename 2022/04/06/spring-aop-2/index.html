@@ -523,7 +523,6 @@ public interface UserService &amp;#123;
     public void modify();
     public void query();
 &#125;</code></pre>
-
 <p>再写一个实现类：</p>
 <pre class="language-java" data-language="java"><code class="language-java">public class UserServiceImpl implements UserService&#123;
     @Override
@@ -546,10 +545,8 @@ public interface UserService &amp;#123;
         System.out.println(&quot;查询了数据&quot;);
     &#125;
 &#125;</code></pre>
-
 <p>然后在XML文件注册bean：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>userService<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.pro.UserServiceImpl<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
-
 <p>好！</p>
 <p>现在我们假设我们的工程就如上所示，现在需要你增加一个日志功能（就是在执行该方法前输出执行了什么方法）</p>
 <p>那么Spring是如何实现的喃？</p>
@@ -557,7 +554,6 @@ public interface UserService &amp;#123;
 <pre class="language-xml" data-language="xml"><code class="language-xml">xmlns:aop="http://www.springframework.org/schema/aop"
 http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop.xsd"></code></pre>
-
 <p>完整的xml文件头部：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span>
@@ -567,7 +563,6 @@ http://www.springframework.org/schema/aop/spring-aop.xsd"></code></pre>
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
-
 <h3 id="2、利用Spring-API接口实现："><a href="#2、利用Spring-API接口实现：" class="headerlink" title="2、利用Spring-API接口实现："></a>2、利用Spring-API接口实现：</h3><h4 id="2-1、前置方法："><a href="#2-1、前置方法：" class="headerlink" title="2.1、前置方法："></a>2.1、前置方法：</h4><pre class="language-java" data-language="java"><code class="language-java">import org.springframework.aop.MethodBeforeAdvice;
 
 import java.lang.reflect.Method;
@@ -582,7 +577,6 @@ public class BeforeLog implements MethodBeforeAdvice &#123;
         System.out.println(target.getClass().getName()+&quot;的&quot;+method.getName()+&quot;被执行了&quot;);
     &#125;
 &#125;</code></pre>
-
 <h4 id="2-2、后置方法："><a href="#2-2、后置方法：" class="headerlink" title="2.2、后置方法："></a>2.2、后置方法：</h4><pre class="language-java" data-language="java"><code class="language-java">import org.springframework.aop.AfterReturningAdvice;
 
 import java.lang.reflect.Method;
@@ -593,7 +587,6 @@ public class AfterLog implements AfterReturningAdvice &#123;
         System.out.println(&quot;执行了&quot;+method.getName()+&quot; 返回了&quot;+returnValue);
     &#125;
 &#125;</code></pre>
-
 <h4 id="2-3、在bean注册："><a href="#2-3、在bean注册：" class="headerlink" title="2.3、在bean注册："></a>2.3、在bean注册：</h4><pre class="language-xml" data-language="xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>beforeLog<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.log.BeforeLog<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>afterLog<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.log.AfterLog<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
 
@@ -607,7 +600,6 @@ public class AfterLog implements AfterReturningAdvice &#123;
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>advisor</span> <span class="token attr-name">advice-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>afterLog<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pointcut<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>advisor</span> <span class="token attr-name">advice-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>beforeLog<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pointcut<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">aop:</span>config</span><span class="token punctuation">></span></span></code></pre>
-
 <p>现在万事大吉，进行测试：</p>
 <pre class="language-java" data-language="java"><code class="language-java">@Test
    public void test()&#123;
@@ -615,7 +607,6 @@ public class AfterLog implements AfterReturningAdvice &#123;
        userService userService &#x3D; context.getBean(&quot;userService&quot;);
        userService.add();
    &#125;</code></pre>
-
 <h3 id="3、利用自定义类实现："><a href="#3、利用自定义类实现：" class="headerlink" title="3、利用自定义类实现："></a>3、利用自定义类实现：</h3><p>先整一个自定义切入点：</p>
 <pre class="language-java" data-language="java"><code class="language-java">public class DiyPoint &#123;
     public void before()
@@ -626,7 +617,6 @@ public class AfterLog implements AfterReturningAdvice &#123;
         System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;方法执行后&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);
     &#125;
 &#125;</code></pre>
-
 <p>同样地，再配置XML文件即可：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml">    第二种方式 ：自定义类
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>diy<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.Diy.DiyPoint<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
@@ -640,11 +630,9 @@ public class AfterLog implements AfterReturningAdvice &#123;
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">aop:</span>after</span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>after<span class="token punctuation">"</span></span> <span class="token attr-name">pointcut-ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>point<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">aop:</span>aspect</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">aop:</span>config</span><span class="token punctuation">></span></span></code></pre>
-
 <h3 id="4、利用注解实现："><a href="#4、利用注解实现：" class="headerlink" title="4、利用注解实现："></a>4、利用注解实现：</h3><p>利用注解首先需要开启注解支持：</p>
 <pre class="language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--    利用注解的方式--></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>PointcutAnnotation<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.Diy.PointcutAnnotation<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></code></pre>
-
 <p>接下来在com.Diy.PointcutAnnotation路径写我们的PointCutAnnotation类：</p>
 <pre class="language-java" data-language="java"><code class="language-java">import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -677,7 +665,6 @@ public class PointcutAnnotation &#123;
         System.out.println(&quot;环绕后&quot;);
     &#125;
 &#125;</code></pre>
-
 <p>同样测试可以通过！！！O(∩_∩)O哈哈~</p>
 <p><img src="/2022/04/06/spring-aop-2/1.jpg" alt="测试"></p>
 <p>美哉，下面开学SpringMVC！</p>
@@ -1190,18 +1177,17 @@ public class PointcutAnnotation &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/04/06/spring-aop-2/">
+                <a href="/2022/04/07/xian-xing-tong-yu-fang-cheng-zu-de-tong-jie-ji-zui-xiao-zheng-zheng-shu-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="AOP(2)-Spring实现AOP">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="线性同余方程的通解及最小正整数解">
                         
-                        <span class="card-title">AOP(2)-Spring实现AOP</span>
+                        <span class="card-title">线性同余方程的通解及最小正整数解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1211,31 +1197,34 @@ public class PointcutAnnotation &#123;
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/ACM/" class="post-category">
+                                    ACM
+                                </a>
+                            
+                            <a href="/categories/ACM/%E6%95%B0%E8%AE%BA/" class="post-category">
+                                    数论
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/ACM/">
+                        <span class="chip bg-color">ACM</span>
                     </a>
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/%E6%95%B0%E8%AE%BA/">
+                        <span class="chip bg-color">数论</span>
                     </a>
                     
                 </div>
@@ -1462,7 +1451,7 @@ public class PointcutAnnotation &#123;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.1k</span>
+                        class="white-color">5.5k</span>
             
             
             
@@ -1518,9 +1507,8 @@ public class PointcutAnnotation &#123;
     </div>
 </footer>
 
-<div class="progress-bar">
-    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-</div>
+<div class="progress-bar"> </div>
+ <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <!-- 搜索遮罩框 -->
@@ -1705,9 +1693,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
