@@ -5,7 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="线性同余方程的通解及最小正整数解, fat fatzard&#39;s Blog">
-    <meta name="description" content="现在来说一个exgcd的应用：求解同余方程
+    <meta name="description" content="1、问题引入现在来说一个exgcd的应用：求解同余方程
 问题：
 
 求同余方程3x≡1 (mod\ 10)的一个解解：可将该同余方程改写成其等价形式，如下：
@@ -13,7 +13,7 @@
 3x+10y=1这个问题的本质是什么？
 就是
 
-求形如ax+by=c方程的一个特解那么对于这种">
+求形如ax+by=c方程的一个特解">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -494,14 +494,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    490
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    4 分
                 </div>
                 
 
@@ -524,7 +524,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>现在来说一个exgcd的应用：求解同余方程</p>
+                <h3 id="1、问题引入"><a href="#1、问题引入" class="headerlink" title="1、问题引入"></a>1、问题引入</h3><p>现在来说一个exgcd的应用：求解同余方程</p>
 <p>问题：</p>
 <script type="math/tex; mode=display">
 求同余方程3x≡1 (mod\ 10)的一个解</script><p>解：可将该同余方程改写成其等价形式，如下：</p>
@@ -541,7 +541,7 @@ a*(\frac{x*gcd(a,b)}{c})+b*(\frac{y*gcd(a,b)}{c})=gcd（a，b）\\
 令X=\frac{x*gcd(a,b)}{c}，Y=\frac{y*gcd(a,b)}{c},则方程变为：aX+bY=gcd(a,b)\\
 又∵gcd(a,b),c都为已知数\\
 ∴可以通过exgcd求出X后，通过反解得到x(如何求解可参考我的上一篇博客)\\
-注：由于是整数解，需要考虑是否能gcd是否整除c\\</script><p>问题继续深入下去！！！！</p>
+注：由于是整数解，需要考虑是否能gcd是否整除c\\</script><h3 id="2、通解求法"><a href="#2、通解求法" class="headerlink" title="2、通解求法"></a>2、通解求法</h3><p>问题继续深入下去！！！！</p>
 <p>如何</p>
 <script type="math/tex; mode=display">
 求关于同余方程ax+by=c的一组通解</script><script type="math/tex; mode=display">
@@ -566,7 +566,45 @@ ax_i+bx_i=c  ①\\
 x=x_0+k*\frac{b}{gcd(a,b)}\\
                       y=y_0-k*\frac{a}{gcd(a,b)}\\
                       \end{cases}\\
-            有了通解便可以推出x和y的最小正整数解\\</script>
+            有了通解便可以推出x和y的最小正整数解\\</script><h3 id="3、例题："><a href="#3、例题：" class="headerlink" title="3、例题："></a>3、例题：</h3><p>题目来自（POJ-1061）：</p>
+<p>题干：</p>
+<p>两只青蛙在网上相识了，它们聊得很开心，于是觉得很有必要见一面。它们很高兴地发现它们住在同一条纬度线上，于是它们约定各自朝西跳，直到碰面为止。可是它们出发之前忘记了一件很重要的事情，既没有问清楚对方的特征，也没有约定见面的具体位置。不过青蛙们都是很乐观的，它们觉得只要一直朝着某个方向跳下去，总能碰到对方的。但是除非这两只青蛙在同一时间跳到同一点上，不然是永远都不可能碰面的。为了帮助这两只乐观的青蛙，你被要求写一个程序来判断这两只青蛙是否能够碰面，会在什么时候碰面。<br>我们把这两只青蛙分别叫做青蛙A和青蛙B，并且规定纬度线上东经0度处为原点，由东往西为正方向，单位长度1米，这样我们就得到了一条首尾相接的数轴。设青蛙A的出发点坐标是x，青蛙B的出发点坐标是y。青蛙A一次能跳m米，青蛙B一次能跳n米，两只青蛙跳一次所花费的时间相同。纬度线总长L米。现在要你求出它们跳了几次以后才会碰面。</p>
+<p>标程：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+using namespace std;
+#define int long long
+int ex_gcd(int a, int b, int &amp;x, int &amp;y)
+&#123;
+    if (!b)
+    &#123;
+        x &#x3D; 1;
+        y &#x3D; 0;
+        return a;
+    &#125;
+    int gcd &#x3D; ex_gcd(b, a % b, y, x);
+    y -&#x3D; a &#x2F; b * x;
+    return gcd;
+&#125;
+signed main()
+&#123;
+    int x, y, m, n, l;
+    cin &gt;&gt; x &gt;&gt; y &gt;&gt; m &gt;&gt; n &gt;&gt; l;
+    int a &#x3D; -(m - n), b &#x3D; l;
+    int X0, Y0;
+    int gcd &#x3D; ex_gcd(a, b, X0, Y0);
+    if ((x - y) % gcd)
+        cout &lt;&lt; &quot;Impossible&quot; &lt;&lt; endl;
+    else
+    &#123;
+        X0 &#x3D; X0 * (x - y) &#x2F; gcd;
+        int s &#x3D; abs(b &#x2F; gcd);
+        cout &lt;&lt; (X0 % s + s) % s &lt;&lt; endl;
+    &#125;
+    return 0;
+&#125;</code></pre>
+
                 
             </div>
             <hr/>
@@ -1356,7 +1394,7 @@ x=x_0+k*\frac{b}{gcd(a,b)}\\
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">5.5k</span>
+                        class="white-color">6k</span>
             
             
             
@@ -1598,9 +1636,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 
 </html>
