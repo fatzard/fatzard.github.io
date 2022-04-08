@@ -487,7 +487,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.6k
                 </div>
                 
 
@@ -524,16 +524,16 @@
 <p>打开IDEA，不断地点击他的父类</p>
 <p>​        <img src="/2022/04/08/springmvc-yuan-li/3.jpg" alt></p>
 <p><img src="/2022/04/08/springmvc-yuan-li/4.jpg" alt></p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\5.jpg" alt></p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\6.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/5.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/6.jpg" alt></p>
 <p>看到没？？？？？</p>
 <p>这是啥？？？这是啥？这不是某亮老师天天在哪儿说的HttpServlet？这不是web课上叫手写的玩意儿吗？</p>
 <p>再继续往下点看看！</p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\7.jpg" alt></p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\8.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/7.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/8.jpg" alt></p>
 <p>这玩意儿就是个继承了一堆爸爸的servlet的大变种！！！</p>
 <h3 id="2、SpringMvc原理流程图"><a href="#2、SpringMvc原理流程图" class="headerlink" title="2、SpringMvc原理流程图"></a>2、SpringMvc原理流程图</h3><p>一段理解之后，我画了SpringMvc的流程图，如下：</p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\1.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/1.jpg" alt></p>
 <p>看着好复杂！</p>
 <p>确实很复杂，我为什么要看着玩意儿的原理？不看原理瘆得慌，没错SpringMvc得到原理就如上图所示一样：</p>
 <h4 id="2-1、SpringMvc请求流程："><a href="#2-1、SpringMvc请求流程：" class="headerlink" title="2.1、SpringMvc请求流程："></a>2.1、SpringMvc请求流程：</h4><ol>
@@ -554,7 +554,7 @@
 <li><p>HTTP响应</p>
 <p>看着好**麻烦，学它干嘛呀！不如就用某亮老师讲的Servlet写。</p>
 <p>嘿嘿，不过这玩意儿是框架O(∩_∩)O哈哈~</p>
-<h4 id="2-2、SpringMvc真正需要程序员做的"><a href="#2-2、SpringMvc真正需要程序员做的" class="headerlink" title="2.2、SpringMvc真正需要程序员做的"></a>2.2、SpringMvc真正需要程序员做的</h4><p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\2.jpg" alt></p>
+<h4 id="2-2、SpringMvc真正需要程序员做的"><a href="#2-2、SpringMvc真正需要程序员做的" class="headerlink" title="2.2、SpringMvc真正需要程序员做的"></a>2.2、SpringMvc真正需要程序员做的</h4><p><img src="/2022/04/08/springmvc-yuan-li/2.jpg" alt></p>
 </li>
 </ol>
 <p>真正需要做只有红框框所示，简直离大谱，这尼玛就是框架！！！</p>
@@ -707,15 +707,16 @@ $&#123;msg&#125;
 <p>下面配置tomcat。</p>
 <h4 id="3-1、踩了大坑！！！"><a href="#3-1、踩了大坑！！！" class="headerlink" title="3.1、踩了大坑！！！"></a>3.1、踩了大坑！！！</h4><p>1、IDEA用<code>jdk16+tomcat10</code>报错，改成<code>jdk+tomcat9</code>才解决</p>
 <p>2、代码没问题，运行是报错404；结果是IDEA没有导包，于是得自己导jar包</p>
-<h4 id="3-1-1、如何检查IDEA是否抽风没导包？"><a href="#3-1-1、如何检查IDEA是否抽风没导包？" class="headerlink" title="3.1.1、如何检查IDEA是否抽风没导包？"></a>3.1.1、如何检查IDEA是否抽风没导包？</h4><p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\9.jpg" alt></p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\10.jpg" alt></p>
+<h4 id="3-2、如何检查IDEA是否抽风没导包？"><a href="#3-2、如何检查IDEA是否抽风没导包？" class="headerlink" title="3.2、如何检查IDEA是否抽风没导包？"></a>3.2、如何检查IDEA是否抽风没导包？</h4><p><img src="/2022/04/08/springmvc-yuan-li/9.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/10.jpg" alt></p>
 <p>先看有没有lib这个包，没有的话，自己手动加包！</p>
-<h3 id="3-2、run！"><a href="#3-2、run！" class="headerlink" title="3.2、run！"></a>3.2、run！</h3><p>tomcat运行成功！！！</p>
+<h4 id="3-3、run！"><a href="#3-3、run！" class="headerlink" title="3.3、run！"></a>3.3、run！</h4><p>tomcat运行成功！！！</p>
 <p>在地址栏输入：hello</p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\11,jpg.jpg" alt></p>
+<p><img src="/2022/04/08/springmvc-yuan-li/11,jpg.jpg" alt></p>
 <p>跳转</p>
-<p><img src="/2022/04/08/springmvc-yuan-li/SpringMVC原理\12.jpg" alt></p>
-<p>成功！！！</p>
+<p><img src="/2022/04/08/springmvc-yuan-li/12.jpg" alt></p>
+<p>成功了！！！</p>
+<p>下次试试注解版！</p>
 
                 
             </div>
@@ -1292,13 +1293,13 @@ $&#123;msg&#125;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/">
+                <a href="/2022/04/07/qiao-miao-zheng-ming-fei-shu-ding-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="扩展欧几里得定理">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="利用“矩阵”巧妙证明斐蜀定理">
                         
-                        <span class="card-title">扩展欧几里得定理</span>
+                        <span class="card-title">利用“矩阵”巧妙证明斐蜀定理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
