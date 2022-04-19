@@ -209,6 +209,33 @@
     
     
     <entry>
+      <title>快速幂</title>
+      <link href="/2022/04/07/kuai-su-mi/"/>
+      <url>/2022/04/07/kuai-su-mi/</url>
+      
+        <content type="html"><![CDATA[<p>通常地，我们计算$a^x$是将$x$从1一直累乘到$x$，这样是最简单的计算方法，但是这种做法的时间复杂度是$o(n)$，一旦我们计算的幂次方较大或者计算次数较多的时候就会花费很长的时间；例如：计算$10^{100000000}$组类似$999^{100000000}$这样的计算式，你可能算一辈子都算不出来。</p><p>​        这个时候引入二进制对$a^x$进行优化：</p><p>​        考虑$a^{2x}$=$a^x×a^x$=$(a^x)$$^2$于是可以利用二进制表示分割成更小的一部分</p><p>​        例如：$9^{13}$=$9^{(1101)_2}$=$9^8$×$9^4$×$9^1$</p><p>​        因为$n$有$[log_2x]+1$个二进制位，因此当我们知道了 $a^1,a^2,a^4…a^{2^k}$后，我们只用计算$[log_2x]+1$次乘法就可以计算出$a^x$    </p><p>​        因此计算$a^x$只需要将$x$对应的二进制下的数位为1的整系数幂乘起来即可</p><p>​        即：$a^x$=$a^{(x_0x_1x_2..x_n)_2}$=$a^{x_02^{0}}$×$a^{x_12^{1}}$×$a^{x_22^{2}}$…….×$a^{x_n2^{n}}$</p><p>​        根据上式发现，原问题被转化成了形式相同的子问题的乘积，并且我们可以在常数时间内从 $2^i$         项推出$2^{i+1}$项。</p><p>​        通过二进制处理后时间复杂度降为$O(logn)$</p><p>​        下面是我的快速幂代码模版：</p><pre class="language-c++" data-language="c++"><code class="language-c++">long long fastpow(long long a, long long n) &#x2F;&#x2F;快速幂&#123;    long long ans &#x3D; 1;    while (n)    &#123;        if (n &amp; 1)        &#123;            ans *&#x3D; a;        &#125;        a *&#x3D; a;        n &gt;&gt;&#x3D; 1; &#x2F;&#x2F;位运算    &#125;    return ans;&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AOP(2)-Spring实现AOP</title>
       <link href="/2022/04/06/spring-aop-2/"/>
       <url>/2022/04/06/spring-aop-2/</url>
