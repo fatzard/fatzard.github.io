@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>不定方程解的数量</title>
+      <link href="/2022/04/21/bu-ding-fang-cheng-jie-de-shu-liang/"/>
+      <url>/2022/04/21/bu-ding-fang-cheng-jie-de-shu-liang/</url>
+      
+        <content type="html"><![CDATA[<h4 id="抛出问题："><a href="#抛出问题：" class="headerlink" title="抛出问题："></a>抛出问题：</h4><script type="math/tex; mode=display">求不定方程 x_1+x_2+x_3+......x_k=n的解的数量，且x_i\ge1，（1\le i\le k）</script><h4 id="1、隔板法"><a href="#1、隔板法" class="headerlink" title="1、隔板法"></a>1、隔板法</h4><p>​    将$n$看成$n$个球，$k$个解表示最终拆成了$k$份</p><p>​    那么问题等价于：用$k-1$个板将$n$个球隔开，$n$个球有$n-1$个缝隙，这$n-1$缝隙可以插入$k-1$个隔板，问：有多少种放法？</p><p>​    显然，有$C_{n-1}^{k-1}$种放法</p><p>​    此时，基本问题解决了</p><h4 id="2、将-x-i-ge-1-改成-x-i-ge-a-i"><a href="#2、将-x-i-ge-1-改成-x-i-ge-a-i" class="headerlink" title="2、将$x_i\ge 1$改成$x_i\ge a_i$"></a>2、将$x_i\ge 1$改成$x_i\ge a_i$</h4><p>​    原问题变为：</p><p>​        </p><script type="math/tex; mode=display">\begin{cases}x_1+x_2+x_3+......x_k=n\\x_1\ge a_1\\x_2\ge a_2\\....\\x_n\ge a_n\end{cases}</script><p>我们只需要将问题转化为原来的子问题：</p><p>​    令$y_i=x_i-(a_i-1)$</p><p>​    此时：$y_i\ge 1$</p><p>那么此时：</p><script type="math/tex; mode=display">\begin{cases}y_1+y_2+y_3+.....y_k=x_1+x_2+..+x_k-(a_1+a_2+..+a_k)+k\\y_i\ge 1\end{cases}</script><p>化简一下：</p><script type="math/tex; mode=display">\begin{cases}y_1+y_2+y_3+.....y_k=n-\sum_{i=1}^{k}a_i+k\\y_i\ge 1\end{cases}</script><p>所以此时这种情况的解的数量为：$C<em>{n-\sum</em>{i=1}^{k}a_i+k}^{k-1}$</p><h4 id="3、再变形！-x-1-x-2-x-3-……x-k-le-n-的解的数量（其余条件不变，即-x-i-ge1，（1-le-i-le-k）-）"><a href="#3、再变形！-x-1-x-2-x-3-……x-k-le-n-的解的数量（其余条件不变，即-x-i-ge1，（1-le-i-le-k）-）" class="headerlink" title="3、再变形！$x_1+x_2+x_3+……x_k\le n$的解的数量（其余条件不变，即$x_i\ge1，（1\le i\le k）$）"></a>3、再变形！$x_1+x_2+x_3+……x_k\le n$的解的数量（其余条件不变，即$x_i\ge1，（1\le i\le k）$）</h4><p>引入一个变量$z$</p><p>​      使：$x_1+x_2+x_3+……x_k+z= n$,其中$z\ge 0$</p><h5 id="3-1、-z-0-时"><a href="#3-1、-z-0-时" class="headerlink" title="3.1、$z=0$时"></a>3.1、$z=0$时</h5><p>问题没有发生变化，此时的解法为：$C_{n-1}^{k-1}$</p><h5 id="3-2、-z-ge-1-时"><a href="#3-2、-z-ge-1-时" class="headerlink" title="3.2、$z\ge 1$时"></a>3.2、$z\ge 1$时</h5><p>此时的$z$相当于$x<em>{k+1}$，相当于在原问题上加一个解，此时的解法为：$C</em>{n-1}^{k}$</p><p>所以最终的解的数量为：$C<em>{n-1}^{k-1}$+$C</em>{n-1}^{k}$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ACM </tag>
+            
+            <tag> 排列组合 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JDBC与Springboot相遇</title>
       <link href="/2022/04/11/springboot-jdbc/"/>
       <url>/2022/04/11/springboot-jdbc/</url>
