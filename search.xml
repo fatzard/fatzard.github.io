@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>SpringBoot前后端分离（后端初体验）</title>
+      <link href="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/"/>
+      <url>/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1、初结构介绍"><a href="#1、初结构介绍" class="headerlink" title="1、初结构介绍"></a>1、初结构介绍</h3><p>​        由于学校安排工程实践，有幸在大致学习了Spring-&gt;SpringMvc-&gt;Springboot基础玩意儿后，第一次基于Springboot裸敲前后端分离项目———装备管理系统（Arms）【感觉过于中二的系统，毕竟谁没事用这个系统啊！！！】，不过通过这个项目的实践，可以初体验前后端分离项目的逻辑，在这样一个小组中，有幸参与了后端的构建，感谢组员建立的数据库。</p><p>​        不过前端尚未结束，很多测试尚未完成，待完成后，将源码上传至github【网址：（尚未结束，于是暂无）】，希望大佬们直接在这个开源项目上魔改~(<em>^ ▽ ^ </em>）~</p><p>​        怎么说喃？后端主要写了一些接口，那么这些接口如何被前端调用？这篇文章也许会帮助你</p><h3 id="2、打包jar并运行jar"><a href="#2、打包jar并运行jar" class="headerlink" title="2、打包jar并运行jar"></a>2、打包jar并运行jar</h3><p>​    这么说吧，打包jar的原因，主要在于避免后端碰源码以及配环境等稍微复杂的后端操作，因此前端只需要通过后端提供的接口拿到想要的数据或者将前端的表单中的数据传输到后端！</p><h4 id="2-1、打包jar"><a href="#2-1、打包jar" class="headerlink" title="2.1、打包jar"></a>2.1、打包jar</h4><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/1.png" alt></p><p>点开idea中的maven控制，点击package便可以打包jar</p><h4 id="2-2、运行jar"><a href="#2-2、运行jar" class="headerlink" title="2.2、运行jar"></a>2.2、运行jar</h4><p>打包好的jar会在target文件夹中</p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/2.png" alt></p><p>打开这个文件夹，按住shift键再点击鼠标右键，再点击在此位置打开powershell窗口</p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/3.png" alt></p><p>输入命令：<code>java -jar [jar文件地址]</code></p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/4.png" alt></p><p>回车运行：</p><p>如果成功会出现如下所示：</p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/5.png" alt></p><p>这样表示后端启动成功！！！</p><p>注意，端口在哪儿，从powershell中查看：</p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/6.png" alt></p><p>可以看到它写的：tomcat在8080端口运行成功</p><h3 id="3、浏览器访问localhost-8080"><a href="#3、浏览器访问localhost-8080" class="headerlink" title="3、浏览器访问localhost:8080"></a>3、浏览器访问localhost:8080</h3><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/7.png" alt></p><p>可以发现成功了，由于我没写前端index页面所以目前没有页面，但是可以通过浏览器url地址发送请求</p><h4 id="3-1、发送请求："><a href="#3-1、发送请求：" class="headerlink" title="3.1、发送请求："></a>3.1、发送请求：</h4><p>查看接口文档</p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/8.png" alt></p><p>在地址栏输入请求：</p><p><img src="/2022/04/22/springboot-qian-hou-duan-chu-ti-yan/9.png" alt></p><p>很不错！！！</p><p>通过接口成功拿到了json数据，这样前端便可以将内容展示出来了！！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>不定方程解的数量</title>
       <link href="/2022/04/21/bu-ding-fang-cheng-jie-de-shu-liang/"/>
       <url>/2022/04/21/bu-ding-fang-cheng-jie-de-shu-liang/</url>
