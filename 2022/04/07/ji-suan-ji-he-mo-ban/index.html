@@ -4,16 +4,13 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="线性同余方程的通解及最小正整数解, fat fatzard&#39;s Blog">
-    <meta name="description" content="1、问题引入现在来说一个exgcd的应用：求解同余方程
-问题：
-
-求同余方程3x≡1 (mod\ 10)的一个解解：可将该同余方程改写成其等价形式，如下：
-
-3x+10y=1这个问题的本质是什么？
-就是
-
-求形如ax+by=c方程的一个特解">
+    <meta name="keywords" content="计算几何模版, fat fatzard&#39;s Blog">
+    <meta name="description" content="计算几何：极角排序：#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+using namespace std;
+struct node
+&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -36,7 +33,7 @@
     </style>
 
 
-    <title>线性同余方程的通解及最小正整数解 | fat fatzard&#39;s Blog</title>
+    <title>计算几何模版 | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -326,12 +323,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">线性同余方程的通解及最小正整数解</h1>
+                    <h1 class="description center-align post-title">计算几何模版</h1>
                 </div>
             </div>
         </div>
@@ -451,8 +448,8 @@
                                 <span class="chip bg-color">ACM</span>
                             </a>
                         
-                            <a href="/tags/%E6%95%B0%E8%AE%BA/">
-                                <span class="chip bg-color">数论</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">
+                                <span class="chip bg-color">计算几何</span>
                             </a>
                         
                     </div>
@@ -467,8 +464,8 @@
                                 ACM
                             </a>
                         
-                            <a href="/categories/ACM/%E6%95%B0%E8%AE%BA/" class="post-category">
-                                数论
+                            <a href="/categories/ACM/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" class="post-category">
+                                计算几何
                             </a>
                         
                     </div>
@@ -487,21 +484,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-19
+                    2022-04-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    23 分
                 </div>
                 
 
@@ -524,85 +521,630 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1、问题引入"><a href="#1、问题引入" class="headerlink" title="1、问题引入"></a>1、问题引入</h3><p>现在来说一个exgcd的应用：求解同余方程</p>
-<p>问题：</p>
-<script type="math/tex; mode=display">
-求同余方程3x≡1 (mod\ 10)的一个解</script><p>解：可将该同余方程改写成其等价形式，如下：</p>
-<script type="math/tex; mode=display">
-3x+10y=1</script><p>这个问题的本质是什么？</p>
-<p>就是</p>
-<script type="math/tex; mode=display">
-求形如ax+by=c方程的一个特解</script><p>那么对于这种形式的方程如何进行求解喃？<br> 法一：暴力从-99999到9999999一个一个的试？</p>
-<p>显然这种本办法是不行的，这个时候就要考虑exgcd</p>
-<p>下面来看操作：</p>
-<script type="math/tex; mode=display">
-已知exgcd的标准形式ax+by=gcd（a，b），\\那么可以将形如ax+by=c构造成标准形式：\\
-a*(\frac{x*gcd(a,b)}{c})+b*(\frac{y*gcd(a,b)}{c})=gcd（a，b）\\
-令X=\frac{x*gcd(a,b)}{c}，Y=\frac{y*gcd(a,b)}{c},则方程变为：aX+bY=gcd(a,b)\\
-又∵gcd(a,b),c都为已知数\\
-∴可以通过exgcd求出X后，通过反解得到x(如何求解可参考我的上一篇博客)\\
-注：由于是整数解，需要考虑是否能gcd是否整除c\\</script><h3 id="2、通解求法"><a href="#2、通解求法" class="headerlink" title="2、通解求法"></a>2、通解求法</h3><p>问题继续深入下去！！！！</p>
-<p>如何</p>
-<script type="math/tex; mode=display">
-求关于同余方程ax+by=c的一组通解</script><script type="math/tex; mode=display">
-解：根据前一个问题，我们已经得到了一组特解x_0,y_0\\
-      现在的问题转化为了根据特解求通解\\
-      设x_i,y_i与x_j,y_j为方程的两组解\\
-则有：
-\begin{cases}
-ax_i+bx_i=c  ①\\
-           ax_j+by_j=c  ②\\
-           \end{cases}
-           \\
-联立①②可得a（x_i-x_j）=b（y_j-y_i）\\
-两边同时除以gcd（a，b）那么得到A（x_i-x_j）=B（y_j-y_i）\\
-此时gcd（A，B）=1\\
-那么通过移项可以发现x_i-x_j=\frac{B*(y_j-y_i)}{A}\\
-由于等号两边都为整数\\
-故y_j-y_i=k*A，同理x_i-x_j=k*B=k*\frac{b}{gcd(a,b)} \\
-（说明x_i与x_j之间的差一定为\frac{b}{gcd(a,b)}的倍数）\\
-所以通解为：
-\begin{cases}
-x=x_0+k*\frac{b}{gcd(a,b)}\\
-                      y=y_0-k*\frac{a}{gcd(a,b)}\\
-                      \end{cases}\\
-            有了通解便可以推出x和y的最小正整数解\\</script><h3 id="3、例题："><a href="#3、例题：" class="headerlink" title="3、例题："></a>3、例题：</h3><p>题目来自（POJ-1061）：</p>
-<p>题干：</p>
-<p>两只青蛙在网上相识了，它们聊得很开心，于是觉得很有必要见一面。它们很高兴地发现它们住在同一条纬度线上，于是它们约定各自朝西跳，直到碰面为止。可是它们出发之前忘记了一件很重要的事情，既没有问清楚对方的特征，也没有约定见面的具体位置。不过青蛙们都是很乐观的，它们觉得只要一直朝着某个方向跳下去，总能碰到对方的。但是除非这两只青蛙在同一时间跳到同一点上，不然是永远都不可能碰面的。为了帮助这两只乐观的青蛙，你被要求写一个程序来判断这两只青蛙是否能够碰面，会在什么时候碰面。<br>我们把这两只青蛙分别叫做青蛙A和青蛙B，并且规定纬度线上东经0度处为原点，由东往西为正方向，单位长度1米，这样我们就得到了一条首尾相接的数轴。设青蛙A的出发点坐标是x，青蛙B的出发点坐标是y。青蛙A一次能跳m米，青蛙B一次能跳n米，两只青蛙跳一次所花费的时间相同。纬度线总长L米。现在要你求出它们跳了几次以后才会碰面。</p>
-<p>标程：</p>
-<pre class="language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+                <h3 id="计算几何："><a href="#计算几何：" class="headerlink" title="计算几何："></a>计算几何：</h3><h4 id="极角排序："><a href="#极角排序：" class="headerlink" title="极角排序："></a>极角排序：</h4><pre class="language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;algorithm&gt;
 #include &lt;cmath&gt;
 using namespace std;
-#define int long long
-int ex_gcd(int a, int b, int &amp;x, int &amp;y)
+struct node
 &#123;
-    if (!b)
+    double x, y;
+&#125; a[55];
+&#x2F;&#x2F;计算叉积p0p1×p0p2
+int cross(node p0,node p1,node p2)&#123;
+    return (p1.x-p0.x)*(p2.y-p0.y)-(p2.x-p0.x)*(p1.y-p0.y);
+&#125;
+&#x2F;&#x2F;计算p1p2的距离
+double dis(node p1,node p2)&#123;
+    return sqrt((double)(p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y));
+&#125;
+&#x2F;&#x2F;极角排序函数，角度相同则距离小的在前面
+bool cmp(node p1,node p2)&#123;
+    int tmp&#x3D;cross(a[0],p1,p2);
+    if(tmp&gt;0) return true;
+    else if(tmp&#x3D;&#x3D;0&amp;&amp;dis(a[0],p1)&lt;dis(a[0],p2)) return true;
+    else return false;
+&#125;
+int main()
+&#123;
+    int i &#x3D; 0;
+    while (scanf(&quot;%lf%lf&quot;, &amp;a[i].x, &amp;a[i].y) !&#x3D; EOF)
     &#123;
-        x &#x3D; 1;
-        y &#x3D; 0;
-        return a;
+        i++;
     &#125;
-    int gcd &#x3D; ex_gcd(b, a % b, y, x);
-    y -&#x3D; a &#x2F; b * x;
-    return gcd;
+    &#x2F;&#x2F;cout &lt;&lt; i &lt;&lt; endl;
+    sort(a + 1, a + i, cmp);
+    for (int k &#x3D; 0; k &lt; i; k++)
+    &#123;
+        printf(&quot;(%d,%d)\n&quot;, (int)a[k].x, (int)a[k].y);
+    &#125;
+    return 0;
+&#125;</code></pre>
+<h4 id="凸包—Graham算法"><a href="#凸包—Graham算法" class="headerlink" title="凸包—Graham算法:"></a>凸包—Graham算法:</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+const int maxn &#x3D; 1e5 + 10;
+int n, tot;
+struct node
+&#123;
+    double x, y;
+&#125; a[maxn], p[maxn];
+double dis(node a, node b)
+&#123;
+    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+&#125;
+double x(node a, node b, node c)
+&#123;
+    return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+&#125;
+bool cmp(node A, node B)
+&#123;
+    double pp &#x3D; x(A, B, a[1]);
+    if (pp &gt; 0)
+        return 1;
+    if (pp &lt; 0)
+        return 0;
+    return dis(a[1], A) &lt; dis(a[1], B);
+&#125;
+void graham()
+&#123;
+    int k &#x3D; 0;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        if (a[i].y &lt; a[k].y || (a[i].y &#x3D;&#x3D; a[k].y &amp;&amp; a[i].x &lt; a[k].x))
+            k &#x3D; i;
+    &#125;
+    swap(a[1], a[k]);
+    sort(a + 2, a + n + 1, cmp);
+    tot &#x3D; 2;
+    p[0] &#x3D; a[0];
+    p[1] &#x3D; a[1];
+    for (int i &#x3D; 2; i &lt;&#x3D; n; i++)
+    &#123;
+        while (tot &gt; 0 &amp;&amp; x(p[tot - 2], p[tot - 1], a[i]) &lt;&#x3D; 0)
+            tot--;
+        p[tot++] &#x3D; a[i];
+    &#125;
+    p[tot+1] &#x3D; a[1];
+&#125;
+int main()
+&#123;
+    cin &gt;&gt; n;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        cin &gt;&gt; a[i].x &gt;&gt; a[i].y;
+    &#125;
+    graham();
+    double ans &#x3D; 0;
+    for (int i &#x3D; 1; i &lt;&#x3D; tot; i++)
+    &#123;
+        ans +&#x3D; dis(p[i], p[i + 1]);
+        cout &lt;&lt; ans &lt;&lt; endl;
+    &#125;
+    printf(&quot;%.2lf\n&quot;,ans);
+    return 0;
+&#125;</code></pre>
+<h4 id="凸包—Andrew算法"><a href="#凸包—Andrew算法" class="headerlink" title="凸包—Andrew算法:"></a>凸包—Andrew算法:</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+#include&lt;cstdio&gt;
+#define ll long long
+#define INF 2147483647
+#define eps 1e-8
+using namespace std;
+
+double ans;
+ll n,top,st[100100];
+struct node&#123;
+	double x,y;
+&#125;a[100100];
+
+inline bool cmp(node a,node b)&#123;
+	return a.x&#x3D;&#x3D;b.x?a.y&lt;b.y:a.x&lt;b.x;
+&#125;
+
+inline double getk(ll i,ll j)&#123;
+	if(fabs(a[j].x-a[i].x)&lt;eps) return INF;&#x2F;&#x2F;两个点横坐标相同则斜率为无限大
+	return (a[j].y-a[i].y)*1.0&#x2F;(a[j].x-a[i].x);
+&#125;
+
+inline double sqr(double v)&#123;
+	return v*v;
+&#125;
+
+inline double calc(ll i,ll j)&#123;
+	return sqrt(sqr(a[i].x-a[j].x)+sqr(a[i].y-a[j].y));
+&#125;
+
+int main()&#123;
+	scanf(&quot;%lld&quot;,&amp;n);
+	for(ll i&#x3D;1; i&lt;&#x3D;n; i++) scanf(&quot;%lf %lf&quot;,&amp;a[i].x,&amp;a[i].y);
+	sort(a+1,a+1+n,cmp);
+	for(ll i&#x3D;1; i&lt;&#x3D;n; i++)&#123;
+		st[++top]&#x3D;i;
+		while(top&gt;&#x3D;3&amp;&amp;getk(st[top-2],st[top])&lt;getk(st[top-2],st[top-1])-eps)&#123;
+			st[top-1]&#x3D;st[top];
+			st[top--]&#x3D;0;
+			&#x2F;&#x2F;栈中第二个元素出栈
+		&#125;
+	&#125;
+	for(ll i&#x3D;1; i&lt;top; i++) ans+&#x3D;calc(st[i],st[i+1]);
+	while(top) st[top--]&#x3D;0;
+    
+	&#x2F;&#x2F;同理
+	for(ll i&#x3D;n; i&gt;&#x3D;1; i--)&#123;
+		st[++top]&#x3D;i;
+		while(top&gt;&#x3D;3&amp;&amp;getk(st[top-2],st[top])&lt;getk(st[top-2],st[top-1])-eps)&#123;&#x2F;&#x2F;要求：栈中至少还有三个元素并且斜率符合要求
+			st[top-1]&#x3D;st[top];
+			st[top--]&#x3D;0;
+		&#125;
+	&#125;
+	for(ll i&#x3D;1; i&lt;top; i++) ans+&#x3D;calc(st[i],st[i+1]);
+	printf(&quot;%.2lf&quot;,ans);
+	return 0;
+&#125;</code></pre>
+<h4 id="离散化扫描线："><a href="#离散化扫描线：" class="headerlink" title="离散化扫描线："></a>离散化扫描线：</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;string.h&gt;
+using namespace std;
+#define int long long
+const int maxn &#x3D; 1e6 + 10;
+
+int rk[maxn];
+int v[maxn];
+
+struct tree
+&#123;
+    int left, right;
+    int cover;
+    int len;
+&#125; tr[maxn &lt;&lt; 3];
+
+struct L
+&#123;
+    int x;
+    int y1, y2;
+    int state;
+    bool operator&lt;(L other)
+    &#123;
+        return x &lt; other.x;
+    &#125;
+&#125; line[maxn];
+
+void pushup(int pos)
+&#123;
+    if (tr[pos].cover)
+        tr[pos].len &#x3D; v[tr[pos].right + 1] - v[tr[pos].left];
+    else
+        tr[pos].len &#x3D; tr[pos * 2].len + tr[pos * 2 + 1].len;
+&#125;
+
+void build(int pos, int left, int right)
+&#123;
+    tr[pos].left &#x3D; left;
+    tr[pos].right &#x3D; right;
+    if (left &#x3D;&#x3D; right)
+        return;
+    int mid &#x3D; left + (right - left) &#x2F; 2;
+    build(pos * 2, left, mid);
+    build(pos * 2 + 1, mid + 1, right);
+&#125;
+
+void update(int pos, int left, int right, int w)
+&#123;
+    if (left &lt;&#x3D; tr[pos].left &amp;&amp; tr[pos].right &lt;&#x3D; right)
+    &#123;
+        tr[pos].cover +&#x3D; w;
+        pushup(pos);
+        return;
+    &#125;
+    int mid &#x3D; tr[pos].left + (tr[pos].right - tr[pos].left) &#x2F; 2;
+    if (left &lt;&#x3D; mid)
+        update(pos * 2, left, right, w);
+    if (mid &lt; right)
+        update(pos * 2 + 1, left, right, w);
+    pushup(pos);
+&#125;
+
+signed main()
+&#123;
+    int n;
+    cin &gt;&gt; n;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        int a, b, c, d;
+        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;
+        line[i] &#x3D; (L)&#123;a, b, d, 1&#125;;
+        line[i + n] &#x3D; (L)&#123;c, b, d, -1&#125;;
+        rk[i] &#x3D; b;
+        rk[i + n] &#x3D; d;
+    &#125;
+    n *&#x3D; 2;
+    sort(rk + 1, rk + 1 + n);
+    int size &#x3D; unique(rk + 1, rk + n + 1) - rk - 1;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        int p1 &#x3D; lower_bound(rk + 1, rk + 1 + size, line[i].y1) - rk;
+        int p2 &#x3D; lower_bound(rk + 1, rk + 1 + size, line[i].y2) - rk;
+        v[p1] &#x3D; line[i].y1;
+        v[p2] &#x3D; line[i].y2;
+        line[i].y1 &#x3D; p1;
+        line[i].y2 &#x3D; p2;
+    &#125;
+    sort(line + 1, line + n + 1);
+    build(1, 1, n);
+    int ans &#x3D; 0;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        ans +&#x3D; tr[1].len * (line[i].x - line[i - 1].x);
+        update(1, line[i].y1, line[i].y2 - 1, line[i].state);
+    &#125;
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+&#125;</code></pre>
+<h4 id="随机增量法（最小圆形覆盖）："><a href="#随机增量法（最小圆形覆盖）：" class="headerlink" title="随机增量法（最小圆形覆盖）："></a>随机增量法（最小圆形覆盖）：</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;random&gt;
+#include &lt;cmath&gt;
+using namespace std;
+const int maxn &#x3D; 1e6 + 10;
+struct no
+&#123;
+    double x, y;
+&#125; node[maxn];
+struct circle
+&#123;
+    double x, y, r;
+&#125;;
+circle get(no p1, no p2, no p3)
+&#123;
+    circle p;
+    double a1 &#x3D; p2.x - p1.x, b1 &#x3D; p2.y - p1.y;
+    double c1 &#x3D; (p2.x * p2.x - p1.x * p1.x + p2.y * p2.y - p1.y * p1.y) &#x2F; 2;
+    double a2 &#x3D; p3.x - p1.x, b2 &#x3D; p3.y - p1.y;
+    double c2 &#x3D; (p3.x * p3.x - p1.x * p1.x + p3.y * p3.y - p1.y * p1.y) &#x2F; 2;
+    p.x &#x3D; (c1 * b2 - c2 * b1) &#x2F; (a1 * b2 - a2 * b1);
+    p.y &#x3D; (a2 * c1 - a1 * c2) &#x2F; (b1 * a2 - b2 * a1);
+    p.r &#x3D; sqrt((p.x - p1.x) * (p.x - p1.x) + (p.y - p1.y) * (p.y - p1.y));
+    return p;
+&#125;
+double dis(no a, no b)
+&#123;
+    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+&#125;
+bool cheak(no p, circle a)
+&#123;
+    if (sqrt((p.x - a.x) * (p.x - a.x) + (p.y - a.y) * (p.y - a.y)) &lt;&#x3D; a.r)
+        return 1;
+    else
+        return 0;
+&#125;
+int main()
+&#123;
+    int n;
+    cin &gt;&gt; n;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        cin &gt;&gt; node[i].x &gt;&gt; node[i].y;
+    &#125;
+    random_shuffle(node + 1, node + n + 1);
+    circle p;
+    p.r &#x3D; 0, p.x &#x3D; node[1].x, p.y &#x3D; node[1].y;
+    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+    &#123;
+        if (!cheak(node[i], p))
+        &#123;
+            p.r &#x3D; 0;
+            p.x &#x3D; node[i].x, p.y &#x3D; node[i].y;
+            for (int j &#x3D; 1; j &lt;&#x3D; i - 1; j++)
+            &#123;
+                if (!cheak(node[j], p))
+                &#123;
+                    p.r &#x3D; (dis(node[i], node[j])) &#x2F; 2;
+                    p.x &#x3D; (node[i].x + node[j].x) &#x2F; 2, p.y &#x3D; (node[i].y + node[j].y) &#x2F; 2;
+                    for (int k &#x3D; 1; k &lt;&#x3D; j - 1; k++)
+                    &#123;
+                        if (!cheak(node[k], p))
+                        &#123;
+                            p &#x3D; get(node[i], node[j], node[k]);
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    printf(&quot;%.2lf %.2lf %.2lf\n&quot;, p.x, p.y, p.r);
+    return 0;
+&#125;</code></pre>
+<h4 id="旋转卡壳找最远点对："><a href="#旋转卡壳找最远点对：" class="headerlink" title="旋转卡壳找最远点对："></a>旋转卡壳找最远点对：</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+#include &lt;cmath&gt;
+using namespace std;
+#define int long long
+const int maxn&#x3D;1e6+10;
+int n, cnt; &#x2F;&#x2F; cnt 是凸包上点的数量
+struct node
+&#123;                     &#x2F;&#x2F;结构体，存储坐标系中的点
+    double x, y;      &#x2F;&#x2F;坐标
+&#125; d[maxn], s[maxn]; &#x2F;&#x2F; d 为原点集，s 为凸包上的点集
+double check(node p1, node p2, node p3, node p4)
+&#123; &#x2F;&#x2F;求叉积，也用于下面的 cmp 中
+    double x1 &#x3D; p2.x - p1.x;
+    double y1 &#x3D; p2.y - p1.y;
+    double x2 &#x3D; p4.x - p3.x;
+    double y2 &#x3D; p4.y - p3.y;
+    return x1 * y2 - x2 * y1;
+&#125;
+double dis(node l, node r)
+&#123; &#x2F;&#x2F;距离公式·平方和
+    return (r.x - l.x) * (r.x - l.x) + (r.y - l.y) * (r.y - l.y);
+&#125;
+bool cmp(node l, node r)
+&#123; &#x2F;&#x2F;按与最左下点的极角排序
+    double tmp &#x3D; check(d[1], l, d[1], r);
+    if (tmp &gt; 0)
+        return 1;
+    if (tmp &#x3D;&#x3D; 0 &amp;&amp; dis(d[1], l) &lt; dis(d[1], r))
+        return 1;
+    return 0;
+&#125;
+void graham()
+&#123;
+    s[1] &#x3D; d[1];                 &#x2F;&#x2F;这样处理下来的第一个点（最左下的点）必然在凸壳上
+    sort(d + 2, d + n + 1, cmp); &#x2F;&#x2F;排序
+    for (int i &#x3D; 2; i &lt;&#x3D; n; i++)
+    &#123;
+        while (cnt &gt; 1 &amp;&amp; check(s[cnt - 1], s[cnt], s[cnt], d[i]) &lt;&#x3D; 0)
+            cnt--; &#x2F;&#x2F;叉积小于等于 0 时退栈。
+        &#x2F;&#x2F;注意，小于等于 0，因为等于 0 时相当于存在共线，此时我们求直径就要考虑线上最远的点也就是端点，而不是线上的点。
+        cnt++;
+        s[cnt] &#x3D; d[i];
+    &#125;
+    s[++cnt] &#x3D; d[1]; &#x2F;&#x2F;最后一个点连接到第一个点上，让凸包形成闭环
+    &#x2F;&#x2F;凸包构建完毕
+&#125;
+
+double get_longest()
+&#123;
+    double ans &#x3D; 0;
+    int p &#x3D; 2;     &#x2F;&#x2F;开始根据边枚举凸壳上的点。我们从第二个点开始枚举。
+    s[0] &#x3D; s[cnt]; &#x2F;&#x2F;转一周会经过第 n 个点，我们接下来会通过取模避免这一点，但这里就要给s[0]赋值为s[cnt]
+    for (int i &#x3D; 0; i &lt;&#x3D; cnt; i++)
+    &#123;
+        while (check(s[p], s[i], s[p], s[i + 1]) &lt; check(s[p + 1], s[i], s[p + 1], s[i + 1]))
+            p &#x3D; (p + 1) % cnt;                                     &#x2F;&#x2F;枚举凸壳上的点，直到下一个点到边的长度比当前点到边的长度小
+        ans &#x3D; max(ans, max(dis(s[i], s[p]), dis(s[i + 1], s[p]))); &#x2F;&#x2F;更新答案
+    &#125;
+    return ans;
 &#125;
 signed main()
 &#123;
-    int x, y, m, n, l;
-    cin &gt;&gt; x &gt;&gt; y &gt;&gt; m &gt;&gt; n &gt;&gt; l;
-    int a &#x3D; -(m - n), b &#x3D; l;
-    int X0, Y0;
-    int gcd &#x3D; ex_gcd(a, b, X0, Y0);
-    if ((x - y) % gcd)
-        cout &lt;&lt; &quot;Impossible&quot; &lt;&lt; endl;
-    else
+    cin &gt;&gt; n;
+    node Exchange;           &#x2F;&#x2F;用于实现交换的工具点
+    cin &gt;&gt; d[1].x &gt;&gt; d[1].y; &#x2F;&#x2F;初始化第一个点
+    for (int i &#x3D; 2; i &lt;&#x3D; n; i++)
     &#123;
-        X0 &#x3D; X0 * (x - y) &#x2F; gcd;
-        int s &#x3D; abs(b &#x2F; gcd);
-        cout &lt;&lt; (X0 % s + s) % s &lt;&lt; endl;
+        cin &gt;&gt; d[i].x &gt;&gt; d[i].y;
+        if (d[i].y &lt; d[1].y)
+        &#123;                    &#x2F;&#x2F;如果当前点的y坐标小于第一个，我们就让它变成第一个
+            Exchange &#x3D; d[i]; &#x2F;&#x2F;注意上面的判断是 &lt; 而不是 &lt;&#x3D; ，因为我们还要保证第一个点是最左下的点
+            d[i] &#x3D; d[1];
+            d[1] &#x3D; Exchange;
+        &#125;
+    &#125;
+    graham();
+    double ans &#x3D; get_longest();&#x2F;&#x2F;旋转卡壳（平面最远点对）
+    printf(&quot;%.0lf&quot;, ans); &#x2F;&#x2F;输出答案
+    return 0;
+&#125;</code></pre>
+<h4 id="旋转卡壳找最大矩形覆盖"><a href="#旋转卡壳找最大矩形覆盖" class="headerlink" title="旋转卡壳找最大矩形覆盖"></a>旋转卡壳找最大矩形覆盖</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+const double eps &#x3D; 1e-11;
+const double PI &#x3D; acos(-1);
+
+int dcmp(double x)
+&#123;
+    if (fabs(x) &lt; eps)
+        return 0;
+    return x &gt; 0 ? 1 : -1;
+&#125;
+struct Point
+&#123;
+    double x, y;
+    Point(double a &#x3D; 0, double b &#x3D; 0) : x(a), y(b) &#123;&#125;
+&#125;;
+typedef Point Vector;
+typedef vector&lt;Point&gt; Polygon;
+
+Vector operator+(const Vector &amp;a, const Vector &amp;b) &#123; return Vector(a.x + b.x, a.y + b.y); &#125;
+Vector operator-(const Vector &amp;a, const Vector &amp;b) &#123; return Vector(a.x - b.x, a.y - b.y); &#125;
+Vector operator*(const Vector &amp;a, double &amp;b) &#123; return Vector(a.x * b, a.y * b); &#125;
+Vector operator&#x2F;(const Vector &amp;a, double &amp;b) &#123; return Vector(a.x &#x2F; b, a.y &#x2F; b); &#125;
+bool operator&#x3D;&#x3D;(const Vector &amp;a, const Vector &amp;b) &#123; return !dcmp(a.x - b.x) &amp;&amp; !dcmp(a.y - b.y); &#125;
+bool operator&lt;(const Vector &amp;a, const Vector &amp;b) &#123; return a.x &lt; b.x || (a.x &#x3D;&#x3D; b.x &amp;&amp; a.y &lt; b.y); &#125;
+double Dot(const Vector &amp;a, const Vector &amp;b) &#123; return a.x * b.x + a.y * b.y; &#125;
+double Length(const Vector &amp;a) &#123; return sqrt(Dot(a, a)); &#125;
+double Length2(const Vector &amp;a) &#123; return Dot(a, a); &#125;
+double Cross(const Vector &amp;a, const Vector &amp;b) &#123; return a.x * b.y - a.y * b.x; &#125;
+double Angle(const Vector &amp;a, const Vector &amp;b) &#123; return acos(Dot(a, b) &#x2F; Length(a) &#x2F; Length(b)); &#125;
+Vector Rotate(Vector A, double rad) &#123; return Point(A.x * cos(rad) - A.y * sin(rad), A.x * sin(rad) + A.y * cos(rad)); &#125;
+
+int ConvexHull(Point *P, int cnt, Point *res)
+&#123;
+    sort(P, P + cnt);
+    cnt &#x3D; unique(P, P + cnt) - P;
+    int m &#x3D; 0;
+    for (int i &#x3D; 0; i &lt; cnt; i++)
+    &#123;
+        while (m &gt; 1 &amp;&amp; Cross(res[m - 1] - res[m - 2], P[i] - res[m - 2]) &lt;&#x3D; 0)
+            m--;
+        res[m++] &#x3D; P[i];
+    &#125;
+    int k &#x3D; m;
+    for (int i &#x3D; cnt - 2; i &gt;&#x3D; 0; i--)
+    &#123;
+        while (m &gt; k &amp;&amp; Cross(res[m - 1] - res[m - 2], P[i] - res[m - 2]) &lt;&#x3D; 0)
+            m--;
+        res[m++] &#x3D; P[i];
+    &#125;
+    if (cnt &gt; 1)
+        m--;
+    return m;
+&#125;
+
+void GetMinRCarea(Point *P, int cnt, double &amp;S, double &amp;C)
+&#123;
+    S &#x3D; C &#x3D; 1e18;
+    int l &#x3D; 1, r &#x3D; 1, u &#x3D; 1;
+    for (int i &#x3D; 0; i &lt; cnt; i++)
+    &#123; &#x2F;&#x2F;枚举底边P[i]~P[i+1]
+        while (Cross(P[i + 1] - P[i], P[u + 1] - P[u]) &gt; eps)
+            u &#x3D; (u + 1) % cnt; &#x2F;&#x2F;找上边，夹角还能增加就向后找
+        while (Dot(P[i + 1] - P[i], P[r + 1] - P[r]) &gt; eps)
+            r &#x3D; (r + 1) % cnt; &#x2F;&#x2F;找右边，夹角还小于90°就继续找
+        if (i &#x3D;&#x3D; 0)
+            l &#x3D; (r + 1) % cnt;
+        while (Dot(P[i + 1] - P[i], P[l + 1] - P[l]) &lt; -eps)
+            l &#x3D; (l + 1) % cnt;                                                                  &#x2F;&#x2F;找左边，夹角还大于90°就继续找
+        double d &#x3D; Length(P[i + 1] - P[i]);                                                     &#x2F;&#x2F;底边长度
+        double a &#x3D; Cross(P[i + 1] - P[i], P[u] - P[i]) &#x2F; d;                                     &#x2F;&#x2F;叉积几何意义就是求向量组成的平行四边形面积，除以底边就是高
+        double b &#x3D; (Dot(P[r] - P[i], P[i + 1] - P[i]) - Dot(P[l] - P[i], P[i + 1] - P[i])) &#x2F; d; &#x2F;&#x2F;向左向右的投影和(点积几何意义：A*B &#x3D; |A||B|cosθ一个向量在另一个向量方向上的投影长度乘后者的长度)，所以最后还要除后者的长度。
+        S &#x3D; min(S, a * b);
+        C &#x3D; min(C, 2.0 * (a + b));
+    &#125;
+&#125;
+const int N &#x3D; 100005;
+Point P[N], R[N];
+int n;
+
+int main()
+&#123;
+    int t;
+    scanf(&quot;%d&quot;,&amp;t);
+    while (t--)
+    &#123;
+        scanf(&quot;%d&quot;,&amp;n);
+        for (int i &#x3D; 0; i &lt; n; i++)
+            scanf(&quot;%lf%lf&quot;, &amp;R[i].x, &amp;R[i].y);
+        int cnt &#x3D; ConvexHull(R, n, P);
+        P[cnt] &#x3D; P[0];
+        double S, C;
+        GetMinRCarea(P, cnt, S, C);
+        printf(&quot;%.2lf %.2lf\n&quot;, S, C);
     &#125;
     return 0;
+&#125;</code></pre>
+<h4 id="PIck定理："><a href="#PIck定理：" class="headerlink" title="PIck定理："></a>PIck定理：</h4><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/2022/04/07/ji-suan-ji-he-mo-ban/1.png" alt></p>
+<h4 id="平面最近点对："><a href="#平面最近点对：" class="headerlink" title="平面最近点对："></a>平面最近点对：</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;cstdio&gt;
+#include &lt;set&gt;
+const int N &#x3D; 200005;
+int n;
+double ans &#x3D; 1e20;
+
+struct point &#123;
+  double x, y;
+
+  point(double x &#x3D; 0, double y &#x3D; 0) : x(x), y(y) &#123;&#125;
+&#125;;
+
+struct cmp_x &#123;
+  bool operator()(const point &amp;a, const point &amp;b) const &#123;
+    return a.x &lt; b.x || (a.x &#x3D;&#x3D; b.x &amp;&amp; a.y &lt; b.y);
+  &#125;
+&#125;;
+
+struct cmp_y &#123;
+  bool operator()(const point &amp;a, const point &amp;b) const &#123; return a.y &lt; b.y; &#125;
+&#125;;
+
+inline void upd_ans(const point &amp;a, const point &amp;b) &#123;
+  double dist &#x3D; sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2));
+  if (ans &gt; dist) ans &#x3D; dist;
+&#125;
+
+point a[N];
+std::multiset&lt;point, cmp_y&gt; s;
+
+int main() &#123;
+  scanf(&quot;%d&quot;, &amp;n);
+  for (int i &#x3D; 0; i &lt; n; i++) scanf(&quot;%lf%lf&quot;, &amp;a[i].x, &amp;a[i].y);
+  std::sort(a, a + n, cmp_x());
+  for (int i &#x3D; 0, l &#x3D; 0; i &lt; n; i++) &#123;
+    while (l &lt; i &amp;&amp; a[i].x - a[l].x &gt;&#x3D; ans) s.erase(s.find(a[l++]));
+    for (auto it &#x3D; s.lower_bound(point(a[i].x, a[i].y - ans));
+         it !&#x3D; s.end() &amp;&amp; it-&gt;y - a[i].y &lt; ans; it++)
+      upd_ans(*it, a[i]);
+    s.insert(a[i]);
+  &#125;
+  printf(&quot;%.4lf&quot;, ans);
+  return 0;
+&#125;
+</code></pre>
+<h4 id="平面最小正方形覆盖（三分）："><a href="#平面最小正方形覆盖（三分）：" class="headerlink" title="平面最小正方形覆盖（三分）："></a>平面最小正方形覆盖（三分）：</h4><pre class="language-C++" data-language="C++"><code class="language-C++">#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+#include&lt;cmath&gt;
+#define INF 0x3f3f3f3f
+#define PI acos(-1.0)
+using namespace std;
+const double eps &#x3D;1e-12;
+const int maxn &#x3D; 50;
+struct Node&#123;
+	int x;
+	int y;
+&#125;a[maxn];
+int n;
+double C(double degree)&#123;
+	double x,y,maxx,maxy,minx,miny;
+	maxx &#x3D; maxy &#x3D; -INF;
+	minx &#x3D; miny &#x3D; INF;
+	for(int i&#x3D;0;i&lt;n;i++)&#123;
+		x&#x3D;a[i].x*cos(degree)-a[i].y*sin(degree);
+		y&#x3D;a[i].x*sin(degree)+a[i].y*cos(degree);
+		maxx&#x3D;max(maxx,x);
+		maxy&#x3D;max(maxy,y);
+		minx&#x3D;min(minx,x);
+		miny&#x3D;min(miny,y);
+	&#125;
+	return max(maxx-minx,maxy-miny);
+&#125;
+double bsearch()&#123;
+	double left&#x3D;0,right&#x3D;PI&#x2F;2.0;
+	double midl,midr;
+	while(right-left&gt;eps)&#123;
+		midl&#x3D;(left+right)&#x2F;2;
+		midr&#x3D;(midl+right)&#x2F;2;
+		if(C(midl)&lt;C(midr))&#123;
+			right&#x3D;midr;
+		&#125;
+		else&#123;
+			left&#x3D;midl;
+		&#125;
+	&#125;
+	return C(left);
+&#125;
+int main()
+&#123;
+	int T;
+	cin&gt;&gt;T;
+	while(T--)&#123;
+		cin&gt;&gt;n;
+		for(int i&#x3D;0;i&lt;n;i++)&#123;
+			cin&gt;&gt;a[i].x&gt;&gt;a[i].y;
+		&#125;
+		double low &#x3D; bsearch();
+		printf(&quot;%.2lf\n&quot;,low*low);
+	&#125;
+	return 0;
 &#125;</code></pre>
 
                 
@@ -630,7 +1172,7 @@ signed main()
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/2022/04/07/xian-xing-tong-yu-fang-cheng-zu-de-tong-jie-ji-zui-xiao-zheng-zheng-shu-jie/">http://wjknowledge.top/2022/04/07/xian-xing-tong-yu-fang-cheng-zu-de-tong-jie-ji-zui-xiao-zheng-zheng-shu-jie/</a>
+                    <a href="http://wjknowledge.top/2022/04/07/ji-suan-ji-he-mo-ban/">http://wjknowledge.top/2022/04/07/ji-suan-ji-he-mo-ban/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -672,8 +1214,8 @@ signed main()
                                     <span class="chip bg-color">ACM</span>
                                 </a>
                             
-                                <a href="/tags/%E6%95%B0%E8%AE%BA/">
-                                    <span class="chip bg-color">数论</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">
+                                    <span class="chip bg-color">计算几何</span>
                                 </a>
                             
                         </div>
@@ -1117,13 +1659,13 @@ signed main()
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/04/07/ou-ji-li-de-suan-fa/">
+                <a href="/2022/04/07/xian-xing-tong-yu-fang-cheng-zu-de-tong-jie-ji-zui-xiao-zheng-zheng-shu-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/7.jpg" class="responsive-img" alt="欧几里得算法的证明">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/23.jpg" class="responsive-img" alt="线性同余方程的通解及最小正整数解">
                         
-                        <span class="card-title">欧几里得算法的证明</span>
+                        <span class="card-title">线性同余方程的通解及最小正整数解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1174,13 +1716,13 @@ signed main()
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/07/ji-suan-ji-he-mo-ban/">
+                <a href="/2022/04/06/spring-aop-2/">
                     <div class="card-image">
                         
                         
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/10.jpg" class="responsive-img" alt="计算几何模版">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/11.jpg" class="responsive-img" alt="AOP(2)-Spring实现AOP">
                         
-                        <span class="card-title">计算几何模版</span>
+                        <span class="card-title">AOP(2)-Spring实现AOP</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1191,18 +1733,14 @@ signed main()
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ACM/" class="post-category">
-                                    ACM
-                                </a>
-                            
-                            <a href="/categories/ACM/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" class="post-category">
-                                    计算几何
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
                                 </a>
                             
                             
@@ -1212,12 +1750,12 @@ signed main()
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ACM/">
-                        <span class="chip bg-color">ACM</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
                     </a>
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">
-                        <span class="chip bg-color">计算几何</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
@@ -1372,13 +1910,6 @@ signed main()
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 
