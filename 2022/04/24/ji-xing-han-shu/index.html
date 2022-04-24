@@ -485,14 +485,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    657
+                    941
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -561,25 +561,62 @@ pq的正因子的数量=p的正因子的数量*q的正因子的数量（排列�
     if(n&gt;1)ans*&#x3D;f(n,1);
     return ans;
 &#125;</code></pre>
-<h4 id="（2）欧拉筛求一连串的积性函数"><a href="#（2）欧拉筛求一连串的积性函数" class="headerlink" title="（2）欧拉筛求一连串的积性函数"></a>（2）欧拉筛求一连串的积性函数</h4><pre class="language-c++" data-language="c++"><code class="language-c++">f[1]&#x3D;1;
-for(int i&#x3D;2;i&lt;&#x3D;n;i++)
+<h4 id="（2）欧拉筛求一连串的积性函数"><a href="#（2）欧拉筛求一连串的积性函数" class="headerlink" title="（2）欧拉筛求一连串的积性函数"></a>（2）欧拉筛求一连串的积性函数</h4><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>求正整数 n的所有正因数的个数，q次询问。</p>
+<h5 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h5><pre class="language-none"><code class="language-none">第一行一个正整数 q (1≤q≤10e5) 。
+第二行到第 q+1行，每行一个正整数 n (1≤n≤10e7)。</code></pre>
+<h5 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h5><pre class="language-none"><code class="language-none">对于每个询问，输出一个正整数。两个答案间用空行分隔。</code></pre>
+<p>数据很大，直接上唯一分解定理时间复杂度为$O(q\sqrt{n})$,OJ评测机稍微不好直接寄 ！！！因此直接上直接上欧拉筛筛积性函数，时间复杂度$O(n)$ </p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+using namespace std;
+const int maxn &#x3D; 1e7 + 10;
+int f[maxn];
+int cnt[maxn];&#x2F;&#x2F;维护素数数量
+int tot;&#x2F;&#x2F;素数数量
+bool not_prime[maxn];&#x2F;&#x2F;判断是否为素数
+int p[maxn];&#x2F;&#x2F;素数表
+int cal_f(int p, int a)&#x2F;&#x2F;计算p^a有多少个正因子，直接排列组合
 &#123;
-    if(!not_prime[i])&#123;
-        p[++tot]&#x3D;1;
-        f[i]&#x3D;cal_f(i,1);
-    &#125;
-    for(int j&#x3D;1;j&lt;&#x3D;tot&amp;&amp;i*p[j]&lt;&#x3D;n;j++)
+    return a+1;
+&#125;
+void Eular()
+&#123;
+    f[1] &#x3D; 1;
+    for (int i &#x3D; 2; i &lt;&#x3D; maxn; i++)
     &#123;
-        not_prime[i*p[j]]&#x3D;1;
-        if(i%p[j]&#x3D;&#x3D;0)
+        if (!not_prime[i])
         &#123;
-            cnt[i*p[j]]&#x3D;cnt[i]+1;
-            f[i*p[j]]&#x3D;f[i]&#x2F;cal_f(p[j],cnt[i])*cal_f(p[j],cnt[i]+1);
-            break;
+            p[++tot] &#x3D; i;
+            f[i] &#x3D; cal_f(i, 1);
+            cnt[i]&#x3D;1;&#x2F;&#x2F;初始的当前素数为1
         &#125;
-        cnt[i*p[j]]&#x3D;1;
-        f[i*p[j]]&#x3D;f[i]*cal_f(p[j],1);
+        for (int j &#x3D; 1; j &lt;&#x3D; tot &amp;&amp; i * p[j] &lt;&#x3D; maxn; j++)
+        &#123;
+            not_prime[i * p[j]] &#x3D; 1;
+            if (i % p[j] &#x3D;&#x3D; 0)
+            &#123;
+                cnt[i * p[j]] &#x3D; cnt[i] + 1;
+                f[i * p[j]] &#x3D; f[i] &#x2F; cal_f(p[j], cnt[i]) * cal_f(p[j], cnt[i] + 1);
+                break;
+            &#125;
+            cnt[i * p[j]] &#x3D; 1;
+            f[i * p[j]] &#x3D; f[i]*cal_f(p[j],1);
+        &#125;
     &#125;
+&#125;
+int main()
+&#123;
+    Eular();
+    int q;
+    cin &gt;&gt; q;
+    while (q--)
+    &#123;
+        int n;
+        cin &gt;&gt; n;
+        cout&lt;&lt;f[n]&lt;&lt;endl;
+    &#125;
+    return 0;
 &#125;</code></pre>
 
                 
@@ -1369,7 +1406,7 @@ for(int i&#x3D;2;i&lt;&#x3D;n;i++)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">16.6k</span>
+                        class="white-color">16.9k</span>
             
             
             
@@ -1614,12 +1651,12 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 3,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><!-- hexo-inject:begin --><!-- hexo-inject:end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 
 </html>
