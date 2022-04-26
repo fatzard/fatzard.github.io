@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>莫比乌斯反演</title>
+      <link href="/2022/04/26/mo-bi-wu-si-fan-yan/"/>
+      <url>/2022/04/26/mo-bi-wu-si-fan-yan/</url>
+      
+        <content type="html"><![CDATA[<h3 id="反演"><a href="#反演" class="headerlink" title="反演"></a>反演</h3><p>​    举个例子：</p><script type="math/tex; mode=display">已知g(n)的前缀和f(n)=\sum_{i=1}^ng(i)，则可以通过f反求g =>g(n)=f(n)-f(n-1)</script><p>​    像这样的过程就是反演，换言之，就是一个函数$f$由$g$推导而来，已知$f$,求$g$</p><h3 id="1、提出一个问题"><a href="#1、提出一个问题" class="headerlink" title="1、提出一个问题"></a>1、提出一个问题</h3><p>​    </p><script type="math/tex; mode=display">已知g(n)的因数和f(n)=\sum_{d|n}g(d),如何通过f反求g</script><h4 id="1-1、先模拟出f"><a href="#1-1、先模拟出f" class="headerlink" title="1.1、先模拟出f"></a>1.1、先模拟出f</h4><script type="math/tex; mode=display">\begin{cases}f(1)=g(1)\\f(2)=g(1)+g(2)\\f(3)=g(1)+g(3)\\f(4)=g(1)+g(2)+g(4)\\f(5)=g(1)+g(5)\\f(6)=g(1)+g(2)+g(3)+g(6)\\f(7)=g(1)+g(7)\\.....\end{cases}</script><p>​            通过以上的等式，可以将相应的g求出：</p><script type="math/tex; mode=display">\begin{cases}g(1)=f(1)\\g(2)=f(2)-f(1)\\g(3)=f(3)-f(1)\\g(4)=f(4)-f(2)\\g(5)=f(5)-f(1)\\g(6)=f(6)-f(3)-f(2)+f(1)\\g(7)=f(7)-f(1)\\.....\end{cases}</script><p>​            通过这个模拟可以看出一丝小小的规律：</p><p>​            将$n$先改写成$p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}….p_k^{\alpha_k}$，然后代入$g(n)$,根据上面的模拟将$g(n)$展开</p><script type="math/tex; mode=display">g(n)=g(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k})\\=f(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k})-f(p_1^{\alpha_1-1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k})-f(p_1^{\alpha_1}p_2^{\alpha_2-1}p_3^{\alpha_3}....p_k^{\alpha_k})-f(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3-1}....p_k^{\alpha_k})\\-f(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k-1})\\+f(p_1^{\alpha_1-1}p_2^{\alpha_2-1}p_3^{\alpha_3}....p_k^{\alpha_k})+f(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3-1}....p_k^{\alpha_k})+.....+f(.....p_{i}^{\alpha_i-1}....p_j^{\alpha_j-1}.....)</script><h4 id="1-2、浓缩展开式"><a href="#1-2、浓缩展开式" class="headerlink" title="1.2、浓缩展开式"></a>1.2、浓缩展开式</h4><p>​        我们通过上面的模拟可以确定最终反演的$g$，一定是长成上面那个复杂的等式的样子，但是这样一个等式不怎么好记，因此我们将上述展开式进行抽象：</p><script type="math/tex; mode=display">g(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k})=\sum_{s\subseteq\{1,2,3,..k\}}(-1)^{|k|}f(p_1^{\alpha_1-i_1}p_2^{\alpha_2-i_2}p_3^{\alpha_3-i_3}....p_k^{\alpha_k-i_k})\\其中\begin{cases}i_j=1,j\in S\\i_j=0,其他\end{cases}</script><p>碰巧！！！在数论有这样一个函数——莫比乌斯函数$\mu$</p><h4 id="1-3、莫比乌斯函数"><a href="#1-3、莫比乌斯函数" class="headerlink" title="1.3、莫比乌斯函数"></a>1.3、莫比乌斯函数</h4><p>​    </p><script type="math/tex; mode=display">\mu(n)=\begin{cases}1,n=1\\(-1)^k,n=p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k}且\alpha_i=1\\0，其他\end{cases}</script><p>​            这个时候我们便可以将$(-1)^{|k|}$用$\mu（n）$进行替换</p><p>​            </p><script type="math/tex; mode=display">g(p_1^{\alpha_1}p_2^{\alpha_2}p_3^{\alpha_3}....p_k^{\alpha_k})=\sum_{s\subseteq\{1,2,3,..k\}}\mu(p_1^{i_1}p_2^{i_2}p_3^{i_3}....p_k^{i_k}) f(p_1^{\alpha_1-i_1}p_2^{\alpha_2-i_2}p_3^{\alpha_3-i_3}....p_k^{\alpha_k-i_k})\\再化简：\\g(n)=\sum_{d|n}\mu(\frac{n}{d})f(d)</script><p>​            举个例子便可知道是否正确了：</p><p>​            </p><script type="math/tex; mode=display">例子：g(6)=\mu(1)f(6)+\mu(2)f(3)+\mu(3)f(2)+\mu(6)f(1)\\=f(6)-f(3)-f(2)+f(1)</script><h3 id="2、莫比乌斯反演"><a href="#2、莫比乌斯反演" class="headerlink" title="2、莫比乌斯反演"></a>2、莫比乌斯反演</h3><p>​    通过上述过程我们便证明了定理1：</p><h4 id="2-1、定理一："><a href="#2-1、定理一：" class="headerlink" title="2.1、定理一："></a>2.1、定理一：</h4><script type="math/tex; mode=display">已知g(n)的因数和f(n)=\sum_{d|n}g(d),则g(n)=\sum_{d|n}\mu(\frac{n}{d})f(d)</script><p>​    除此之外，还有一个常见的</p><h4 id="2-2、定理二："><a href="#2-2、定理二：" class="headerlink" title="2.2、定理二："></a>2.2、定理二：</h4><script type="math/tex; mode=display">有两个函数f,g,且存在正整数N，对于所有n>N,f(n)=g(n)=0,则:\\f(n)=\sum_{n|m,m\leq N}g(m)  \iff  g(n)=\sum_{n|m,m\leq N}\mu(\frac{m}{n})f(m)</script><p>​                证明的方式和定理一异曲同工。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>积性函数</title>
       <link href="/2022/04/24/ji-xing-han-shu/"/>
       <url>/2022/04/24/ji-xing-han-shu/</url>
