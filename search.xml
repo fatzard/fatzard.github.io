@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> ACM </tag>
-            
             <tag> 数论 </tag>
+            
+            <tag> ACM </tag>
             
         </tags>
       
@@ -47,9 +47,9 @@
       
         <tags>
             
-            <tag> ACM </tag>
-            
             <tag> 数论 </tag>
+            
+            <tag> ACM </tag>
             
         </tags>
       
@@ -101,9 +101,9 @@
       
         <tags>
             
-            <tag> 排列组合 </tag>
-            
             <tag> ACM </tag>
+            
+            <tag> 排列组合 </tag>
             
         </tags>
       
@@ -201,6 +201,33 @@
     
     
     <entry>
+      <title>快速幂</title>
+      <link href="/2022/04/07/kuai-su-mi/"/>
+      <url>/2022/04/07/kuai-su-mi/</url>
+      
+        <content type="html"><![CDATA[<p>通常地，我们计算$a^x$是将$x$从1一直累乘到$x$，这样是最简单的计算方法，但是这种做法的时间复杂度是$o(n)$，一旦我们计算的幂次方较大或者计算次数较多的时候就会花费很长的时间；例如：计算$10^{100000000}$组类似$999^{100000000}$这样的计算式，你可能算一辈子都算不出来。</p><p>​        这个时候引入二进制对$a^x$进行优化：</p><p>​        考虑$a^{2x}$=$a^x×a^x$=$(a^x)$$^2$于是可以利用二进制表示分割成更小的一部分</p><p>​        例如：$9^{13}$=$9^{(1101)_2}$=$9^8$×$9^4$×$9^1$</p><p>​        因为$n$有$[log_2x]+1$个二进制位，因此当我们知道了 $a^1,a^2,a^4…a^{2^k}$后，我们只用计算$[log_2x]+1$次乘法就可以计算出$a^x$    </p><p>​        因此计算$a^x$只需要将$x$对应的二进制下的数位为1的整系数幂乘起来即可</p><p>​        即：$a^x$=$a^{(x_0x_1x_2..x_n)_2}$=$a^{x_02^{0}}$×$a^{x_12^{1}}$×$a^{x_22^{2}}$…….×$a^{x_n2^{n}}$</p><p>​        根据上式发现，原问题被转化成了形式相同的子问题的乘积，并且我们可以在常数时间内从 $2^i$         项推出$2^{i+1}$项。</p><p>​        通过二进制处理后时间复杂度降为$O(logn)$</p><p>​        下面是我的快速幂代码模版：</p><pre class="language-c++" data-language="c++"><code class="language-c++">long long fastpow(long long a, long long n) &#x2F;&#x2F;快速幂&#123;    long long ans &#x3D; 1;    while (n)    &#123;        if (n &amp; 1)        &#123;            ans *&#x3D; a;        &#125;        a *&#x3D; a;        n &gt;&gt;&#x3D; 1; &#x2F;&#x2F;位运算    &#125;    return ans;&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数论 </tag>
+            
+            <tag> ACM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>利用“矩阵”巧妙证明斐蜀定理</title>
       <link href="/2022/04/07/qiao-miao-zheng-ming-fei-shu-ding-li/"/>
       <url>/2022/04/07/qiao-miao-zheng-ming-fei-shu-ding-li/</url>
@@ -219,65 +246,9 @@
       
         <tags>
             
-            <tag> ACM </tag>
-            
             <tag> 数论 </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>快速幂</title>
-      <link href="/2022/04/07/kuai-su-mi/"/>
-      <url>/2022/04/07/kuai-su-mi/</url>
-      
-        <content type="html"><![CDATA[<p>通常地，我们计算$a^x$是将$x$从1一直累乘到$x$，这样是最简单的计算方法，但是这种做法的时间复杂度是$o(n)$，一旦我们计算的幂次方较大或者计算次数较多的时候就会花费很长的时间；例如：计算$10^{100000000}$组类似$999^{100000000}$这样的计算式，你可能算一辈子都算不出来。</p><p>​        这个时候引入二进制对$a^x$进行优化：</p><p>​        考虑$a^{2x}$=$a^x×a^x$=$(a^x)$$^2$于是可以利用二进制表示分割成更小的一部分</p><p>​        例如：$9^{13}$=$9^{(1101)_2}$=$9^8$×$9^4$×$9^1$</p><p>​        因为$n$有$[log_2x]+1$个二进制位，因此当我们知道了 $a^1,a^2,a^4…a^{2^k}$后，我们只用计算$[log_2x]+1$次乘法就可以计算出$a^x$    </p><p>​        因此计算$a^x$只需要将$x$对应的二进制下的数位为1的整系数幂乘起来即可</p><p>​        即：$a^x$=$a^{(x_0x_1x_2..x_n)_2}$=$a^{x_02^{0}}$×$a^{x_12^{1}}$×$a^{x_22^{2}}$…….×$a^{x_n2^{n}}$</p><p>​        根据上式发现，原问题被转化成了形式相同的子问题的乘积，并且我们可以在常数时间内从 $2^i$         项推出$2^{i+1}$项。</p><p>​        通过二进制处理后时间复杂度降为$O(logn)$</p><p>​        下面是我的快速幂代码模版：</p><pre class="language-c++" data-language="c++"><code class="language-c++">long long fastpow(long long a, long long n) &#x2F;&#x2F;快速幂&#123;    long long ans &#x3D; 1;    while (n)    &#123;        if (n &amp; 1)        &#123;            ans *&#x3D; a;        &#125;        a *&#x3D; a;        n &gt;&gt;&#x3D; 1; &#x2F;&#x2F;位运算    &#125;    return ans;&#125;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> ACM </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
             <tag> ACM </tag>
-            
-            <tag> 数论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>扩展欧几里得定理</title>
-      <link href="/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/"/>
-      <url>/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/</url>
-      
-        <content type="html"><![CDATA[<p>现在我们已经知道了，方程ax+by=gcd（a，b） 的一组可行解一定有一组可行解，那么如何求解它喃？</p><p>而这个时候我们有一个方法可以帮助我们求解：</p><p>扩展欧几里得算法（Extended Euclidean algorithm, EXGCD），常用于求ax+by=gcd（a，b） 的一组可行解。</p><p>下面来看一下证明：</p><p>(没加载出来一定要多刷新一下，这渲染太慢了)</p><script type="math/tex; mode=display">设\begin{cases}ax1+by1=gcd(a,b)\\bx2+(a\ mod\ b)y2=gcd(b,a\ mod\ b)\end{cases}\\∵gcd(a,b)=gcd(b,a\ mod\ b);\\∴ax1+by1=gcd(b,a mod b)=bx2+(a\ mod\ b)y2;\\又∵a\ mod\ b=a-[\frac{a}{b}]*b\\\begin{aligned}∴bx2+(a\ mod\ b)y2&=bx2+(a-[\frac{a}{b}]*b)y2\\                             &=bx2+ay2-[\frac{a}{b}]*b*y2\\                             &=ay2+b(x2-[\frac{a}{b}]*y2)\\                             &=ax1+by1\\                           \end{aligned}\\                             由于对应项系数对应相等,所以 \\                             \begin{cases}                             x1=y2\\        y1=x2-[\frac{a}{b}]*y2\\        \end{cases}</script><p>那么将x2，y2 不断代入递归求解直至gcd 为 0为止<br>在这之前有 </p><script type="math/tex; mode=display">gcd*x+0*y=gcd</script><p>，故x=1，y=0，再反过来带回去迭代便可以求出一组可行解</p><p>代码实现：</p><pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;bits&#x2F;stdc++.h&gt;using namespace std;int ex_gcd(int a,int b,int &amp;x,int &amp;y)&#x2F;&#x2F;扩展欧几里得求ax+by&#x3D;gcd（a，b）；&#123;if(!b)&#123;x&#x3D;1;        y&#x3D;0;return a;&#125;int gcd&#x3D;ex_gcd(b,a%b,y,x);y-&#x3D;a&#x2F;b*x;return gcd;&#125;int main()&#123;    int a,b,x,y;    cin&gt;&gt;a&gt;&gt;b;    int gcd&#x3D;ex_gcd(a,b,x,y);     printf(&quot;%dx+%dy&#x3D;%d\n&quot;,a,b,gcd);    cout&lt;&lt;&quot;x&#x3D;&quot;&lt;&lt;x&lt;&lt;&quot; y&#x3D;&quot;&lt;&lt;y&lt;&lt;endl;&#x2F;&#x2F;方程的特解，可由线性代数相关知识推出通解；    return 0;&#125;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> ACM </category>
-          
-          <category> 数论 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ACM </tag>
-            
-            <tag> 数论 </tag>
             
         </tags>
       
@@ -313,6 +284,35 @@
     
     
     <entry>
+      <title>扩展欧几里得定理</title>
+      <link href="/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/"/>
+      <url>/2022/04/07/kuo-zhan-ou-ji-li-de-suan-fa/</url>
+      
+        <content type="html"><![CDATA[<p>现在我们已经知道了，方程ax+by=gcd（a，b） 的一组可行解一定有一组可行解，那么如何求解它喃？</p><p>而这个时候我们有一个方法可以帮助我们求解：</p><p>扩展欧几里得算法（Extended Euclidean algorithm, EXGCD），常用于求ax+by=gcd（a，b） 的一组可行解。</p><p>下面来看一下证明：</p><p>(没加载出来一定要多刷新一下，这渲染太慢了)</p><script type="math/tex; mode=display">设\begin{cases}ax1+by1=gcd(a,b)\\bx2+(a\ mod\ b)y2=gcd(b,a\ mod\ b)\end{cases}\\∵gcd(a,b)=gcd(b,a\ mod\ b);\\∴ax1+by1=gcd(b,a mod b)=bx2+(a\ mod\ b)y2;\\又∵a\ mod\ b=a-[\frac{a}{b}]*b\\\begin{aligned}∴bx2+(a\ mod\ b)y2&=bx2+(a-[\frac{a}{b}]*b)y2\\                             &=bx2+ay2-[\frac{a}{b}]*b*y2\\                             &=ay2+b(x2-[\frac{a}{b}]*y2)\\                             &=ax1+by1\\                           \end{aligned}\\                             由于对应项系数对应相等,所以 \\                             \begin{cases}                             x1=y2\\        y1=x2-[\frac{a}{b}]*y2\\        \end{cases}</script><p>那么将x2，y2 不断代入递归求解直至gcd 为 0为止<br>在这之前有 </p><script type="math/tex; mode=display">gcd*x+0*y=gcd</script><p>，故x=1，y=0，再反过来带回去迭代便可以求出一组可行解</p><p>代码实现：</p><pre class="language-c++" data-language="c++"><code class="language-c++">#include&lt;bits&#x2F;stdc++.h&gt;using namespace std;int ex_gcd(int a,int b,int &amp;x,int &amp;y)&#x2F;&#x2F;扩展欧几里得求ax+by&#x3D;gcd（a，b）；&#123;if(!b)&#123;x&#x3D;1;        y&#x3D;0;return a;&#125;int gcd&#x3D;ex_gcd(b,a%b,y,x);y-&#x3D;a&#x2F;b*x;return gcd;&#125;int main()&#123;    int a,b,x,y;    cin&gt;&gt;a&gt;&gt;b;    int gcd&#x3D;ex_gcd(a,b,x,y);     printf(&quot;%dx+%dy&#x3D;%d\n&quot;,a,b,gcd);    cout&lt;&lt;&quot;x&#x3D;&quot;&lt;&lt;x&lt;&lt;&quot; y&#x3D;&quot;&lt;&lt;y&lt;&lt;endl;&#x2F;&#x2F;方程的特解，可由线性代数相关知识推出通解；    return 0;&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+          <category> 数论 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数论 </tag>
+            
+            <tag> ACM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>欧几里得算法的证明</title>
       <link href="/2022/04/07/ou-ji-li-de-suan-fa/"/>
       <url>/2022/04/07/ou-ji-li-de-suan-fa/</url>
@@ -331,9 +331,9 @@
       
         <tags>
             
-            <tag> ACM </tag>
-            
             <tag> 数论 </tag>
+            
+            <tag> ACM </tag>
             
         </tags>
       
@@ -360,9 +360,9 @@
       
         <tags>
             
-            <tag> ACM </tag>
-            
             <tag> 数论 </tag>
+            
+            <tag> ACM </tag>
             
         </tags>
       
