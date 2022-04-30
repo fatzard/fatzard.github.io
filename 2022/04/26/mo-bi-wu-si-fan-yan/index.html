@@ -477,21 +477,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-28
+                    2022-04-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    13 分
                 </div>
                 
 
@@ -583,8 +583,10 @@ g(n)=\sum_{d|n}\mu(\frac{n}{d})f(d)</script><p>​            举个例子便可
 有两个函数f,g,且存在正整数N，对于所有n>N,f(n)=g(n)=0,则:
 \\
 f(n)=\sum_{n|m,m\leq N}g(m)  \iff  g(n)=\sum_{n|m,m\leq N}\mu(\frac{m}{n})f(m)</script><p>​                证明的方式和定理一异曲同工。</p>
-<h3 id="3、例题："><a href="#3、例题：" class="headerlink" title="3、例题："></a>3、例题：</h3><p>​                            有两个序列a,b，问：有多少个序列<x,y>满足$gcd(x,y)=1$ 且 $a<em>{b_x}=b</em>{a_y}$</x,y></p>
+<h3 id="3、莫反好题："><a href="#3、莫反好题：" class="headerlink" title="3、莫反好题："></a>3、莫反好题：</h3><h4 id="3-1、牛客14648"><a href="#3-1、牛客14648" class="headerlink" title="3.1、牛客14648"></a>3.1、牛客14648</h4><p>题目连接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/14648">https://ac.nowcoder.com/acm/problem/14648</a></p>
+<p>​                        </p>
 <script type="math/tex; mode=display">
+题目大意：有两个序列a,b，问：有多少个序列<x,y>满足gcd(x,y)=1 且 a_{b_x}=b_{a_y}</script><script type="math/tex; mode=display">
 这道题的意思等价于求\sum_{1\leq x\leq n,1\leq y\leq n}[a_{b_x}=b_{a_y}][gcd(x,y)=1]
 \\
 那么设f(D)=\sum_{1\leq x\leq n,1\leq y\leq n}[a_{b_x}=b_{a_y}][gcd(x,y)=D]
@@ -692,6 +694,141 @@ signed main()
         ans +&#x3D; mu[i] * getg(i, n);
     &#125;
     cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+&#125;</code></pre>
+<h4 id="3-2、AtCoder-Grand-Contest-038C"><a href="#3-2、AtCoder-Grand-Contest-038C" class="headerlink" title="3.2、AtCoder Grand Contest 038C"></a>3.2、AtCoder Grand Contest 038C</h4><p>题目连接：<a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc038/tasks/agc038_c">https://atcoder.jp/contests/agc038/tasks/agc038_c</a></p>
+<script type="math/tex; mode=display">
+给一个长度为 n的序列 a_0,a_1,a_2,...,a_{n−1}\\
+求∑_{i=0}^{n−2}∑_{j=i+1}^{n−1}lcm(a_i,a_j)\ mod\ 998244353</script><script type="math/tex; mode=display">
+解：首先利用和式的性质：\sum_{i=0}^{n-1}\sum_{j=0}^{n-1}a_{ij}=2\sum_{i=0}^{n-2}\sum_{j=i+1}^{n-1}a_{ij}+\sum_{i=0}^{n-1}a_{ii}
+\\这个性质可以想象成一个大矩阵a_{ij}求和，这个和式等价于<整个矩阵的和=
+右上角+左下角+对角线>
+\\
+∴∑_{i=0}^{n−2}∑_{j=i+1}^{n−1}lcm(a_i,a_j)=\frac{∑_{i=0}^{n−1}∑_{j=0}^{n−1}lcm(a_i,a_j)-\sum_{i=0}^{n-1}a_i}{2}
+\\
+由于\sum_{i=0}^{n-1}a_i很好算，所以这个问题等价于如何求∑_{i=0}^{n−1}∑_{j=0}^{n−1}lcm(a_i,a_j)
+\\又∵lcm(a_i,a_j)=\frac{a_i*a_j}{gcd(a_i,a_j)}
+\\∴∑_{i=0}^{n−1}∑_{j=0}^{n−1}lcm(a_i,a_j)=∑_{i=0}^{n−1}∑_{j=0}^{n−1}\frac{a_i*a_j}{gcd(a_i,a_j)}
+\\∴∑_{i=0}^{n−1}∑_{j=0}^{n−1}lcm(a_i,a_j)=\sum_{d=1}^{max(a_0,a_2..a_{n-1})}\frac{1}{d}∑_{i=0}^{n−1}∑_{j=0}^{n−1}a_i*a_j[gcd(a_i,a_j)=d]
+\\这样一来，这个问题感觉就变得套路化了！
+\\上套路：
+\\设f(d)=∑_{i=0}^{n−1}∑_{j=0}^{n−1}a_i*a_j[gcd(a_i,a_j)=d]
+\\做一个倍数和函数g\\
+则g(d)=\sum_{d|D}f(D)=\sum_{d|D}∑_{i=0}^{n−1}∑_{j=0}^{n−1}a_i*a_j[gcd(a_i,a_j)=D]
+\\
+∵D|a_i,D|a_j
+\\
+∴d|a_i,d|a_j
+\\
+∴g(d)=\sum_{d|D}∑_{i=0}^{n−1}a_i[d|a_i]∑_{j=0}^{n−1}a_j[d|a_j]
+\\
+∴g(d)=\sum_{d|D}(∑_{i=0}^{n−1}a_i[d|a_i])^2
+\\这样一来通过枚举d就可以在O((max(a_i))log(max(a_i)))的时间复杂度下通过打表打出g函数
+\\利用莫比乌斯反演定理二可得：
+\\f(d)=\sum_{d|D}\mu(\frac{D}{d})g(D)
+\\∴∑_{i=0}^{n−1}∑_{j=0}^{n−1}lcm(a_i,a_j)=\sum_{d=1}^{max(a_0,a_2..a_{n-1})}\frac{1}{d}\sum_{d|D}\mu(\frac{D}{d})g(D)
+\\
+∴∑_{i=0}^{n−2}∑_{j=i+1}^{n−1}lcm(a_i,a_j)=\frac{\sum_{d=1}^{max(a_0,a_2..a_{n-1})}\frac{1}{d}\sum_{d|D}\mu(\frac{D}{d})g(D)-\sum_{i=0}^{n-1}a_i}{2}
+\\
+积性函数\mu可以用欧拉筛在线性的时间o(n)内打表打出来，g函数也是在O(nlogn)的时间复杂度打表预处理
+\\同理最后这个\sum_{d=1}^{max(a_0,a_2..a_{n-1})}\frac{1}{d}\sum_{d|D}\mu(\frac{D}{d})g(D)也可以在o(nlogn)的时间复杂度求出来
+\\因此这个复杂的玩意儿可以在O(nlogn)的时间复杂度下解决！！！
+\\最后还需要注意一下，此题还有有一个取模的操作
+\\对于此题分数取模，最好预先打表处理逆元，用一个inv数组保存，不然会超时</script><p>下面贴上代码（加了注释）：</p>
+<pre class="language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+using namespace std;
+#define int long long
+const int maxn &#x3D; 1e6 + 10;
+const int mod &#x3D; 998244353;
+vector&lt;int&gt; primes;
+bool isnp[maxn];
+int mu[maxn];
+int a[maxn];
+int gf[maxn];
+int cnt[maxn];
+int inv[maxn];
+void Eular_mu(int n)&#x2F;&#x2F;欧拉筛求莫比乌斯函数
+&#123;
+    mu[1] &#x3D; 1;
+    for (int i &#x3D; 2; i &lt;&#x3D; n; i++)
+    &#123;
+        if (!isnp[i])
+        &#123;
+            primes.push_back(i);
+            mu[i] &#x3D; -1;
+        &#125;
+        for (auto p : primes)
+        &#123;
+            if (i * p &gt; n)
+                break;
+            isnp[i * p] &#x3D; 1;
+            if (i % p &#x3D;&#x3D; 0)
+            &#123;
+                mu[i * p] &#x3D; 0;
+                break;
+            &#125;
+            mu[i * p] &#x3D; -mu[i];
+        &#125;
+    &#125;
+&#125;
+int qp(int a, int x)&#x2F;&#x2F;用快速幂
+&#123;
+    int ans &#x3D; 1;
+    while (x)
+    &#123;
+        if (x &amp; 1)
+        &#123;
+            ans &#x3D; ans * a % mod;
+        &#125;
+        a &#x3D; a * a % mod;
+        x &gt;&gt;&#x3D; 1;
+    &#125;
+    return ans;
+&#125;
+signed main()
+&#123;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin &gt;&gt; n;
+    int maxx &#x3D; 0;
+    int sum &#x3D; 0;
+    for (int i &#x3D; 0; i &lt; n; i++)
+    &#123;
+        cin &gt;&gt; a[i];
+        maxx &#x3D; max(a[i], maxx);
+        sum +&#x3D; a[i];
+        cnt[a[i]]++;&#x2F;&#x2F;记录a[i]的数量
+    &#125;
+    Eular_mu(maxn);
+    for(int i&#x3D;1;i&lt;&#x3D;maxn;i++)&#123;&#x2F;&#x2F;快速幂套费马小定理初始化逆元
+        inv[i]&#x3D;qp(i,mod-2);
+    &#125;
+    for (int d &#x3D; 1; d &lt;&#x3D; maxx; d++)&#x2F;&#x2F;求g函数
+    &#123;
+        for (int i &#x3D; d; i &lt;&#x3D; maxx; i +&#x3D; d)
+        &#123;
+            gf[d] &#x3D; (gf[d] + i * cnt[i] % mod) % mod;
+&#x2F;&#x2F;由于是枚举d的倍数,如果符合条件一定存在a[i]和此时d的倍数相等，这个时候cnt的作用体现出来
+&#x2F;&#x2F;利用cnt便可以直接求和
+        &#125;
+        gf[d] &#x3D; gf[d] * gf[d] % mod;
+    &#125;
+    int ans &#x3D; 0;
+    for (int d &#x3D; 1; d &lt;&#x3D; maxx; d++)
+    &#123;
+        for (int i &#x3D; d; i &lt;&#x3D; maxx; i +&#x3D; d)
+        &#123;
+            ans &#x3D; (ans + mu[i &#x2F; d] * gf[i] %mod* inv[d] % mod) % mod;
+&#x2F;&#x2F;同理枚举d的倍数，原理和g函数相似，最后直接套推出来的公式
+        &#125;
+    &#125;
+    cout &lt;&lt; (ans - sum%mod+mod ) % mod * inv[2] % mod &lt;&lt; endl;
+&#x2F;&#x2F;sum容易吧mod爆了，一定要取模
     return 0;
 &#125;</code></pre>
 
@@ -1482,7 +1619,7 @@ signed main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">18.2k</span>
+                        class="white-color">19.4k</span>
             
             
             
@@ -1727,12 +1864,12 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 3,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 
 </html>
