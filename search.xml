@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>容斥原理（二进制枚举实现）</title>
+      <link href="/2022/06/21/rong-chi-yuan-li-er-jin-zhi-mei-ju/"/>
+      <url>/2022/06/21/rong-chi-yuan-li-er-jin-zhi-mei-ju/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1、什么是容斥原理？"><a href="#1、什么是容斥原理？" class="headerlink" title="1、什么是容斥原理？"></a>1、什么是容斥原理？</h3><p>​        容斥原理是一种计数的方法：先不考虑重叠的情况，把包含于某内容中的所有对象的数目先计算出来，然后再把计数时重复计算的数目排斥出去，使得计算的结果既无遗漏又无重复，这种计数的方法称为容斥原理。</p><p>​        注：也可以将容斥定理描述为：要计算几个集合并集的大小，我们要先将所有<strong>单个集合</strong>的大小计算出来，然后减去所有<strong>两个集合相交</strong>的部分，再加回所有<strong>三个集合相交</strong>的部分，再减去所有<strong>四个集合相交</strong>的部分………依此类推，一直计算到<strong>所有集合相交</strong>的部分。（可以理解为就是先把所有单个集合全加一遍然后再去重）</p><p>​        为了直观的表达，可以采用韦恩图表示：</p><p><img src="/2022/06/21/rong-chi-yuan-li-er-jin-zhi-mei-ju/1.jpg" alt="集合A与集合B"></p><p>那么可以清晰的观察到：$A\cup B=A+B-A\cap B$</p><p>那么再增加一个集合C，结果又会怎么样喃？</p><p><img src="/2022/06/21/rong-chi-yuan-li-er-jin-zhi-mei-ju/2.jpg" alt="集合A、B、C"></p><p>同理我们可以得出以下结论：</p><p>$A\cup B\cup C=A+B+C-A\cap B-A\cap C-C\cap B +A\cup B\cup C$</p><p>………..</p><p>通过不断地增加集合的数量，最终可以得出容斥原理的一个重要公式。</p><h4 id="1-1、容斥原理公式"><a href="#1-1、容斥原理公式" class="headerlink" title="1.1、容斥原理公式"></a>1.1、容斥原理公式</h4><script type="math/tex; mode=display">|\cup_{i=1}^{n}A_i|=\sum_{i=1}^{n}|A_i|-\sum_{i,j:1\leq i\leq j\leq n}|A_i\cap A_j|+\sum_{i,j,k:1\leq i\leq j\leq k\leq n}|A_i\cap A_j\cap A_k|-..+(-1)^{n-1}|A_1\cap ..\cap A_n|</script><h3 id="2、二进制枚举"><a href="#2、二进制枚举" class="headerlink" title="2、二进制枚举"></a>2、二进制枚举</h3><h4 id="2-1、前提定理："><a href="#2-1、前提定理：" class="headerlink" title="2.1、前提定理："></a>2.1、前提定理：</h4><p>​    含有N个元素的集合的一切子集的个数为$2^n$</p><script type="math/tex; mode=display">证明:\\含有0个元素的子集有：C_n^0 \\含有1个元素的子集有：C_n^1 \\含有2个元素的子集有：C_n^2 \\含有3个元素的子集有：C_n^3 \\....\\含有n个元素的子集有：C_n^n\\所以：一切子集的总个数为：C_n^0+C_n^1+....C_n^n\\由二项式定理可得\sum_{i=0}^{n}c_n^i=2^n</script><h4 id="2-2、如何枚举出N个元素的集合的所有子集？"><a href="#2-2、如何枚举出N个元素的集合的所有子集？" class="headerlink" title="2.2、如何枚举出N个元素的集合的所有子集？"></a>2.2、如何枚举出N个元素的集合的所有子集？</h4><p>利用二进制的特性，由于二进制是01字符串，故我们可以用二进制数的每一位表示某个集合是否被选中（1表示该集合被选中，0表示该集合没有被选中）</p><p>如以下的例子：</p><div class="table-container"><table><thead><tr><th>集合编号</th><th>1</th><th>2</th><th>3</th></tr></thead><tbody><tr><td>二进制</td><td>1</td><td>0</td><td>1</td></tr><tr><td>状态</td><td>选</td><td>不选</td><td>选</td></tr></tbody></table></div><h4 id="2-3、原理"><a href="#2-3、原理" class="headerlink" title="2.3、原理"></a>2.3、原理</h4><p>由于我们已经知道$n$个元素的集合的子集一共有$2^n$个，而长度为n的二进制数表示的范围为$[0,2^{n}-1]$，在这个区间上正好有$2^n$个数，所以这每个数也正好可以表示每个集合。</p><p>例如：二进制011表示选择了2、3集合</p><h4 id="2-4、巧妙利用位运算实现代码"><a href="#2-4、巧妙利用位运算实现代码" class="headerlink" title="2.4、巧妙利用位运算实现代码"></a>2.4、巧妙利用位运算实现代码</h4><p>​    由于我们在进行操作时，是遍历二进制的十进制表示形式，如果我们将它转化为二进制再来枚举每一位，会非常麻烦。为了便于判断，因此采用先左移（&lt;&lt;）再进行位与运算符（&amp;）</p><p>​    1进行左移几位之后，将变成000100…00的形式；又因为&amp;运算是在同一位上同时为1才为1，所以进行&amp;运算后可以知道此时左移的位数上的集合是否被选中。</p><p>代码实现：</p><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;string&gt;using namespace std;int main()&#123;    int n;    cin &gt;&gt; n;    for(int i &#x3D; 0; i &lt; (1&lt;&lt;n); i++) &#x2F;&#x2F;从0～2^n-1个状态    &#123;        for(int j &#x3D; 0; j &lt; n; j++) &#x2F;&#x2F;遍历二进制的每一位        &#123;            if(i &amp; (1 &lt;&lt; j))&#x2F;&#x2F;判断二进制第j位是否存在            &#123;                &#x2F;&#x2F;相关集合操作            &#125;        &#125;    &#125;    return 0;&#125;</code></pre><h3 id="3、二进制枚举实现容斥定理"><a href="#3、二进制枚举实现容斥定理" class="headerlink" title="3、二进制枚举实现容斥定理"></a>3、二进制枚举实现容斥定理</h3><p>我们已经知道容斥定理的公式：</p><script type="math/tex; mode=display">|\cup_{i=1}^{n}A_i|=\sum_{i=1}^{n}|A_i|-\sum_{i,j:1\leq i\leq j\leq n}|A_i\cap A_j|+\sum_{i,j,k:1\leq i\leq j\leq k\leq n}|A_i\cap A_j\cap A_k|-..+(-1)^{n-1}|A_1\cap ..\cap A_n|</script><p>观察这个容斥的式子可以发现，每个元素同样有是否被选中的性质，因此可以用二进制枚举。</p><p>首先枚举N个元素的集合的所有子集：</p><pre class="language-C++" data-language="C++"><code class="language-C++">for(int i&#x3D;1;i&lt;(1&lt;&lt;lena);i++)</code></pre><p>然后枚举每一位</p><pre class="language-C++" data-language="C++"><code class="language-C++">for (int j &#x3D; 0; j &lt; n; j++)</code></pre><p>由于容斥定理的式子中有子集中元素的数量这一重要的因子，因此我们要利用变量$cnt$记录此时该子集中元素的数量</p><pre class="language-C++" data-language="C++"><code class="language-C++">if ((1 &lt;&lt; j) &amp; i)&#123;                    tmp++;           lcm *&#x3D; a[j]; &#125;</code></pre><p>枚举完每一位后，我们需要将答案统计起来</p><p>此时通过容斥定理的式子可以发现，当子集中元素个数为偶数时为-;当元素个数为奇数时为+。</p><pre class="language-c++" data-language="c++"><code class="language-c++">if (tmp % 2 &#x3D;&#x3D; 1)    ans +&#x3D; n &#x2F; lcm; &#x2F;&#x2F;奇数是加 偶数是减else    ans -&#x3D; n &#x2F; lcm;</code></pre><p>例如：求n以内2、 3、 5、 7、 11的倍数有多少个？</p><p>完整代码：</p><pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;#include &lt;stdio.h&gt;#include &lt;math.h&gt;using namespace std;int a[] &#x3D; &#123;2, 3, 5, 7, 11&#125;;int main()&#123;    int n;    int lena &#x3D; 5;    int ans &#x3D; 0;    cin &gt;&gt; n;    for (int i &#x3D; 1; i &lt; (1 &lt;&lt; lena); i++)    &#123;        &#x2F;&#x2F;&#x2F;每个数都有2种状态 ，在或不在 ,意思是2，3，5，7，11的倍数或不是，        &#x2F;&#x2F;&#x2F;一共有2^5-1种可能        int tmp &#x3D; 0;        int lcm &#x3D; 1;        for (int j &#x3D; 0; j &lt; lena; j++)        &#123;            if ((1 &lt;&lt; j) &amp; i)            &#123;                &#x2F;&#x2F;&#x2F;选第j个b倍数子;与i的二进制的第j位比较，看是否为1，是则选中                tmp++;       &#x2F;&#x2F;标志变量计算i中1的个数，也就是倍数的个数                lcm *&#x3D; a[j]; &#x2F;&#x2F;&#x2F;相乘            &#125;        &#125;        if (tmp % 2 &#x3D;&#x3D; 1)            ans +&#x3D; n &#x2F; lcm; &#x2F;&#x2F;奇数是加 偶数是减        else            ans -&#x3D; n &#x2F; lcm;    &#125;    printf(&quot;%d\n&quot;, ans);&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>莫比乌斯反演</title>
       <link href="/2022/04/26/mo-bi-wu-si-fan-yan/"/>
       <url>/2022/04/26/mo-bi-wu-si-fan-yan/</url>
@@ -20,9 +47,9 @@
       
         <tags>
             
-            <tag> 数论 </tag>
-            
             <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
             
         </tags>
       
@@ -47,9 +74,9 @@
       
         <tags>
             
-            <tag> 数论 </tag>
-            
             <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
             
         </tags>
       
@@ -101,9 +128,9 @@
       
         <tags>
             
-            <tag> ACM </tag>
-            
             <tag> 排列组合 </tag>
+            
+            <tag> ACM </tag>
             
         </tags>
       
@@ -201,33 +228,6 @@
     
     
     <entry>
-      <title>快速幂</title>
-      <link href="/2022/04/07/kuai-su-mi/"/>
-      <url>/2022/04/07/kuai-su-mi/</url>
-      
-        <content type="html"><![CDATA[<p>通常地，我们计算$a^x$是将$x$从1一直累乘到$x$，这样是最简单的计算方法，但是这种做法的时间复杂度是$o(n)$，一旦我们计算的幂次方较大或者计算次数较多的时候就会花费很长的时间；例如：计算$10^{100000000}$组类似$999^{100000000}$这样的计算式，你可能算一辈子都算不出来。</p><p>​        这个时候引入二进制对$a^x$进行优化：</p><p>​        考虑$a^{2x}$=$a^x×a^x$=$(a^x)$$^2$于是可以利用二进制表示分割成更小的一部分</p><p>​        例如：$9^{13}$=$9^{(1101)_2}$=$9^8$×$9^4$×$9^1$</p><p>​        因为$n$有$[log_2x]+1$个二进制位，因此当我们知道了 $a^1,a^2,a^4…a^{2^k}$后，我们只用计算$[log_2x]+1$次乘法就可以计算出$a^x$    </p><p>​        因此计算$a^x$只需要将$x$对应的二进制下的数位为1的整系数幂乘起来即可</p><p>​        即：$a^x$=$a^{(x_0x_1x_2..x_n)_2}$=$a^{x_02^{0}}$×$a^{x_12^{1}}$×$a^{x_22^{2}}$…….×$a^{x_n2^{n}}$</p><p>​        根据上式发现，原问题被转化成了形式相同的子问题的乘积，并且我们可以在常数时间内从 $2^i$         项推出$2^{i+1}$项。</p><p>​        通过二进制处理后时间复杂度降为$O(logn)$</p><p>​        下面是我的快速幂代码模版：</p><pre class="language-c++" data-language="c++"><code class="language-c++">long long fastpow(long long a, long long n) &#x2F;&#x2F;快速幂&#123;    long long ans &#x3D; 1;    while (n)    &#123;        if (n &amp; 1)        &#123;            ans *&#x3D; a;        &#125;        a *&#x3D; a;        n &gt;&gt;&#x3D; 1; &#x2F;&#x2F;位运算    &#125;    return ans;&#125;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> ACM </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 数论 </tag>
-            
-            <tag> ACM </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>利用“矩阵”巧妙证明斐蜀定理</title>
       <link href="/2022/04/07/qiao-miao-zheng-ming-fei-shu-ding-li/"/>
       <url>/2022/04/07/qiao-miao-zheng-ming-fei-shu-ding-li/</url>
@@ -246,9 +246,36 @@
       
         <tags>
             
+            <tag> ACM </tag>
+            
             <tag> 数论 </tag>
             
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>快速幂</title>
+      <link href="/2022/04/07/kuai-su-mi/"/>
+      <url>/2022/04/07/kuai-su-mi/</url>
+      
+        <content type="html"><![CDATA[<p>通常地，我们计算$a^x$是将$x$从1一直累乘到$x$，这样是最简单的计算方法，但是这种做法的时间复杂度是$o(n)$，一旦我们计算的幂次方较大或者计算次数较多的时候就会花费很长的时间；例如：计算$10^{100000000}$组类似$999^{100000000}$这样的计算式，你可能算一辈子都算不出来。</p><p>​        这个时候引入二进制对$a^x$进行优化：</p><p>​        考虑$a^{2x}$=$a^x×a^x$=$(a^x)$$^2$于是可以利用二进制表示分割成更小的一部分</p><p>​        例如：$9^{13}$=$9^{(1101)_2}$=$9^8$×$9^4$×$9^1$</p><p>​        因为$n$有$[log_2x]+1$个二进制位，因此当我们知道了 $a^1,a^2,a^4…a^{2^k}$后，我们只用计算$[log_2x]+1$次乘法就可以计算出$a^x$    </p><p>​        因此计算$a^x$只需要将$x$对应的二进制下的数位为1的整系数幂乘起来即可</p><p>​        即：$a^x$=$a^{(x_0x_1x_2..x_n)_2}$=$a^{x_02^{0}}$×$a^{x_12^{1}}$×$a^{x_22^{2}}$…….×$a^{x_n2^{n}}$</p><p>​        根据上式发现，原问题被转化成了形式相同的子问题的乘积，并且我们可以在常数时间内从 $2^i$         项推出$2^{i+1}$项。</p><p>​        通过二进制处理后时间复杂度降为$O(logn)$</p><p>​        下面是我的快速幂代码模版：</p><pre class="language-c++" data-language="c++"><code class="language-c++">long long fastpow(long long a, long long n) &#x2F;&#x2F;快速幂&#123;    long long ans &#x3D; 1;    while (n)    &#123;        if (n &amp; 1)        &#123;            ans *&#x3D; a;        &#125;        a *&#x3D; a;        n &gt;&gt;&#x3D; 1; &#x2F;&#x2F;位运算    &#125;    return ans;&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
             <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
             
         </tags>
       
@@ -302,9 +329,9 @@
       
         <tags>
             
-            <tag> 数论 </tag>
-            
             <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
             
         </tags>
       
@@ -331,9 +358,9 @@
       
         <tags>
             
-            <tag> 数论 </tag>
-            
             <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
             
         </tags>
       
@@ -360,9 +387,9 @@
       
         <tags>
             
-            <tag> 数论 </tag>
-            
             <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
             
         </tags>
       
