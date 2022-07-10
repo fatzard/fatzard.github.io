@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2022/07/10/la-ge-lang-ri-cha-zhi-fa/"/>
+      <url>/2022/07/10/la-ge-lang-ri-cha-zhi-fa/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-拉格朗日插值法的由来"><a href="#1-拉格朗日插值法的由来" class="headerlink" title="1.拉格朗日插值法的由来"></a>1.拉格朗日插值法的由来</h3><p>​        拉格朗日插值法究竟解决的是什么问题喃？</p><h4 id="问题：在二维图像上给出-n-个点，如何得到一个通过这-n-个点的一条线？"><a href="#问题：在二维图像上给出-n-个点，如何得到一个通过这-n-个点的一条线？" class="headerlink" title="问题：在二维图像上给出$n$个点，如何得到一个通过这$n$个点的一条线？"></a>问题：在二维图像上给出$n$个点，如何得到一个通过这$n$个点的一条线？</h4><p>​     例如：已知以下几个点$(0,1)、(1,0)、(2,1)$,问这条曲线是什么？</p><p><img src="/2022/07/10/la-ge-lang-ri-cha-zhi-fa/1.jpg" style="zoom:67%;"></p><p>显然易见对于这三个点，是可以用多项式画出这三个点的，因此我们可以假设这个二次多项式为</p><script type="math/tex; mode=display">y=a_0+a_1x+a_2x^2</script><p>我们带入这三个点$(x_1,y_1),(x_2,y_2),(x_3,y_3)$</p><p>可以得到以下方程组</p><script type="math/tex; mode=display">\begin{cases}y_1=a_0+a_1x_1+a_2x_1^2\\y_2=a_0+a_1x_2+a_2x_2^2\\y_3=a_0+a_1x_3+a_2x_3^2\\\end{cases}</script><p>对于这样一个方程组，我们可以用高斯消元解出系数。</p><p>但是拉格朗日是如何思考这个问题的喃？</p><h4 id="拉格朗日的思考："><a href="#拉格朗日的思考：" class="headerlink" title="拉格朗日的思考："></a>拉格朗日的思考：</h4><p>拉格朗日从另外的角度思考了这个问题，在他看来<code>可以通过三根二次曲线相加来达到目标</code>。那这是怎么的三根二次曲线呢？</p><p>这三根曲线只需满足一些条件即可：</p><script type="math/tex; mode=display">曲线1：y_1f_1(x)可以保证，在x_1点处，取值为y_1,其余两点取值为0\\曲线2：y_2f_1(x)可以保证，在x_2点处，取值为y_2,其余两点取值为0\\曲线3：y_3f_1(x)可以保证，在x_3点处，取值为y_3,其余两点取值为0</script><p>则所求曲线为：</p><script type="math/tex; mode=display">f(x)=y_1f_1(x)+y_2f_2(x)+y_3f_3(x)</script><p>而这样一条曲线正好可以过给的三个点</p><p><img src="/2022/07/10/la-ge-lang-ri-cha-zhi-fa/2.jpg" style="zoom:50%;"></p><h3 id="2、拉格朗日插值法的推导"><a href="#2、拉格朗日插值法的推导" class="headerlink" title="2、拉格朗日插值法的推导"></a>2、拉格朗日插值法的推导</h3><p>对于过每一个点$(x_i,y_i)$的曲线的函数设为$y_jf_i(x_j)$</p><p>因此需要满足的条件为：</p><script type="math/tex; mode=display">f_i(x_j)=\begin{cases}1,i=j\\0,i\neq j\end{cases}</script><p>因此我们最后构造出$f_i(x_j)$即可</p><p>显而易见，以下这个函数满足条件</p><script type="math/tex; mode=display">f_i(x)=\frac{(x-x_1)(x-x_2)...(x-x_n)}{(x_i-x_1)(x_i-x_2)...(x_i-x_n)}(i\neq j)</script><p>因此</p><script type="math/tex; mode=display">f(x)=\sum_{i=1}^{n}y_if_i(x)=\sum_{i=1}^{n}y_i\Pi_{i\neq j}\frac{x-x_j}{x_i-x_j}</script><p>上模板题：<a href="https://www.luogu.com.cn/problem/P4781">https://www.luogu.com.cn/problem/P4781</a></p><pre class="language-C++" data-language="C++"><code class="language-C++">#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;cmath&gt;#include&lt;string.h&gt;using namespace std;#define int long longconst int maxn&#x3D;1e4+10;int x[maxn];int y[maxn];const int mod &#x3D;998244353;int qp(int x,int n)&#123;    int ans&#x3D;1;    while(n)&#123;        if(n&amp;1)&#123;            ans&#x3D;ans*x%mod;        &#125;        x&#x3D;x*x%mod;        n&gt;&gt;&#x3D;1;    &#125;    return ans;&#125;int inv(int x)&#123;    return qp(x,mod-2);&#125;int lagrange(int num,int n)&#123;    int ans&#x3D;0;    for(int k&#x3D;1;k&lt;&#x3D;n;k++)&#123;        int s1&#x3D;y[k];        int s2&#x3D;1;        for(int i&#x3D;1;i&lt;&#x3D;n;i++)&#123;            if(i&#x3D;&#x3D;k)continue;            s1&#x3D;s1*(num-x[i])%mod;            s2&#x3D;s2*(x[k]-x[i])%mod;        &#125;        ans&#x3D;(ans+s1*inv(s2))%mod;    &#125;    ans&#x3D;(ans%mod+mod)%mod;    return ans;&#125;signed main()&#123;    int n,k;    cin&gt;&gt;n&gt;&gt;k;    for(int i&#x3D;1;i&lt;&#x3D;n;i++)&#123;        cin&gt;&gt;x[i]&gt;&gt;y[i];    &#125;    cout&lt;&lt;lagrange(k,n)&lt;&lt;endl;    return 0;&#125;</code></pre><p>当然这样的时间复杂度$O(n^2)$</p><p>在有些情况下不能做到最优，因此对于一些情况我们可以进行优化</p><h3 id="3、横坐标为连续的自然数（1-2-3…-）时，可以进行优化"><a href="#3、横坐标为连续的自然数（1-2-3…-）时，可以进行优化" class="headerlink" title="3、横坐标为连续的自然数（1,2,3….）时，可以进行优化"></a>3、横坐标为连续的自然数（1,2,3….）时，可以进行优化</h3><p>由于横坐标为连续的自然数:</p><p>故插值公式可以优化为：</p><script type="math/tex; mode=display">f(x)=\sum_{i=1}^{n+1}y_i\frac{\Pi_{j=1}^{n+1}(x-j)}{(x-j)(-1)^{n+1-i}(i-1)!(n+1-i)!}</script><p>这样一来，可以通过预处理后缀积、前缀积然后代入这个式子，所以这种情况时间复杂度为$O(n)$</p><p>例题：求自然数的k次幂的和</p><script type="math/tex; mode=display">求\sum_{i=1}^{n}i^k\\思路：首先我们通过这个式子可以判断出这个式子最终一定是一个k+1次的多项式\\因此我们只需要k+2个点\\那么接下来如何设计这个函数喃？我们可以把所求看为f(n)=\sum_{i=1}^{n}i^k\\那么每一个点为(j,\sum_{i=1}^{j}i^k)\\因此我们预处理出k+2个点，然后将这k+2个点代入插值公式即可</script><p>相同题意的例题：<a href="https://codeforces.com/problemset/problem/622/F">https://codeforces.com/problemset/problem/622/F</a></p><p>代码：</p><pre class="language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;cmath&gt;#include &lt;string.h&gt;#define int long longusing namespace std;const int maxn &#x3D; 1e6 + 10;const int mod &#x3D; 1e9 + 7;int x[maxn];int y[maxn];int qp(int a, int b)&#123;    int ans &#x3D; 1;    while (b)    &#123;        if (b &amp; 1)        &#123;            ans &#x3D; ans * a % mod;        &#125;        a &#x3D; a * a % mod;        b &gt;&gt;&#x3D; 1;    &#125;    return ans;&#125;int inv(int x)&#123;    return qp(x, mod - 2);&#125;int fac[maxn];void init_fac()&#123;    fac[0] &#x3D; 1;    fac[1] &#x3D; 1;    for (int i &#x3D; 2; i &lt; maxn - 5; i++)    &#123;        fac[i] &#x3D; fac[i - 1] * i % mod;    &#125;&#125;int back;int lagrange(int n, int k)&#123;    int ans &#x3D; 0;    for (int i &#x3D; 1; i &lt;&#x3D; k + 2; i++)    &#123;        int s1 &#x3D; back * y[i] % mod;        int s2 &#x3D; ((k + 2 - i) % 2 &#x3D;&#x3D; 0 ? 1 : -1) * (n - i);        s2 &#x3D; s2 * fac[i - 1] % mod;        s2 &#x3D; s2 * fac[k + 2 - i] % mod;        ans &#x3D; (ans + s1 * inv(s2) % mod) % mod;    &#125;    ans &#x3D; (ans % mod + mod) % mod;    return ans;&#125;signed main()&#123;    ios::sync_with_stdio(false);    cin.tie(0);    cout.tie(0);    int n, k;    cin &gt;&gt; n &gt;&gt; k;    init_fac();    for (int i &#x3D; 1; i &lt;&#x3D; k + 2; i++)    &#123;        x[i] &#x3D; i;        y[i] &#x3D; (y[i - 1] + qp(i, k)) % mod;    &#125;    if (n &lt;&#x3D; k+2)    &#123;        cout &lt;&lt; y[n] &lt;&lt; endl;    &#125;    else    &#123;        back &#x3D; 1;        for (int j &#x3D; 1; j &lt;&#x3D; k + 2; j++)        &#123;            back &#x3D; back * (n - j) % mod;        &#125;        cout &lt;&lt; lagrange(n, k) &lt;&lt; endl;    &#125;    return 0;&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> ACM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ACM </tag>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>容斥原理（二进制枚举实现）</title>
       <link href="/2022/06/21/rong-chi-yuan-li-er-jin-zhi-mei-ju/"/>
       <url>/2022/06/21/rong-chi-yuan-li-er-jin-zhi-mei-ju/</url>
