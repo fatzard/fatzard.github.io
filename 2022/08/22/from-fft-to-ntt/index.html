@@ -479,7 +479,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-08-27
+                    2022-08-31
                 </div>
                 
 
@@ -542,18 +542,20 @@ f(x)\times g(x)&=1\times(1+x^5+x^6+x^7)+x^2\times(1+x^5+x^6+x^7)+x^3\times(1+x^5
 <p>得出推论：在平面直角坐标系中，$n+1$个点就能唯一确定一个$n$次多项式。</p>
 <p>因此，对于一个$n$次多项式$f(x)$而言，我们可以用$n+1$个点来描述一个多项式；换言之，两个多项式相乘，等价于两个多项式的对应点值相乘。(点值的乘法对应着整个多项式的乘法,也就是<strong>浓缩了整个多项式</strong>)</p>
 <p>将能唯一表达一个$n$次多项式$f(x)$的$n+1$个点,称为$f(x)$的点值表达式。</p>
-<p>​      <strong>例如：$n$次多项式$f(x)$的点值表达式为：</strong></p>
-<p><strong>$\left{(x<em>1,f(x_1)),(x_2,f(x_2)),(x_3,f(x_3))……(x</em>{n+1},f(x_{n+1}))\right}$</strong></p>
-<p>由于$n$次多项式$f(x)$与$n$次多项式$g(x)$,他们的乘积一定是一个$2n+1$次的多项式，所以我们只需要对$f(x)$和$g(x)$找到$2n+1$个对应的点，然后将他们对应点的<strong>纵坐标</strong>相乘，便可以确定多项式$f(x)\times g(x)$的点值表达式；</p>
-<p>​    <strong>例如：$2n+1$次多项式$f(x)\times g(x)$的点值表达式为：    </strong></p>
-<p><strong>$\left{(x<em>1,f(x_1)g(x_1)),(x_2,f(x_2)g(x_2)),(x_3,f(x_3)g(x_3))……(x</em>{2n+1},f(x<em>{2n+1})g(x</em>{2n+1}))\right}$</strong></p>
-<p>最后我们将多项式$f(x)\times g(x)$的点值表达式转化为多项式的一般表达式（系数表达式）便得到了我们想要的多项式乘积了。</p>
+<script type="math/tex; mode=display">
+ 例如：n次多项式f(x)的点值表达式为：\\
+
+\left\{(x_1,f(x_1)),(x_2,f(x_2)),(x_3,f(x_3))......(x_{n+1},f(x_{n+1}))\right\}</script><p>由于$n$次多项式$f(x)$与$n$次多项式$g(x)$,他们的乘积一定是一个$2n+1$次的多项式，所以我们只需要对$f(x)$和$g(x)$找到$2n+1$个对应的点，然后将他们对应点的<strong>纵坐标</strong>相乘，便可以确定多项式$f(x)\times g(x)$的点值表达式；</p>
+<script type="math/tex; mode=display">
+例如：2n+1次多项式f(x)\times g(x)的点值表达式为：    \\
+
+\left\{(x_1,f(x_1)g(x_1)),(x_2,f(x_2)g(x_2)),(x_3,f(x_3)g(x_3))......(x_{2n+1},f(x_{2n+1})g(x_{2n+1}))\right\}</script><p>最后我们将多项式$f(x)\times g(x)$的点值表达式转化为多项式的一般表达式（系数表达式）便得到了我们想要的多项式乘积了。</p>
 <p><strong>而这也是FFT算法的流程</strong></p>
 <h3 id="2-2、DFT-amp-IDFT"><a href="#2-2、DFT-amp-IDFT" class="headerlink" title="2.2、DFT&amp;IDFT"></a>2.2、DFT&amp;IDFT</h3><p><strong>DFT</strong>：把多项式的系数表达式转化为点值表达式的变换过程</p>
 <p><strong>IDFT</strong>：把多项式的点值表达式转化为系数表达式的变换过程</p>
 <p><strong>下面这张图便对比了FFT算法与暴力算法的区别</strong></p>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/2022/08/22/from-fft-to-ntt/1.jpg" alt></p>
-<h3 id="3、FFT的实现"><a href="#3、FFT的实现" class="headerlink" title="3、FFT的实现"></a>3、FFT的实现</h3><h4 id="3-1、DFT"><a href="#3-1、DFT" class="headerlink" title="3.1、DFT"></a>3.1、DFT</h4><p>​    由于我们想要多项式的点值表达式，所以我们需要利用一些方法获得多项式的上的点；但是细想一下会发现，</p>
+<h2 id="3、FFT的实现"><a href="#3、FFT的实现" class="headerlink" title="3、FFT的实现"></a>3、FFT的实现</h2><h3 id="3-1、DFT"><a href="#3-1、DFT" class="headerlink" title="3.1、DFT"></a>3.1、DFT</h3><p>​    由于我们想要多项式的点值表达式，所以我们需要利用一些方法获得多项式的上的点；但是细想一下会发现，</p>
 <script type="math/tex; mode=display">
 如果对于一个n次多项式f(x)，我们任选n+1个点的横坐标x_1,x_2,x_3....x_n,x_{n+1},\\再分别计算其对应的纵坐标f(x_1),f(x_2),f(x_3)...f(x_n),f(x_{n+1})的时间复杂度是O(n^2)\\(由于计算每个横坐标的时间复杂度是O(n),但是有n个点)；</script><p>​    这样一来，我们通过随便找$n+1$个点的方式，会让我们的时间复杂度和暴力没什么区别！</p>
 <p>​    那么有快速找到$n+1$个点的方法么？答案当然是有的！</p>
@@ -658,7 +660,7 @@ f(w_n^{k+\frac{n}{2}})&=f_e(w_n^{2(k+\frac{n}{2})})+w_n^{k+\frac{n}{2}}f_o(w_n^{
 那么有reverse[i]=⌊\frac{reverse⌊\frac{x}{2}⌋}{2}⌋+(i\times(mod2))\times(\frac{len(i)}{2})</script><p>因此我们可以把每个数都放在其最终位置上，不断往上迭代即可！</p>
 <p><strong>#</strong>附一个蝴蝶变换的小结论：</p>
 <p>蝴蝶变换过后的序列，任取三个数都不构成等差数列。</p>
-<h4 id="3-2、IDFT"><a href="#3-2、IDFT" class="headerlink" title="3.2、IDFT"></a>3.2、IDFT</h4><p>现在我们已经知道$k$次多项式$f(x)$的点值表达式：${(w_n^0,f(w_n^0)),(w_n^1,f(w_n^1)),(w_n^2,f(w_n^2)),….,(w_n^n,f(w_n^n))} (k\leq n,n=2^m-1)$</p>
+<h3 id="3-2、IDFT"><a href="#3-2、IDFT" class="headerlink" title="3.2、IDFT"></a>3.2、IDFT</h3><p>现在我们已经知道$k$次多项式$f(x)$的点值表达式：${(w_n^0,f(w_n^0)),(w_n^1,f(w_n^1)),(w_n^2,f(w_n^2)),….,(w_n^n,f(w_n^n))} (k\leq n,n=2^m-1)$</p>
 <p>那么可一把点值表达式改写成与之对应的矩阵的形式：</p>
 <script type="math/tex; mode=display">
 \begin{bmatrix}
@@ -831,7 +833,7 @@ f(w_n^{k+\frac{n}{2}})&=f_e(w_n^{2(k+\frac{n}{2})})+w_n^{k+\frac{n}{2}}f_o(w_n^{
 \end{bmatrix}</script><p>最后我们注意到对于$w_n^{n-j}$，其实它为$w_n^j$的共轭复数；因此在IDFT中，只需将DFT中的乘以单位根变为乘以其共轭复数即可，但是分治结束后，需要除以$n$</p>
 <p><strong>其实上述需要求逆的矩阵是一个范德蒙德矩阵，也可以利用范德蒙德矩阵求逆的过程</strong></p>
 <p>好了！耗时三天终于敲完FFT的公式推导了！！！下面的代码实现就比较容易了！</p>
-<h3 id="4、FFT代码实现"><a href="#4、FFT代码实现" class="headerlink" title="4、FFT代码实现"></a>4、FFT代码实现</h3><p>直接上模版：</p>
+<h2 id="4、FFT代码实现"><a href="#4、FFT代码实现" class="headerlink" title="4、FFT代码实现"></a>4、FFT代码实现</h2><p>直接上模版：</p>
 <pre class="language-c++" data-language="c++"><code class="language-c++">double PI &#x3D; acos(-1.0);
 &#x2F;&#x2F;复数类
 struct Complex
@@ -934,18 +936,18 @@ void fft(Complex *a, int n, int type &#x3D; 1)
     &#125;
 &#125;</code></pre>
 <p>代码有注释，就不细说了！</p>
-<h3 id="5、FFT的瓶颈"><a href="#5、FFT的瓶颈" class="headerlink" title="5、FFT的瓶颈"></a>5、FFT的瓶颈</h3><p>虽然FFT的在时间复杂度上非常优秀，但是计算机在计算时仍然会遇到一些问题！</p>
+<h2 id="5、FFT的瓶颈"><a href="#5、FFT的瓶颈" class="headerlink" title="5、FFT的瓶颈"></a>5、FFT的瓶颈</h2><p>虽然FFT的在时间复杂度上非常优秀，但是计算机在计算时仍然会遇到一些问题！</p>
 <p>例如：由于复数类中使用的是<strong>double</strong>类型，而且在计算单位根存在除法，除此之外计算机计算下$\pi$始终是一个逼近值，因此必然也必然会存在误差！所以在特殊情况下计算机计算会出现一定的误差！</p>
 <p>但是有没有解决办法喃？</p>
 <p>可以说在一定情况下是可以避免误差的！这个时候就要引出<strong>原根</strong></p>
-<h3 id="6、To-NTT"><a href="#6、To-NTT" class="headerlink" title="6、To NTT"></a>6、To NTT</h3><p><strong>原根</strong>：</p>
+<h2 id="6、To-NTT"><a href="#6、To-NTT" class="headerlink" title="6、To NTT"></a>6、To NTT</h2><p><strong>原根</strong>：</p>
 <script type="math/tex; mode=display">
 设m\in N^*,a\in Z,若gcd(a,m)=1,且\delta_m(a)=\varphi(m),则称a为模m的原根\\
 注：\delta_m(a)为a模m的阶，\varphi为m的欧拉函数</script><p>通过定义我们可以知道，原根是一种定义在模意义下的定义，因此对于<strong>FFT</strong>遇到的的精度问题，我们也只能保证在模意义下的答案正确</p>
 <p>我们通过推导可以发现原根具有和单位根几乎一样的性质，因此我们可以通过原根推出基本相同的结论</p>
 <p>这样一来我们就不必考虑复数域了！！</p>
 <p>也可以理解为<strong>NTT</strong>其实就是把<strong>FFT</strong>中的单位根换成了原根</p>
-<h4 id="6-1-NTT代码实现"><a href="#6-1-NTT代码实现" class="headerlink" title="6.1 NTT代码实现"></a>6.1 NTT代码实现</h4><pre class="language-c++" data-language="c++"><code class="language-c++">const int g &#x3D; 3, gi &#x3D; 332748118, mod &#x3D; 998244353;
+<h3 id="6-1-NTT代码实现"><a href="#6-1-NTT代码实现" class="headerlink" title="6.1 NTT代码实现"></a>6.1 NTT代码实现</h3><pre class="language-c++" data-language="c++"><code class="language-c++">const int g &#x3D; 3, gi &#x3D; 332748118, mod &#x3D; 998244353;
 &#x2F;&#x2F; 998244353的一个原根为3且998244353-1&#x3D;2^23*119，3在模998244353意义下的逆元为332748118
 int qp(int a, int n)
 &#123;
@@ -1010,7 +1012,7 @@ void NTT(int *a, int n, int type &#x3D; 1)
     &#125;
 &#125;</code></pre>
 <p>可以发现，NTT和FFT代码大体逻辑是相同的！！！只是从单位根换成了原根</p>
-<h4 id="6-2-tips"><a href="#6-2-tips" class="headerlink" title="6.2 tips"></a>6.2 tips</h4><p>在抽象代数中，原根就是循环群的生成元。这个概念只在模 $m$缩剩余系关于乘法形成的群中有“原根”这个名字，在一般的循环群中都称作“生成元”。</p>
+<h3 id="6-2-tips"><a href="#6-2-tips" class="headerlink" title="6.2 tips"></a>6.2 tips</h3><p>在抽象代数中，原根就是循环群的生成元。这个概念只在模 $m$缩剩余系关于乘法形成的群中有“原根”这个名字，在一般的循环群中都称作“生成元”。</p>
 <p>并非每个模$m$缩剩余系关于乘法形成的群都是循环群，存在原根就表明它同构于循环群，如果不存在原根就表明不同构。</p>
 
                 
@@ -1802,7 +1804,7 @@ void NTT(int *a, int n, int type &#x3D; 1)
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">27.9k</span>
+                        class="white-color">28.3k</span>
             
             
             
