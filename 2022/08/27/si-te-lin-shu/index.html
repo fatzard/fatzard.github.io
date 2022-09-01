@@ -4,8 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="cdqNTT, fat fatzard&#39;s Blog">
-    <meta name="description" content="分治NTT：“我卷我自己”">
+    <meta name="keywords" content="斯特林数, fat fatzard&#39;s Blog">
+    <meta name="description" content="斯特林数（Stirling Number）斯特林数主要处理的是把$N$个不同的元素分成$k$个集合或环的个数问题
+1.第二类斯特林数表示将$n$个元素划分成$m$个集合，每个集合非空的方案数，读作$n$子集$m$，记作$\begin{Bma">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +29,7 @@
     </style>
 
 
-    <title>cdqNTT | fat fatzard&#39;s Blog</title>
+    <title>斯特林数 | fat fatzard&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -318,12 +319,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">cdqNTT</h1>
+                    <h1 class="description center-align post-title">斯特林数</h1>
                 </div>
             </div>
         </div>
@@ -472,28 +473,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-08-24
+                    2022-08-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-08-31
+                    2022-09-01
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    413
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -516,54 +517,110 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="分治NTT"><a href="#分治NTT" class="headerlink" title="分治NTT"></a>分治NTT</h2><p>引出问题：</p>
-<script type="math/tex; mode=display">
-给定序列g_1,g_2,g_3...g_{n-1},现有序列f满足f_i=\sum_{j=1}^{i}f_{i-j}g_j,且f_0=1，求序列f_0,f_1,f_2,f_3....f_n-1 \\
-答案模998244353</script><p>看到这个递推式，第一眼一定是暴力，但是我们会发现，暴力的时间复杂度为$O(n^2)$，显而易见时间复杂度太高</p>
-<p>那么这个时候，我们不妨考虑CDQ分治</p>
-<script type="math/tex; mode=display">
-我们考虑序列区间[left,right]中[left,mid]对区间[mid+1,right]的影响\\
-显而易见，对于x\in[left,mid]而言，它对y\in[mid+1,right]贡献为：\\
-f_x\times g_{y-x}\\
-\therefore f_y=f_y+\sum_{i=left}^{mid}f_ig_{y-i}</script><p>所以我们可以通过NTT将卷积的部分给计算出来，然后将相应的部分加上去便可以得到最后的答案。</p>
-<p>计算一下时间复杂度：</p>
-<p>由于我们是分治再套上NTT求卷积因此，时间复杂度为：$O(nlog^2n)$</p>
-<p><strong>分治NTT模版</strong></p>
-<pre class="language-c++" data-language="c++"><code class="language-c++">Poly f,g;&#x2F;&#x2F;封装的多项式
-&#x2F;&#x2F; CDQ分治，先求出f[l,mid)​，可以发现这部分对区间的f[mid,r)​的贡献是f[l,mid)∗g[0,r−l)
-void cdqntt(int l, int r)
-&#123;
-    if (l &#x3D;&#x3D; r)
-    &#123;
-        、、、、、、、
-        return;
-    &#125;
-    int mid &#x3D; (l + r) &gt;&gt; 1;
-    cdqntt(l, mid);
-    f.a.clear(), g.a.clear();
-    for (int i &#x3D; l; i &lt;&#x3D; mid; i++)
-    &#123;
-        f.a.push_back(F[i]);
-    &#125;
-    for (int i &#x3D; 0; i &lt;&#x3D; r - l; i++)
-    &#123;
-        if (i &#x3D;&#x3D; 0)
-        &#123;
-            g.a.push_back(0);
-        &#125;
-        else
-        &#123;
-            g.a.push_back(G[i]);
-        &#125;
-    &#125;
-    Poly fA &#x3D; (Poly)f * g;&#x2F;&#x2F;多项式NTT计算
-    for (int i &#x3D; mid + 1; i &lt;&#x3D; r; i++)
-    &#123;
-        &#x2F;&#x2F;计算贡献
-    &#125;
-    cdqntt(mid + 1, r);
-&#125;</code></pre>
+                <h2 id="斯特林数（Stirling-Number）"><a href="#斯特林数（Stirling-Number）" class="headerlink" title="斯特林数（Stirling Number）"></a>斯特林数（Stirling Number）</h2><p>斯特林数主要处理的是把$N$个不同的元素分成$k$个集合或环的个数问题</p>
+<h3 id="1-第二类斯特林数"><a href="#1-第二类斯特林数" class="headerlink" title="1.第二类斯特林数"></a>1.第二类斯特林数</h3><p>表示将$n$个元素划分成$m$个集合，每个集合非空的方案数，读作$n$<strong>子集</strong>$m$，记作$\begin{Bmatrix}n\m \end{Bmatrix}$,又称为<strong>斯特林子集数</strong></p>
+<h4 id="1-1、组合意义推导"><a href="#1-1、组合意义推导" class="headerlink" title="1.1、组合意义推导"></a>1.1、组合意义推导</h4><p>新来一个元素$n$，对于该元素我们有两种方案：</p>
+<h1 id="1：元素-n-单独做一个集合，故此时的方案为：-begin-Bmatrix-n-1-k-1-end-Bmatrix"><a href="#1：元素-n-单独做一个集合，故此时的方案为：-begin-Bmatrix-n-1-k-1-end-Bmatrix" class="headerlink" title="1：元素$n$单独做一个集合，故此时的方案为：$\begin{Bmatrix}n-1\k-1\end{Bmatrix}$"></a>1：元素$n$单独做一个集合，故此时的方案为：$\begin{Bmatrix}n-1\k-1\end{Bmatrix}$</h1><h1 id="2：元素-n-放入一个现有的非空集合，那么我们需要选择一个非空集合，故此时的方案为-C-k-1-begin-Bmatrix-n-1-k-end-Bmatrix"><a href="#2：元素-n-放入一个现有的非空集合，那么我们需要选择一个非空集合，故此时的方案为-C-k-1-begin-Bmatrix-n-1-k-end-Bmatrix" class="headerlink" title="2：元素$n$放入一个现有的非空集合，那么我们需要选择一个非空集合，故此时的方案为:$C_k^1\begin{Bmatrix}n-1\k\end{Bmatrix}$"></a>2：元素$n$放入一个现有的非空集合，那么我们需要选择一个非空集合，故此时的方案为:$C_k^1\begin{Bmatrix}n-1\k\end{Bmatrix}$</h1><p>所以通过加法原理可以得到：$\begin{Bmatrix}n\m \end{Bmatrix}=\begin{Bmatrix}n-1\k-1\end{Bmatrix}+C_k^1\begin{Bmatrix}n-1\k\end{Bmatrix}$</p>
+<h4 id="1-2、容斥原理推导"><a href="#1-2、容斥原理推导" class="headerlink" title="1.2、容斥原理推导"></a>1.2、容斥原理推导</h4><script type="math/tex; mode=display">
+设全集S=\{乱放\}\\
+子集A_i=\{第i个盒子是空的\}\\
 
+\begin{aligned}
+\therefore|S-U_{k=0}^{m}A_i|&=\sum_{k=0}^{m}(-1)^k[子问题:哪几个盒子是空的]\\
+&=\frac{1}{m!}\sum_{k=0}^{m}(-1)^kC_m^k(m-k)^n\\
+&=\sum_{k=0}^m\frac{(-1)^k}{k!}\frac{(m-k)^n}{(m-k)!}
+\end{aligned}
+\\
+\therefore 通项公式
+\begin{Bmatrix}
+n\\m
+\end{Bmatrix}=\sum_{k=0}^m\frac{(-1)^k}{k!}\frac{(m-k)^n}{(m-k)!}</script><p>通过观察我们可以发现通项公式其实是一个卷积的形式，因此我们可以利用FFT在$O(nlogn)$的时间内求对于$n$不变，任意$m\in[0,n]$的$\begin{Bmatrix}n\m\end{Bmatrix}$</p>
+<h4 id="1-3、生成函数推导"><a href="#1-3、生成函数推导" class="headerlink" title="1.3、生成函数推导"></a>1.3、生成函数推导</h4><script type="math/tex; mode=display">
+由于分的每个集合是没有标号的，故可以写出每个集合的指数生成函数A(x)=\sum_{i=1}^{+\infty}\frac{x^i}{i!}\\
+\therefore 
+\begin{Bmatrix}
+n\\m
+\end{Bmatrix}=\frac{[x^n]A^m(x)}{m!}</script><p>那么可以利用多项式快速幂求出</p>
+<p>通过观察我们还可以发现，在$m$不变时，利用多项式快速幂求出$A^m(x)$后，对于任意$n&gt;m$都可以通过$A^m(x)$在$O(1)$时间内知道对应的$[x^n]$</p>
+<h4 id="1-4、第二类斯特林数的重要性质"><a href="#1-4、第二类斯特林数的重要性质" class="headerlink" title="1.4、第二类斯特林数的重要性质"></a>1.4、第二类斯特林数的重要性质</h4><script type="math/tex; mode=display">
+n^k=\sum_{i=0}^{k}i!C_n^i\begin{Bmatrix}k\\i\end{Bmatrix}</script><h5 id="1-4-1、理解"><a href="#1-4-1、理解" class="headerlink" title="1.4.1、理解"></a>1.4.1、理解</h5><p>等式左边考虑$k$个球可以放置在$n$个盒子里</p>
+<p>等式右边考虑为枚举非空盒子的数量$i$,那么把$k$个球放到$i$个盒子</p>
+<h5 id="1-4-2、运用"><a href="#1-4-2、运用" class="headerlink" title="1.4.2、运用"></a>1.4.2、运用</h5><p>可以将一个高次方数转化为第二类斯特林数</p>
+<h4 id="1-5、第二类斯特林数其他性质"><a href="#1-5、第二类斯特林数其他性质" class="headerlink" title="1.5、第二类斯特林数其他性质"></a>1.5、第二类斯特林数其他性质</h4><script type="math/tex; mode=display">
+\begin{aligned}
+&\begin{Bmatrix}
+0\\0
+\end{Bmatrix}=1\\
+&\begin{Bmatrix}
+n\\0
+\end{Bmatrix}=0,n>0
+\\
+&\begin{Bmatrix}
+n\\n
+\end{Bmatrix}=1
+\\
+&\begin{Bmatrix}
+n\\2
+\end{Bmatrix}=\begin{Bmatrix}
+n-1\\1
+\end{Bmatrix}+2\times \begin{Bmatrix}
+n-1\\2
+\end{Bmatrix}=1+2^{n-1}
+\\
+&\begin{Bmatrix}
+n\\n-1
+\end{Bmatrix}=C_n^2
+\\
+&\begin{Bmatrix}
+n\\n-2
+\end{Bmatrix}=C_n^3+3C_n^4
+\\
+&\begin{Bmatrix}
+n\\3
+\end{Bmatrix}=\frac{1}{2}(3^{n-1}+1)-2^{n-1}
+\\
+&\begin{Bmatrix}
+n\\n-3
+\end{Bmatrix}=C_n^4+10C_n^5+15C_n^6
+\end{aligned}</script><h3 id="2、第一类斯特林数"><a href="#2、第一类斯特林数" class="headerlink" title="2、第一类斯特林数"></a>2、第一类斯特林数</h3><p>表示 $n$ 个数形成 $m$ 个环的方案数，读作$n$ <strong>轮换</strong>$m$ ,记作$\begin{bmatrix}n\m\end{bmatrix}$，又称为斯特林轮换数</p>
+<h4 id="2-1、组合意义推导"><a href="#2-1、组合意义推导" class="headerlink" title="2.1、组合意义推导"></a>2.1、组合意义推导</h4><p>新来一个元素$n$，对于该元素我们有两种方案：</p>
+<h1 id="1：元素-n-单独做一个环，故此时的方案为：-begin-bmatrix-n-1-k-1-end-bmatrix"><a href="#1：元素-n-单独做一个环，故此时的方案为：-begin-bmatrix-n-1-k-1-end-bmatrix" class="headerlink" title="1：元素$n$单独做一个环，故此时的方案为：$\begin{bmatrix}n-1\k-1\end{bmatrix}$"></a>1：元素$n$单独做一个环，故此时的方案为：$\begin{bmatrix}n-1\k-1\end{bmatrix}$</h1><h1 id="2：元素-n-放入一个现有的环，那么我们需要选择一个数，并把这个新数插到其前面，故此时的方案为-C-n-1-1-begin-bmatrix-n-1-k-end-bmatrix"><a href="#2：元素-n-放入一个现有的环，那么我们需要选择一个数，并把这个新数插到其前面，故此时的方案为-C-n-1-1-begin-bmatrix-n-1-k-end-bmatrix" class="headerlink" title="2：元素$n$放入一个现有的环，那么我们需要选择一个数，并把这个新数插到其前面，故此时的方案为:$C_{n-1}^1\begin{bmatrix}n-1\k\end{bmatrix}$"></a>2：元素$n$放入一个现有的环，那么我们需要选择一个数，并把这个新数插到其前面，故此时的方案为:$C_{n-1}^1\begin{bmatrix}n-1\k\end{bmatrix}$</h1><p>所以通过加法原理可以得到：$\begin{bmatrix}n\m \end{bmatrix}=\begin{bmatrix}n-1\k-1\end{bmatrix}+C_{n-1}^1\begin{bmatrix}n-1\k\end{bmatrix}$</p>
+<h4 id="2-2、生成函数推导"><a href="#2-2、生成函数推导" class="headerlink" title="2.2、生成函数推导"></a>2.2、生成函数推导</h4><script type="math/tex; mode=display">
+同样地我们考虑单个环上的生成函数，对于长度为i的环而言，其方案数为(i-1)!\\
+\therefore 我们可以写出单个环的指数生成函数:A(x)=\sum_{i=1}^{n}(i-1)!\frac{x^i}{i!}=\sum_{i=1}^{n}\frac{x^i}{i}\\
+\therefore 
+\begin{bmatrix}
+n\\m
+\end{bmatrix}={[x^n]A^m(x)}</script><h4 id="2-3、第一类斯特林数的性质"><a href="#2-3、第一类斯特林数的性质" class="headerlink" title="2.3、第一类斯特林数的性质"></a>2.3、第一类斯特林数的性质</h4><script type="math/tex; mode=display">
+\begin{aligned}
+&\begin{bmatrix}
+0\\0
+\end{bmatrix}=1
+\\
+&\begin{bmatrix}
+n\\0
+\end{bmatrix}=0,n>0
+\\
+&\begin{bmatrix}
+n\\1
+\end{bmatrix}=(n-1)!
+\\
+&\begin{bmatrix}
+n\\n-1
+\end{bmatrix}=C_n^2
+\\
+&\begin{bmatrix}
+n\\n-2
+\end{bmatrix}=(n-1)!\times \sum_{i=1}^{n-1}\frac{1}{i}
+\\
+&\begin{bmatrix}
+n\\n-2
+\end{bmatrix}=2C_n^3+3C_n^4
+\\
+&\sum_{k=0}^{n}\begin{bmatrix}
+n\\k
+\end{bmatrix}=n!
+\end{aligned}</script>
                 
             </div>
             <hr/>
@@ -589,7 +646,7 @@ void cdqntt(int l, int r)
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wjknowledge.top/2022/08/24/cdqntt/">http://wjknowledge.top/2022/08/24/cdqntt/</a>
+                    <a href="http://wjknowledge.top/2022/08/27/si-te-lin-shu/">http://wjknowledge.top/2022/08/27/si-te-lin-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1072,9 +1129,10 @@ void cdqntt(int l, int r)
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/08/27/si-te-lin-shu/">
                     <div class="card-image">
@@ -1092,9 +1150,9 @@ void cdqntt(int l, int r)
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1111,6 +1169,7 @@ void cdqntt(int l, int r)
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1133,24 +1192,24 @@ void cdqntt(int l, int r)
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/08/22/from-fft-to-ntt/">
+                <a href="/2022/08/24/cdqntt/">
                     <div class="card-image">
                         
                         
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/11.jpg" class="responsive-img" alt="From FFT to NTT">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/medias/featureimages/10.jpg" class="responsive-img" alt="cdqNTT">
                         
-                        <span class="card-title">From FFT to NTT</span>
+                        <span class="card-title">cdqNTT</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            One of my favorite algorithm
+                            分治NTT：“我卷我自己”
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-24
                             </span>
                         <span class="publish-author">
                             
