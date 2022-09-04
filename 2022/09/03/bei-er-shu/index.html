@@ -5,9 +5,11 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="贝尔数, fat fatzard&#39;s Blog">
-    <meta name="description" content="贝尔数（Bell Number）贝尔数表示的是基数为$n$的集合的划分成两两不想交的子集的划分方案数，记作$B_n$
-贝尔数的前几项为：$1,1,2,5,15,52,203……….$
-1、组合意义推导我们考虑第$n+1$个元素$b_{n+1">
+    <meta name="description" content="贝尔数（Bell Number）
+贝尔数表示的是基数为\(n\)的集合的划分成两两不想交的子集的划分方案数，记作\(B_n\)
+贝尔数的前几项为：\(1,1,2,5,15,52,203..........\)
+1、组合意义推导
+我们">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -488,7 +490,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
@@ -518,45 +520,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="贝尔数（Bell-Number）"><a href="#贝尔数（Bell-Number）" class="headerlink" title="贝尔数（Bell Number）"></a>贝尔数（Bell Number）</h2><p><strong>贝尔数</strong>表示的是基数为$n$的集合的划分成两两不想交的子集的划分方案数，记作$B_n$</p>
-<p><strong>贝尔数</strong>的前几项为：$1,1,2,5,15,52,203……….$</p>
-<h3 id="1、组合意义推导"><a href="#1、组合意义推导" class="headerlink" title="1、组合意义推导"></a>1、组合意义推导</h3><p>我们考虑第$n+1$个元素$b_{n+1}$，那么可以对其分类讨论：</p>
-<p>（1）、如果$b_{n+1}$单独分为一个子集，则不用从$n$个元素中选择元素出来和其组成一个子集，故此时的方案数为：$C_n^0B_n$</p>
-<p>（2）、如果$b<em>{n+1}$和一个元素组成一个子集，则需要从$n$个元素中选出一个元素与之组成一个子集，故此时的方案数为：$C_n^1B</em>{n-1}$</p>
-<p>（3）、如果$b<em>{n+1}$和两个元素组成一个子集，则需要从$n$个元素中选出两个元素与之组成一个子集，故此时的方案数为：$C_n^2B</em>{n-2}$</p>
-<p>$……….$</p>
-<p>以此类推，那么我们可以得到递推式：</p>
-<script type="math/tex; mode=display">
+                <h2 id="贝尔数bell-number">贝尔数（Bell Number）</h2>
+<p><strong>贝尔数</strong>表示的是基数为<span class="math inline">\(n\)</span>的集合的划分成两两不想交的子集的划分方案数，记作<span class="math inline">\(B_n\)</span></p>
+<p><strong>贝尔数</strong>的前几项为：<span class="math inline">\(1,1,2,5,15,52,203..........\)</span></p>
+<h3 id="组合意义推导">1、组合意义推导</h3>
+<p>我们考虑第<span class="math inline">\(n+1\)</span>个元素<span class="math inline">\(b_{n+1}\)</span>，那么可以对其分类讨论：</p>
+<p>（1）、如果<span class="math inline">\(b_{n+1}\)</span>单独分为一个子集，则不用从<span class="math inline">\(n\)</span>个元素中选择元素出来和其组成一个子集，故此时的方案数为：<span class="math inline">\(C_n^0B_n\)</span></p>
+<p>（2）、如果<span class="math inline">\(b_{n+1}\)</span>和一个元素组成一个子集，则需要从<span class="math inline">\(n\)</span>个元素中选出一个元素与之组成一个子集，故此时的方案数为：<span class="math inline">\(C_n^1B_{n-1}\)</span></p>
+<p>（3）、如果<span class="math inline">\(b_{n+1}\)</span>和两个元素组成一个子集，则需要从<span class="math inline">\(n\)</span>个元素中选出两个元素与之组成一个子集，故此时的方案数为：<span class="math inline">\(C_n^2B_{n-2}\)</span></p>
+<p><span class="math inline">\(..........\)</span></p>
+<p>以此类推，那么我们可以得到递推式： <span class="math display">\[
 \begin{aligned}
-B_{n+1}&=\sum_{k=0}^{n}C_n^{k}B_{n-k}\\
-&=\sum_{k=0}^{n}C_n^{k}B_k
-\end{aligned}</script><p><strong>另一种意义</strong>：</p>
+B_{n+1}&amp;=\sum_{k=0}^{n}C_n^{k}B_{n-k}\\
+&amp;=\sum_{k=0}^{n}C_n^{k}B_k
+\end{aligned}
+\]</span> <strong>另一种意义</strong>：</p>
 <p>我们还可以考虑另外一种组合意义：</p>
-<p>（1）、将$n$个元素分成$1$个子集，此时方案数：$\begin{Bmatrix}n\\1\end{Bmatrix}$</p>
-<p>（2）、将$n$个元素分成$2$个子集，此时方案数：$\begin{Bmatrix}n\\2\end{Bmatrix}$</p>
-<p>（3）、将$n$个元素分成$3$个子集，此时方案数：$\begin{Bmatrix}n\\3\end{Bmatrix}$</p>
-<p>$……..$</p>
-<p>以此类推，我们可以得到新的递推式：</p>
-<script type="math/tex; mode=display">
-B_n=\sum_{k=0}^n\begin{Bmatrix}n\\\\k\end{Bmatrix}</script><p>这种推导方式也推导出了，<strong>贝尔数</strong>与<strong>第二类斯特林数</strong>的关系</p>
-<h3 id="2、生成函数推导"><a href="#2、生成函数推导" class="headerlink" title="2、生成函数推导"></a>2、生成函数推导</h3><script type="math/tex; mode=display">
+<p>（1）、将<span class="math inline">\(n\)</span>个元素分成<span class="math inline">\(1\)</span>个子集，此时方案数：<span class="math inline">\(\begin{Bmatrix}n\\\\1\end{Bmatrix}\)</span></p>
+<p>（2）、将<span class="math inline">\(n\)</span>个元素分成<span class="math inline">\(2\)</span>个子集，此时方案数：<span class="math inline">\(\begin{Bmatrix}n\\\\2\end{Bmatrix}\)</span></p>
+<p>（3）、将<span class="math inline">\(n\)</span>个元素分成<span class="math inline">\(3\)</span>个子集，此时方案数：<span class="math inline">\(\begin{Bmatrix}n\\\\3\end{Bmatrix}\)</span></p>
+<p><span class="math inline">\(........\)</span></p>
+<p>以此类推，我们可以得到新的递推式： <span class="math display">\[
+B_n=\sum_{k=0}^n\begin{Bmatrix}n\\\\k\end{Bmatrix}
+\]</span> 这种推导方式也推导出了，<strong>贝尔数</strong>与<strong>第二类斯特林数</strong>的关系</p>
+<h3 id="生成函数推导">2、生成函数推导</h3>
+<p><span class="math display">\[
 设b(x)为序列【B_1,B_2,B_3....B_n】的生成函数
 \\
 则b(x)=\sum_{i=0}^{\infty}B_i\frac{x^i}{i!}\\
 \therefore b(x)=\sum_{i=0}^{\infty}\sum_{k=0}^{i-1}C_{i-1}^{k}B_k\frac{x^i}{i!}\\改变i与k的求和顺序\\
 \begin{aligned}
-\therefore b(x)&=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}C_{i-1}^{k}\frac{x^i}{i!}\\
-&=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}\frac{(i-1)!}{(i-k-1)!k!}\frac{x^i}{i!}\\
-&=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}\frac{1}{i(i-k-1)!k!}x^i\\
+\therefore b(x)&amp;=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}C_{i-1}^{k}\frac{x^i}{i!}\\
+&amp;=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}\frac{(i-1)!}{(i-k-1)!k!}\frac{x^i}{i!}\\
+&amp;=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}\frac{1}{i(i-k-1)!k!}x^i\\
 \end{aligned}
 \\
 对b(x)求关于x的导数\\
 \begin{aligned}
-\therefore b^{`}(x)&=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}\frac{1}{(i-k-1)!k!}x^{i-1}\\
-&=\sum_{k=0}^{\infty}\frac{B_k}{k!}\sum_{i=k+1}^{\infty}\frac{1}{(i-k-1)!}x^{i-1}\\
-&=\sum_{k=0}^{\infty}\frac{B_k}{k!}\sum_{i=0}^{\infty}\frac{1}{i!}x^{i-1}x^{k+1}\\
-&=\sum_{k=0}^{\infty}\frac{B_kx^k}{k!}\sum_{i=0}^{\infty}\frac{1}{i!}x^i\\
-&=b(x)e^x\\
+\therefore b^{`}(x)&amp;=\sum_{k=0}^{\infty}B_k\sum_{i=k+1}^{\infty}\frac{1}{(i-k-1)!k!}x^{i-1}\\
+&amp;=\sum_{k=0}^{\infty}\frac{B_k}{k!}\sum_{i=k+1}^{\infty}\frac{1}{(i-k-1)!}x^{i-1}\\
+&amp;=\sum_{k=0}^{\infty}\frac{B_k}{k!}\sum_{i=0}^{\infty}\frac{1}{i!}x^{i-1}x^{k+1}\\
+&amp;=\sum_{k=0}^{\infty}\frac{B_kx^k}{k!}\sum_{i=0}^{\infty}\frac{1}{i!}x^i\\
+&amp;=b(x)e^x\\
 \end{aligned}\\
 \therefore \frac{b^{`}(x)}{b(x)}=e^x
 \\
@@ -565,36 +570,47 @@ B_n=\sum_{k=0}^n\begin{Bmatrix}n\\\\k\end{Bmatrix}</script><p>这种推导方式
 \\
 \therefore b(x)=e^{e^x+c},c为常数
 \\代入计算得C=-1\\
-\therefore b(x)=e^{e^x-1}</script><h3 id="3、性质"><a href="#3、性质" class="headerlink" title="3、性质"></a>3、性质</h3><h4 id="引理："><a href="#引理：" class="headerlink" title="引理："></a>引理：</h4><script type="math/tex; mode=display">
-B_{n+m}=\sum_{i=0}^{n}C_n^iB_i\sum_{j=0}^mj^{n-i}\begin{Bmatrix}m\\\\j\end{Bmatrix}</script><p>组合意义证明：</p>
-<p>​    把$n+m$个元素分成$n$个元素和$m$个元素；首先枚举$m$个元素划分成$j$个集合，此时有$\begin{Bmatrix}m\\j\end{Bmatrix}$;再枚举$n$个元素中选$i$个出来任意划分 成子集，此时有$C_n^iB_i$；还剩下$n-i$个元素，那么这$n-i$个元素必然在$j$个集合中，此时有$j^{n-i}$，然后根据乘法原理将其相乘，便是最后的结果</p>
-<h4 id="3-1、Dobinski公式："><a href="#3-1、Dobinski公式：" class="headerlink" title="3.1、Dobinski公式："></a>3.1、Dobinski公式：</h4><script type="math/tex; mode=display">
-B_n=\frac{1}{e}\sum_{k=0}^{\infty}\frac{k^n}{k!}</script><p>​            期望为$n$的泊松分数的$n$次矩</p>
-<h4 id="3-2、Touchard同余"><a href="#3-2、Touchard同余" class="headerlink" title="3.2、Touchard同余"></a>3.2、Touchard同余</h4><script type="math/tex; mode=display">
-若对\forall p\in primes,有B_{p+n}\equiv B_n+B_{n+1}(mod\space p)</script><p>​        证明：</p>
-<script type="math/tex; mode=display">
+\therefore b(x)=e^{e^x-1}
+\]</span></p>
+<h3 id="性质">3、性质</h3>
+<h4 id="引理">引理：</h4>
+<p><span class="math display">\[
+B_{n+m}=\sum_{i=0}^{n}C_n^iB_i\sum_{j=0}^mj^{n-i}\begin{Bmatrix}m\\\\j\end{Bmatrix}
+\]</span></p>
+<p>组合意义证明：</p>
+<p>​ 把<span class="math inline">\(n+m\)</span>个元素分成<span class="math inline">\(n\)</span>个元素和<span class="math inline">\(m\)</span>个元素；首先枚举<span class="math inline">\(m\)</span>个元素划分成<span class="math inline">\(j\)</span>个集合，此时有<span class="math inline">\(\begin{Bmatrix}m\\\\j\end{Bmatrix}\)</span>;再枚举<span class="math inline">\(n\)</span>个元素中选<span class="math inline">\(i\)</span>个出来任意划分 成子集，此时有<span class="math inline">\(C_n^iB_i\)</span>；还剩下<span class="math inline">\(n-i\)</span>个元素，那么这<span class="math inline">\(n-i\)</span>个元素必然在<span class="math inline">\(j\)</span>个集合中，此时有<span class="math inline">\(j^{n-i}\)</span>，然后根据乘法原理将其相乘，便是最后的结果</p>
+<h4 id="dobinski公式">3.1、Dobinski公式：</h4>
+<p><span class="math display">\[
+B_n=\frac{1}{e}\sum_{k=0}^{\infty}\frac{k^n}{k!}
+\]</span></p>
+<p>​ 期望为<span class="math inline">\(n\)</span>的泊松分数的<span class="math inline">\(n\)</span>次矩</p>
+<h4 id="touchard同余">3.2、Touchard同余</h4>
+<p><span class="math display">\[
+若对\forall p\in primes,有B_{p+n}\equiv B_n+B_{n+1}(mod\space p)
+\]</span></p>
+<p>​ 证明： <span class="math display">\[
 \begin{aligned}
-B_{n+p}&=\sum_{i=0}^{n}C_n^iB_i\sum_{j=0}^pj^{n-i}\begin{Bmatrix}p\\\\j\end{Bmatrix}\\
-&=\sum_{j=0}^p\begin{Bmatrix}p\\\\j\end{Bmatrix}\sum_{i=0}^{n}C_n^iB_ij^{n-i}\\
-又\because 对于\forall &j\in(1,p)且p\in primes,有 \begin{Bmatrix}p\\\\j\end{Bmatrix}\equiv0(mod\space p)
+B_{n+p}&amp;=\sum_{i=0}^{n}C_n^iB_i\sum_{j=0}^pj^{n-i}\begin{Bmatrix}p\\\\j\end{Bmatrix}\\
+&amp;=\sum_{j=0}^p\begin{Bmatrix}p\\\\j\end{Bmatrix}\sum_{i=0}^{n}C_n^iB_ij^{n-i}\\
+又\because 对于\forall &amp;j\in(1,p)且p\in primes,有 \begin{Bmatrix}p\\\\j\end{Bmatrix}\equiv0(mod\space p)
 \\
-\therefore B_{n+p}\space mod\space p&=\sum_{j=0}^p\begin{Bmatrix}p\\\\j\end{Bmatrix}\sum_{i=0}^{n}C_n^iB_ij^{n-i}\space mod\space p\\
-&=(\sum_{j=0}^p\begin{Bmatrix}p\\\\j\end{Bmatrix}\space mod\space p)(\sum_{i=0}^{n}C_n^iB_ij^{n-i}\space mod\space p)\space mod\space p\\
-&=(\begin{Bmatrix}p\\\\1\end{Bmatrix}+0+\begin{Bmatrix}p\\\\p\end{Bmatrix})(\sum_{i=0}^{n}C_n^iB_ij^{n-i}\space mod\space p)\space mod\space p\\
-&=(\begin{Bmatrix}p\\\\1\end{Bmatrix}(\sum_{i=0}^{n}C_n^iB_i1^{n-i}\space mod\space p)\space mod\space p+\begin{Bmatrix}p\\\\p\end{Bmatrix}(\sum_{i=0}^{n}C_n^iB_ip^{n-i}\space mod\space p)\space mod\space p)\space mod\space p\\
-&=(\sum_{i=0}^{n}C_n^iB_i1^{n-i}+\sum_{i=0}^{n}C_n^iB_ip^{n-i})\space mod\space p\\
-&=(\sum_{i=0}^{n}C_n^iB_i+\sum_{i=0}^{n}C_n^iB_ip^{n-i})\space mod\space p\\
-&=(B_{n+1}+\sum_{i=0}^{n}C_n^iB_ip^{n-i})\space mod\space p\\
-又\because 对\forall i>0,&p^i\equiv 0(mod \space p )\\
-\therefore \sum_{i=0}^{n}C_n^i&B_ip^{n-i}\space mod\space p=C_n^nB_np^{n-n}\space mod\space p=B_n\space mod\space p\\
-\therefore B_{n+p}&\equiv B_{n+1}+B_n(\space mod\space p)\\故：结论得证
-\end{aligned}</script><p><strong>TIPS</strong>：</p>
-<p>证明：$对于\forall j\in(1,p)且p\in primes,有 \begin{Bmatrix}p\\j\end{Bmatrix}\equiv0(mod\space p)$</p>
-<script type="math/tex; mode=display">
+\therefore B_{n+p}\space mod\space p&amp;=\sum_{j=0}^p\begin{Bmatrix}p\\\\j\end{Bmatrix}\sum_{i=0}^{n}C_n^iB_ij^{n-i}\space mod\space p\\
+&amp;=(\sum_{j=0}^p\begin{Bmatrix}p\\\\j\end{Bmatrix}\space mod\space p)(\sum_{i=0}^{n}C_n^iB_ij^{n-i}\space mod\space p)\space mod\space p\\
+&amp;=(\begin{Bmatrix}p\\\\1\end{Bmatrix}+0+\begin{Bmatrix}p\\\\p\end{Bmatrix})(\sum_{i=0}^{n}C_n^iB_ij^{n-i}\space mod\space p)\space mod\space p\\
+&amp;=(\begin{Bmatrix}p\\\\1\end{Bmatrix}(\sum_{i=0}^{n}C_n^iB_i1^{n-i}\space mod\space p)\space mod\space p+\begin{Bmatrix}p\\\\p\end{Bmatrix}(\sum_{i=0}^{n}C_n^iB_ip^{n-i}\space mod\space p)\space mod\space p)\space mod\space p\\
+&amp;=(\sum_{i=0}^{n}C_n^iB_i1^{n-i}+\sum_{i=0}^{n}C_n^iB_ip^{n-i})\space mod\space p\\
+&amp;=(\sum_{i=0}^{n}C_n^iB_i+\sum_{i=0}^{n}C_n^iB_ip^{n-i})\space mod\space p\\
+&amp;=(B_{n+1}+\sum_{i=0}^{n}C_n^iB_ip^{n-i})\space mod\space p\\
+又\because 对\forall i&gt;0,&amp;p^i\equiv 0(mod \space p )\\
+\therefore \sum_{i=0}^{n}C_n^i&amp;B_ip^{n-i}\space mod\space p=C_n^nB_np^{n-n}\space mod\space p=B_n\space mod\space p\\
+\therefore B_{n+p}&amp;\equiv B_{n+1}+B_n(\space mod\space p)\\故：结论得证
+\end{aligned}
+\]</span> <strong>TIPS</strong>：</p>
+<p>证明：<span class="math inline">\(对于\forall j\in(1,p)且p\in primes,有 \begin{Bmatrix}p\\\\j\end{Bmatrix}\equiv0(mod\space p)\)</span> <span class="math display">\[
 由第二类斯特林数的通项公式得：\begin{Bmatrix}p\\\\j\end{Bmatrix}=\sum_{k=0}^m\frac{(-1)^k}{k!}\frac{(j-k)^p}{(j-k)!}\\
 \begin{aligned}
-\therefore \begin{Bmatrix}p\\\\j\end{Bmatrix}\space mod\space p&=(\sum_{k=0}^j\frac{(-1)^k}{k!}\frac{(j-k)^p}{(j-k)!})\space mod\space p\\
-&=(\sum_{k=0}^j(\frac{(-1)^k}{k!}\space mod\space p)(\frac{(j-k)^p}{(j-k)!}\space mod\space p)\space mod\space p)\space mod\space p\\
+\therefore \begin{Bmatrix}p\\\\j\end{Bmatrix}\space mod\space p&amp;=(\sum_{k=0}^j\frac{(-1)^k}{k!}\frac{(j-k)^p}{(j-k)!})\space mod\space p\\
+&amp;=(\sum_{k=0}^j(\frac{(-1)^k}{k!}\space mod\space p)(\frac{(j-k)^p}{(j-k)!}\space mod\space p)\space mod\space p)\space mod\space p\\
 \end{aligned}
 \\
 由费马小定理可得:对于\forall p\in primes且\forall a 满足gcd(a,p)=1，都有a^{p-1}\equiv 1(\space mod\space p)\\
@@ -610,27 +626,32 @@ B_{n+p}&=\sum_{i=0}^{n}C_n^iB_i\sum_{j=0}^pj^{n-i}\begin{Bmatrix}p\\\\j\end{Bmat
 那么可得A(x)=B(x)C(x)=e^{-x}xe^x=x
 \\
 \therefore A(x)=x\\
-\therefore 对于i>1,\sum_{k=0}^i\frac{(-1)^k}{k!}\frac{1}{(j-k-1)!}=0
+\therefore 对于i&gt;1,\sum_{k=0}^i\frac{(-1)^k}{k!}\frac{1}{(j-k-1)!}=0
 \\
 \therefore对于\forall j\in(1,p)且p\in primes,有 \begin{Bmatrix}p\\\\j\end{Bmatrix}\equiv0(mod\space p)
-\\结论得证</script><h3 id="4、贝尔三角形"><a href="#4、贝尔三角形" class="headerlink" title="4、贝尔三角形"></a>4、贝尔三角形</h3><p>构造三角矩阵</p>
-<p>满足一下递推式：</p>
-<script type="math/tex; mode=display">
+\\结论得证
+\]</span></p>
+<h3 id="贝尔三角形">4、贝尔三角形</h3>
+<p>构造三角矩阵</p>
+<p>满足一下递推式： <span class="math display">\[
 a_{n,m}=
 \begin{cases}
 1,n=1,m=1\\
-a_{n-1,m-1},n>1,m=1\\
-a_{n,m-1}+a_{n-1,m-1},n>1,m>1
-\end{cases}</script><script type="math/tex; mode=display">
+a_{n-1,m-1},n&gt;1,m=1\\
+a_{n,m-1}+a_{n-1,m-1},n&gt;1,m&gt;1
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
 \begin{aligned}
-& 1     \\
-& 1\quad\qquad 2    \\
-& 2\quad\qquad 3\quad\qquad 5    \\
-& 5\quad\qquad 7\quad\qquad 10\qquad 15 \\
-& 15\qquad  20\qquad    27\qquad 37\qquad 52    \\
-& 52\qquad    67\qquad 87\qquad 114\qquad 151\qquad 203\\
-& 203\qquad    255\qquad 322\qquad    409\qquad 523\qquad    674\qquad 877 \\
-\end{aligned}</script><p>每行的首项为贝尔数</p>
+&amp; 1     \\
+&amp; 1\quad\qquad 2    \\
+&amp; 2\quad\qquad 3\quad\qquad 5   \\
+&amp; 5\quad\qquad 7\quad\qquad 10\qquad 15 \\
+&amp; 15\qquad  20\qquad    27\qquad 37\qquad 52    \\
+&amp; 52\qquad  67\qquad 87\qquad 114\qquad 151\qquad 203\\
+&amp; 203\qquad 255\qquad 322\qquad 409\qquad 523\qquad 674\qquad 877 \\
+\end{aligned}
+\]</span> 每行的首项为贝尔数</p>
 
                 
             </div>
@@ -1401,6 +1422,13 @@ a_{n,m-1}+a_{n-1,m-1},n>1,m>1
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
