@@ -483,21 +483,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-09-04
+                    2022-09-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    15 分
                 </div>
                 
 
@@ -637,7 +637,7 @@ B_{n+p}&amp;=\sum_{i=0}^{n}C_n^iB_i\sum_{j=0}^pj^{n-i}\begin{Bmatrix}p\\\\j\end{
 a_{n,m}=
 \begin{cases}
 1,n=1,m=1\\
-a_{n-1,m-1},n&gt;1,m=1\\
+a_{n-1,n-1},n&gt;1,m=1\\
 a_{n,m-1}+a_{n-1,m-1},n&gt;1,m&gt;1
 \end{cases}
 \]</span></p>
@@ -652,6 +652,236 @@ a_{n,m-1}+a_{n-1,m-1},n&gt;1,m&gt;1
 &amp; 203\qquad 255\qquad 322\qquad 409\qquad 523\qquad 674\qquad 877 \\
 \end{aligned}
 \]</span> 每行的首项为贝尔数</p>
+<h3 id="快速求贝尔数在模意义下的第n项">5、快速求贝尔数在模意义下的第<span class="math inline">\(n\)</span>项</h3>
+<p>题目链接：https://vjudge.csgrandeur.cn/problem/HDU-4767</p>
+<p>题意：求<span class="math inline">\(B_n \space mod \space 95041567\)</span></p>
+<p>思路：</p>
+<p>​ 首先，我们发现<span class="math inline">\(95041567\)</span>并不是一个素数；但是我们发现<span class="math inline">\(95041567\)</span>是多个不相同的素数的乘积，因此我们可以考虑CRT合并，所以我们可以列出以下方程： <span class="math display">\[
+95041567=\Pi_ip_i\\
+\begin{cases}
+x\equiv a_1(\space mod \space p_1)\\
+x\equiv a_2(\space mod \space p_2)\\
+....\\
+x\equiv a_n(\space mod \space p_k)\\
+\end{cases}
+\]</span> ​ 因此我们将问题转化为了求出一组<span class="math inline">\(a_i=B_n \space mod \space p_i\\\)</span></p>
+<p>​ 而对于每一组素数<span class="math inline">\(p_i\)</span>，我们可以利用<span class="math inline">\(Touchard同余\)</span> <span class="math display">\[
+将 B_{n+p}\equiv B_{n+1}+B_n(\space mod\space p)改写成模意义下的矩阵相乘的形式:
+\\
+\begin{bmatrix}
+B_{n+p-1}\\
+B_{n+p}\\
+B_{n+p+1}\\
+\vdots
+\\
+B_{n+p+p-1}
+\end{bmatrix}=
+\begin{bmatrix}
+&amp;0 &amp;0 &amp;0 &amp;\dots&amp;0&amp;1\\
+&amp;1 &amp;1 &amp;0 &amp;\dots&amp;0&amp;0\\
+&amp;0 &amp;1 &amp;1 &amp;\dots&amp;0&amp;0\\
+&amp;\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp;\vdots\\
+&amp;0 &amp;0 &amp;0 &amp;\dots&amp;1&amp;1\
+\end{bmatrix}\times
+\begin{bmatrix}
+B_{n}\\
+B_{n+1}\\
+B_{n+2}\\
+\vdots
+\\
+B_{n+p-1}
+\end{bmatrix}
+\]</span> 那么可以利用矩阵的递推推出第<span class="math inline">\(n\)</span>项与前几项的关系： <span class="math display">\[
+\begin{bmatrix}
+B_{n}\\
+B_{n+1}\\
+B_{n+2}\\
+\vdots
+\\
+B_{n+p-1}
+\end{bmatrix}=
+\begin{bmatrix}
+&amp;0 &amp;0 &amp;0 &amp;\dots&amp;0&amp;1\\
+&amp;1 &amp;1 &amp;0 &amp;\dots&amp;0&amp;0\\
+&amp;0 &amp;1 &amp;1 &amp;\dots&amp;0&amp;0\\
+&amp;\vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp;\vdots\\
+&amp;0 &amp;0 &amp;0 &amp;\dots&amp;1&amp;1\
+\end{bmatrix}^{\frac{n}{p-1}}\times
+\begin{bmatrix}
+B_{0}\\
+B_{1}\\
+B_{2}\\
+\vdots
+\\
+B_{p-1}
+\end{bmatrix}
+\]</span> 我们发现中间那个矩阵可以利用矩阵快速幂求出，那么我们只需要预处理出前<span class="math inline">\(p_i\)</span>个<span class="math inline">\(B_i\)</span>，然后利用矩阵乘法就可以得到<span class="math inline">\(B_n\space mod \space p_i\)</span></p>
+<p>现在我们已经知道一组<span class="math inline">\(a_i\)</span>,那么利用CRT合并得到的结果，便是最后的答案！</p>
+<pre class="language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#include &lt;string.h&gt;
+#include &lt;vector&gt;
+using namespace std;
+#define int long long
+#define endl &quot;\n&quot;
+const int maxn &#x3D; 1e2 + 10;
+const int p &#x3D; 95041567;
+int bell[maxn][maxn], ans[maxn];
+&#x2F;&#x2F;矩阵快速幂
+int cnt;
+struct jz
+&#123;
+    int m[maxn][maxn];
+    jz()
+    &#123;
+        memset(m, 0, sizeof(m));
+    &#125;
+&#125; ot;
+jz mul(jz a, jz b, int mod)
+&#123;
+    jz c;
+    for (int i &#x3D; 1; i &lt;&#x3D; cnt; i++)
+    &#123;
+        for (int j &#x3D; 1; j &lt;&#x3D; cnt; j++)
+        &#123;
+            c.m[i][j] &#x3D; 0;
+            for (int k &#x3D; 1; k &lt;&#x3D; cnt; k++)
+                c.m[i][j] &#x3D; (c.m[i][j] + a.m[i][k] * b.m[k][j] % mod) % mod;
+        &#125;
+    &#125;
+    return c;
+&#125;
+jz ksm(jz a, int b, int mod)
+&#123;
+    jz ans;
+    for (int i &#x3D; 1; i &lt;&#x3D; cnt; i++)
+        for (int j &#x3D; 1; j &lt;&#x3D; cnt; j++)
+            ans.m[i][j] &#x3D; 1 * (i &#x3D;&#x3D; j);
+    while (b)
+    &#123;
+        if (b % 2)
+            ans &#x3D; mul(ans, a, mod);
+        a &#x3D; mul(a, a, mod);
+        b &gt;&gt;&#x3D; 1;
+    &#125;
+    return ans;
+&#125;
+&#x2F;&#x2F;模数分解
+vector&lt;int&gt; mod;
+vector&lt;int&gt; a;
+void div(int n)
+&#123;
+    for (int i &#x3D; 2; i * i &lt;&#x3D; n; i++)
+    &#123;
+        if (n % i &#x3D;&#x3D; 0)
+        &#123;
+            mod.push_back(i);
+            while (n % i &#x3D;&#x3D; 0)
+            &#123;
+                n &#x2F;&#x3D; i;
+            &#125;
+        &#125;
+    &#125;
+    if (n &gt; 1)
+    &#123;
+        mod.push_back(n);
+    &#125;
+&#125;
+&#x2F;&#x2F;CRT合并
+void exgcd(int a, int b, int &amp;x, int &amp;y)
+&#123;
+    if (b &#x3D;&#x3D; 0)
+    &#123;
+        x &#x3D; 1;
+        y &#x3D; 0;
+        return;
+    &#125;
+    exgcd(b, a % b, x, y);
+    int temp &#x3D; x;
+    x &#x3D; y;
+    y &#x3D; temp - a &#x2F; b * y;
+&#125;
+int CRT(vector&lt;int&gt; a, vector&lt;int&gt; mod)
+&#123;
+    int n &#x3D; mod.size();
+    int M &#x3D; 1, ans &#x3D; 0;
+    for (int i &#x3D; 0; i &lt; n; i++)
+    &#123;
+        M *&#x3D; mod[i];
+    &#125;
+    for (int i &#x3D; 0; i &lt; n; i++)
+    &#123;
+        int m &#x3D; M &#x2F; mod[i];
+        int b, y;
+        exgcd(m, mod[i], b, y);
+        ans &#x3D; (ans + a[i] * m * b % M) % M;
+    &#125;
+    return (ans % M + M) % M;
+&#125;
+&#x2F;&#x2F;贝尔三角形递推前几项贝尔数
+void init()
+&#123;
+    bell[1][1] &#x3D; 1;
+    for (int i &#x3D; 2; i &lt; maxn; i++)
+    &#123;
+        for (int j &#x3D; 1; j &lt; maxn; j++)
+        &#123;
+            if (j &#x3D;&#x3D; 1)
+            &#123;
+                bell[i][j] &#x3D; bell[i - 1][i - 1];
+            &#125;
+            else
+            &#123;
+                bell[i][j] &#x3D; (bell[i][j - 1] + bell[i - 1][j - 1]) % p;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+signed main()
+&#123;
+    ios::sync_with_stdio(false);
+    cin.tie(0), cout.tie(0);
+    div(95041567);
+    init();
+    int t;
+    cin &gt;&gt; t;
+    while (t--)
+    &#123;
+        int n;
+        cin &gt;&gt; n;
+        a.clear();
+        for (auto mo : mod)
+        &#123;
+            cnt &#x3D; mo;
+            jz temp;
+            temp.m[1][mo] &#x3D; 1;
+            for (int i &#x3D; 2; i &lt;&#x3D; mo; i++)
+            &#123;
+                for (int j &#x3D; 1; j &lt;&#x3D; mo; j++)
+                &#123;
+                    if (i &#x3D;&#x3D; j || i &#x3D;&#x3D; j + 1)
+                    &#123;
+                        temp.m[i][j] &#x3D; 1;
+                    &#125;
+                &#125;
+            &#125;
+            ot &#x3D; ksm(temp, n &#x2F; (mo - 1), mo);
+            memset(ans, 0, sizeof(ans));
+            for (int i &#x3D; 1; i &lt;&#x3D; mo; i++)
+            &#123;
+                for (int j &#x3D; 1; j &lt;&#x3D; mo; j++)
+                &#123;
+                    ans[i] &#x3D; (ans[i] + ot.m[i][j] * bell[j][1] % mo) % mo;
+                &#125;
+            &#125;
+            a.push_back(ans[n % (mo - 1) + 1]);
+        &#125;
+        int ans &#x3D; CRT(a, mod);
+        cout &lt;&lt; ans &lt;&lt; endl;
+    &#125;
+    return 0;
+&#125;</code></pre>
 
                 
             </div>
@@ -1448,7 +1678,7 @@ a_{n,m-1}+a_{n-1,m-1},n&gt;1,m&gt;1
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">31.2k</span>
+                        class="white-color">32.4k</span>
             
             
             
@@ -1693,12 +1923,12 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 3,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 
 </html>
